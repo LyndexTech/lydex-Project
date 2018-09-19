@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Lyndex Technology</title>
+
+    <!-- Bootstrap core CSS -->
+    <!-- import Bootstrap CDN: CSS, JS, Popper.js and jQuary-->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous"> 
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <!-- import Bootstrap end --> 
+
+    <!-- Custom styles for financial page -->
+    
+
+  </head>
+
+  <body>
+    <!-- financial information nav -->
+    <div class="container">
+        <div class="row">
+            <ul class="nav nav-tabs">
+                <li class="nav-item">
+                    <a class="nav-link" href="companyinfo.html">Company Information Review</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="financialanalysis.html">Financial Analysis Reports</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" href="taxcredit.html">SR&amp;ED Tax Credit Review</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="taxexpense.html">R&amp;D Tax Expense Analysis</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="product.html">Product &amp; Tech vs R&amp;D Field</a>
+                </li>
+            </ul>
+        </div>
+
+        <br>
+
+        <!-- tax credit content -->
+        <!-- tax statistics -->
+        <h4>Tax Statistics</h4>
+        <div class="row">
+            <div class="col-sm-4">
+                <table class="table table-borderless table-sm">
+                    <thead>
+                        <tr>
+                            <th>RBC</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Industry Company Size: 10000</td>
+                        </tr>
+                        <tr>
+                            <td>Industry Sub-classification: Banking</td>
+                        </tr>
+                        <tr>
+                            <td>Industry Market Size: 20000</td>
+                        </tr>
+                        <tr>
+                            <td>Industry R&amp;D Expense: $50000</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="col-sm-8">
+                <table class="table table-hover table-sm">
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <th>2017</th>
+                            <th>2016</th>
+                            <th>2015</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <th>GST/HST</th>
+                            <td>30000</td>
+                            <td>20000</td>
+                            <td>10000</td>
+                        </tr>
+                        <tr>
+                            <th>Net Sales</th>
+                            <td>3000</td>
+                            <td>2000</td>
+                            <td>1000</td>
+                        </tr>
+                        <tr>
+                            <th>Investment Tax Credit</th>
+                            <td>3000</td>
+                            <td>2000</td>
+                            <td>1000</td>
+                        </tr>
+                        <tr>
+                            <th>SR&amp;ED Tax Credit</th>
+                            <td>300</td>
+                            <td>200</td>
+                            <td>100</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    
+        <hr>
+        <br>
+
+        <!-- tax history -->
+        <h4>History Tax Issue</h4>
+        <form>
+            <div class="form-row">
+                <div class="form-group col-sm-6">
+                    <label for="gst/hstIssue">GST/HST Tax Issue:</label>
+                    <textarea class="form-control" id="gst/hstIssue"></textarea>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-sm-6">
+                    <label for="employeeTaxIssue">Employee Tax Issue:</label>
+                    <textarea class="form-control" id="employeeTaxIssue"></textarea>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-sm-6">
+                    <label for="transferPricingTaxIssue">Transfer Pricing Tax Issue:</label>
+                    <textarea class="form-control" id="transferPricingTaxIssue"></textarea>
+                </div>
+            </div>
+            <button type="submit" class="btn btn-primary">Update</button>
+        </form>
+
+        <!-- Pagination -->
+        <div class="row">
+            <div class="col">
+                <nav aria-label="Page navigation">
+                    <ul class="pagination justify-content-center">
+                        <li class="page-item">
+                            <a class="page-link" href="financialanalysis.html">Previous</a>
+                        </li>
+                        <li class="page-item"><a class="page-link" href="companyinfo.html">1</a></li>
+                        <li class="page-item"><a class="page-link" href="financialanalysis.html">2</a></li>
+                        <li class="page-item active"><a class="page-link" href="taxcredit.html">3</a></li>
+                        <li class="page-item"><a class="page-link" href="taxexpense.html">4</a></li>
+                        <li class="page-item"><a class="page-link" href="product.html">5</a></li>
+                        <li class="page-item">
+                            <a class="page-link" href="taxexpense.html">Next</a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>    
+        </div>
+
+    </div>
+
+    
+    
+  </body>
+</html>
