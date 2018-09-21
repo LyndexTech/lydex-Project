@@ -17,8 +17,7 @@ const fs = require("fs-extra");
 const bodyParser = require("body-parser");
 const exphbs = require("express-handlebars");
 const clientSessions = require("client-sessions");
-// load custom JavaScript
-const dataService = require("./data_service.js");     
+// load custom JavaScript  
 const dataServiceAuth = require("./data_service_auth.js");
 
 // set up web app
@@ -180,17 +179,16 @@ app.post("/register", (req, res) => {
 
 // sign-in user form
 app.post("/signin", (req, res) => {
-    req.body.userAgent = req.get("User-Agent");
+    //req.body.userAgent = req.get("User-Agent");
     dataServiceAuth.checkUser(req.body)
     .then((user) => {
       req.session.user = {
-      userName: user.userName,
-      email: user.email
+      cli_loginName: user.cli_loginName,
       }
       res.redirect("/accessment");
      })
     .catch((err) => {
-      res.render("signin", {errorMessage: err, userName: req.body.userName});
+      res.render("signin", {errorMessage: err, cli_loginName: req.body.cli_loginName});
     });
 });
 
@@ -214,8 +212,7 @@ app.use((req,res) => {
 });
   
 // setup http server to listen on HTTP_PORT
-dataService.initialize()
-.then(dataServiceAuth.initialize)
+dataServiceAuth.initialize()
 .then(function(){
 app.listen(HTTP_PORT, function(){
     console.log("app listening on: " + HTTP_PORT)
