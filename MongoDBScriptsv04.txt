@@ -1,0 +1,154 @@
+/*In the 4st version, the cli_ID was replaced by cli_loginName in all Collections*/
+/*In the db.client, cli_loginName is a unique/Primary Key and in the other Collections as a Foreign Key to be better the relationship*/
+
+/*xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx*/
+/*Collection: Client */
+/*New Script*/
+db.client.insert({			
+	cli_loginName: "User1",		
+	cli_password : "%User1@",		
+	cli_userLinkedInURL: "https://www.linkedin.com/company/hp/",
+	cli_companyName: "XPTO Ltd.",	
+	cli_engineeringHeadcount: "Adam Smith",
+	cli_informationTechHeadcount: "Info of Tech Headcount Adam Smith",
+	cli_specialities: "Specialities of XPTO Ltd.",
+	cli_salesHeadcount: "Lara Jacobs",
+	cli_progProjManagementHeadcount: "Female competition project",
+	cli_LinkedInProfile: {cli_website:"www.xpto.ca",
+                        cli_headquarters:"Toronto, Ontario",
+                        cli_yearFounded:2001,
+                        cli_companyType:"Public Company",
+                        cli_companySize:"10001 + employees"},
+	cli_officeLocation: {cli_address_line1: " 123 Yonge St.", 
+                        cli_address_line2: "suite 230",
+                        cli_city: "Toronto", 
+                        cli_province: "ON", 
+                        cli_country: "Canada", 
+                        cli_phone: "123-123-1234", 
+                        cli_fax: "123-123-1234", 
+                        cli_email: "info@xpto.ca"}
+})
+
+
+/*xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx*/
+/*Collection: Public Financial */
+db.publicFinancial.insert({
+		cli_loginName: "User1",
+		puf_3FiscalYears:[{puf_FiscalYear: 2015,
+				   puf_incomeStatment3: [{ins_sales: 10000,
+                                        ins_workingCapital: 100000,
+    		     	    			    ins_profitLoss: 12000, 
+ 						                ins_operatingProfit: 10000,
+      							        ins_incomeTax: 20, ins_COGS: 10000,
+                                        ins_depreciationAmortization: 10000, 
+                                        ins_RDexpenditure: 10000,
+                                        ins_SGAexpense: 10000, 
+                                        ins_otherSGAexpense: 10000, 
+                                        ins_EBIT: 10000}],
+                   puf_balanceSheet: [{bas_propertyPlantEquip: 10000, 
+                                    bas_constructInProgress: 10000,
+                                    bas_computerSoftwareEquip: 10000, 
+                                    bas_otherPPE: 10000,
+                                    bas_accummulatedDepreciation: 10000, 
+                                    bas_intangibleAsset: 10000}],
+                   puf_cashFlow: [{caf_deferredTax: 10000,
+                                    caf_investmentTaxCredit: 10000, 
+                                    caf_capitalExpenditure: 10000}],	
+                   puf_financialRatio: [{fir_PEratio: 10000, 
+                                    fir_currentRatio: 10000, 
+                                    fir_quitckRatio: 10000,
+                                    fir_assetTurnover: 10000, 
+                                    fir_grossMargin: 10000, 
+                                    fir_operatingMargin: 10000,
+                                    fir_netMargin: 10000}]
+		}],
+		puf_5FiscalYears:[{puf_FiscalYear: 2013,	
+				   puf_incomeStatment5: [{ins_researchDevelopment: 10000}]
+		}]	
+		
+})			
+
+/*xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx*/
+/*Collection: Industry Benchmark */
+db.industryBenchmark.insert({			
+	cli_loginName: "User1",		
+	inb_industry: "Write a Text here...",		
+	inb_subClassification: "Write a Text here...",		
+	inb_mainListedCompany: "Write a Text here...",		
+	inb_marketSizeBillion: 10000,		
+	inb_RDexpense: 10000,
+	inb_3FiscalYears:[ {inb_3FYear: 2015,
+                        inb_industryBenchmark3: {inb_canadianRDexpenditure: 10000,
+                                                inb_SREDtaxCredit: 10000,
+                                                inb_industrySize: 10000,
+                                                inb_RDexpense: 10000}},
+			            {inb_3FYear: 2016,
+                        inb_industryBenchmark3: {inb_canadianRDexpenditure: 20000,
+                                                inb_SREDtaxCredit: 10000,
+                                                inb_industrySize: 10000,
+                                                inb_RDexpense: 10000}},
+			            {inb_3FYear: 2017,
+                        inb_industryBenchmark3: {inb_canadianRDexpenditure: 30000,
+                                                inb_SREDtaxCredit: 10000,
+                                                inb_industrySize: 10000,
+                                                inb_RDexpense: 10000}
+                        }],
+	inb_5FiscalYears:[ {inb_5FYear: 2013,
+			            inb_industryBenchmark5: {inb_marketSize: 12000},
+			            inb_5FYear: 2014,
+			            inb_industryBenchmark5: {inb_marketSize: 13000},
+			            inb_5FYear: 2015,
+			            inb_industryBenchmark5: {inb_marketSize: 14000},
+			            inb_5FYear: 2016,
+			            inb_industryBenchmark5: {inb_marketSize: 15000},
+		                inb_5FYear: 2017,
+			            inb_industryBenchmark5: {inb_marketSize: 16000}	
+			        }]
+		
+})	
+
+
+/*xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx*/
+/*Collection: Company Tax Info */
+db.companyTaxInfo.insert({cli_loginName: "User1", 
+	cti_salaryWages:10000, 
+	cti_contractExpense:10000, 
+	cti_capitalExpenditure:10000, 
+	cti_GSThstTaxIssues: "Write a Text here...", 
+	cti_employeeTaxIssue: "Write a Text here...",
+	cti_transferPricingTaxIssue: "Write a Text here...", 
+	cti_otherTaxIssue: "Write a Text here...",
+	cti_3FiscalYears:[ {cti_FiscalYear: 2015,
+                        cti_companyTaxInfo3: {  cti_gstHST: 10000, 
+                                                cti_investmentTaxCredit: 10000, 
+                                                cti_SREDtaxCredit: 10000, 
+                                                cti_salaryWages: 10000, 
+                                                cti_costMaterial: 10000, 
+                                                cti_contractExpense: 10000, 
+                                                cti_leaseExpenditure: 10000, 
+                                                cti_capitalExpenditure: 10000, 
+                                                cti_overhead: 10000}},
+			            {cti_FiscalYear: 2016,
+                          cti_companyTaxInfo3: {  cti_gstHST: 20000, 
+                                                cti_investmentTaxCredit: 20000, 
+                                                cti_SREDtaxCredit: 10000, 
+                                                cti_salaryWages: 10000, 
+                                                cti_costMaterial: 10000, 
+                                                cti_contractExpense: 10000, 
+                                                cti_leaseExpenditure: 10000, 
+                                                cti_capitalExpenditure: 10000, 
+                                                cti_overhead: 10000}},
+			            {cti_FiscalYear: 2017,
+                              cti_companyTaxInfo3: {cti_gstHST: 30000, 
+                                                    cti_investmentTaxCredit: 30000, 
+                                                    cti_SREDtaxCredit: 10000,
+                                                    cti_salaryWages: 10000, 
+                                                    cti_costMaterial: 10000, 
+                                                    cti_contractExpense: 10000, 
+                                                    cti_leaseExpenditure: 10000, 
+                                                    cti_capitalExpenditure: 10000, 
+                                                    cti_overhead: 10000}}
+                         ]
+})
+
+/*xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx*/
