@@ -6,3 +6,5 @@ Updates on Sep.20:
 
 Updates on Sep.21
 1. MongoDB code new version updated, please check version 4 for the newest version.
+2. Server.js updated.
+3. data_service_auth.js updated: data queries created, need to be modified with GET and POST methods in server.js
