@@ -46,59 +46,259 @@
         </div> 
 
         <br>
-        <!-- expense analysis content -->
-        <h4>Company Name</h4>
-        <table class="table table-sm table-hover">
-            <thead>
-                <tr>
-                    <th></th>
-                    <th>2017</th>
-                    <th>2016</th>
-                    <th>2015</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <th colspan="4">Operating Expense</th>
-                </tr>
-                <tr>
-                    <td>Sales/COGS</td>
-                    <td>15000</td>
-                    <td>13000</td>
-                    <td>10000</td>
-                </tr>
-                <tr>
-                    <td>Dep/Amortization</td>
-                    <td>500</td>
-                    <td>300</td>
-                    <td>200</td>
-                </tr>
-                <tr>
-                    <td>SG&amp;A Expense</td>
-                    <td>800</td>
-                    <td>800</td>
-                    <td>600</td>
-                </tr>
-                <tr>
-                    <td>Other SG&amp;A Expense</td>
-                    <td>700</td>
-                    <td>500</td>
-                    <td>400</td>
-                </tr>
-                <tr>
-                    <td>EBIT</td>
-                    <td>8000</td>
-                    <td>7000</td>
-                    <td>5000</td>
-                </tr>
-                <tr>
-                    <td>Income Tax</td>
-                    <td>2000</td>
-                    <td>1800</td>
-                    <td>1700</td>
-                </tr>
-            </tbody>
-        </table>
+        
+        <form>
+            <h5>Operating Expense</h5>
+            <div class="form-row">
+                <div class="form-group col-md-3">
+                    <p class="text-center" ></p>
+                </div>
+                <div class="form-group col-md-3">
+                    <p class="text-center">2017</p>
+                </div>
+                <div class="form-group col-md-3">
+                    <p class="text-center">2016</p>
+                </div>
+                <div class="form-group col-md-3">
+                    <p class="text-center">2015</p>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-3">
+                    <p class="text-center" >Sales</p>
+                </div>
+                <div class="form-group col-md-3">
+                    <input type="text" class="form-control" id="sales2017" value="">
+                </div>
+                <div class="form-group col-md-3">
+                    <input type="text" class="form-control" id="sales2016" value="">
+                </div>
+                <div class="form-group col-md-3">
+                    <input type="text" class="form-control" id="sales2015" value="">
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-3">
+                    <p class="text-center" >COGS</p>
+                </div>
+                <div class="form-group col-md-3">
+                    <input type="text" class="form-control" id="cogs2017" value="">
+                </div>
+                <div class="form-group col-md-3">
+                    <input type="text" class="form-control" id="cogs2016" value="">
+                </div>
+                <div class="form-group col-md-3">
+                    <input type="text" class="form-control" id="cogs2015" value="">
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-3">
+                    <p class="text-center" >Depreciation/Amoritization</p>
+                </div>
+                <div class="form-group col-md-3">
+                    <input type="text" class="form-control" id="depAmo2017" value="">
+                </div>
+                <div class="form-group col-md-3">
+                    <input type="text" class="form-control" id="depAmo2016" value="">
+                </div>
+                <div class="form-group col-md-3">
+                    <input type="text" class="form-control" id="depAmo2015" value="">
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-3">
+                    <p class="text-center" >SG&amp;A Expense</p>
+                </div>
+                <div class="form-group col-md-3">
+                    <input type="text" class="form-control" id="sga2017" value="">
+                </div>
+                <div class="form-group col-md-3">
+                    <input type="text" class="form-control" id="sga2016" value="">
+                </div>
+                <div class="form-group col-md-3">
+                    <input type="text" class="form-control" id="sga2015" value="">
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-3">
+                    <p class="text-center" >Other SG&amp;A Expense</p>
+                </div>
+                <div class="form-group col-md-3">
+                    <input type="text" class="form-control" id="osga2017" value="">
+                </div>
+                <div class="form-group col-md-3">
+                    <input type="text" class="form-control" id="osga2016" value="">
+                </div>
+                <div class="form-group col-md-3">
+                    <input type="text" class="form-control" id="osga2015" value="">
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-3">
+                    <p class="text-center" >EBIT</p>
+                </div>
+                <div class="form-group col-md-3">
+                    <input type="text" class="form-control" id="ebit2017" value="">
+                </div>
+                <div class="form-group col-md-3">
+                    <input type="text" class="form-control" id="ebit2016" value="">
+                </div>
+                <div class="form-group col-md-3">
+                    <input type="text" class="form-control" id="ebit2015" value="">
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-3">
+                    <p class="text-center" >Income Tax</p>
+                </div>
+                <div class="form-group col-md-3">
+                    <input type="text" class="form-control" id="incomeTax2017" value="">
+                </div>
+                <div class="form-group col-md-3">
+                    <input type="text" class="form-control" id="incomeTax2016" value="">
+                </div>
+                <div class="form-group col-md-3">
+                    <input type="text" class="form-control" id="incomeTax2015" value="">
+                </div>
+            </div>
+
+            <hr>
+
+            <h5>SR&amp;ED Tax Credit</h5>
+            <div class="form-row">
+                <div class="form-group col-md-3">
+                    <p class="text-center" ></p>
+                </div>
+                <div class="form-group col-md-3">
+                    <p class="text-center">2017</p>
+                </div>
+                <div class="form-group col-md-3">
+                    <p class="text-center">2016</p>
+                </div>
+                <div class="form-group col-md-3">
+                    <p class="text-center">2015</p>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-3">
+                    <p class="text-center" >Salary &amp; Wages</p>
+                </div>
+                <div class="form-group col-md-3">
+                    <input type="text" class="form-control" id="salary2017" value="">
+                </div>
+                <div class="form-group col-md-3">
+                    <input type="text" class="form-control" id="salary2016" value="">
+                </div>
+                <div class="form-group col-md-3">
+                    <input type="text" class="form-control" id="salary2015" value="">
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-3">
+                    <p class="text-center" >Cost of materials</p>
+                </div>
+                <div class="form-group col-md-3">
+                    <input type="text" class="form-control" id="cost2017" value="">
+                </div>
+                <div class="form-group col-md-3">
+                    <input type="text" class="form-control" id="cost2016" value="">
+                </div>
+                <div class="form-group col-md-3">
+                    <input type="text" class="form-control" id="cost2015" value="">
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-3">
+                    <p class="text-center" >Contract Expense</p>
+                </div>
+                <div class="form-group col-md-3">
+                    <input type="text" class="form-control" id="con2017" value="">
+                </div>
+                <div class="form-group col-md-3">
+                    <input type="text" class="form-control" id="con2016" value="">
+                </div>
+                <div class="form-group col-md-3">
+                    <input type="text" class="form-control" id="con2015" value="">
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-3">
+                    <p class="text-center" >Lease Expenditure</p>
+                </div>
+                <div class="form-group col-md-3">
+                    <input type="text" class="form-control" id="lea2017" value="">
+                </div>
+                <div class="form-group col-md-3">
+                    <input type="text" class="form-control" id="lea2016" value="">
+                </div>
+                <div class="form-group col-md-3">
+                    <input type="text" class="form-control" id="lea2015" value="">
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-3">
+                    <p class="text-center" >Overhead</p>
+                </div>
+                <div class="form-group col-md-3">
+                    <input type="text" class="form-control" id="over2017" value="">
+                </div>
+                <div class="form-group col-md-3">
+                    <input type="text" class="form-control" id="over2016" value="">
+                </div>
+                <div class="form-group col-md-3">
+                    <input type="text" class="form-control" id="over2015" value="">
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-3">
+                    <p class="text-center" >Capital Expenditure</p>
+                </div>
+                <div class="form-group col-md-3">
+                    <input type="text" class="form-control" id="cap2017" value="">
+                </div>
+                <div class="form-group col-md-3">
+                    <input type="text" class="form-control" id="cap2016" value="">
+                </div>
+                <div class="form-group col-md-3">
+                    <input type="text" class="form-control" id="cap2015" value="">
+                </div>
+            </div>
+
+            <hr>
+            <!-- NOTE: no related database to store the input for 2018 r&d expense -->
+            <h5>2018 R&amp;D Expense</h5>
+            <br>
+            <div class="form-row">
+              <div class="form-group col-md-3">
+                    <p class="text-center" >Salary &amp; Wages</p>
+                </div>
+              <div class="form-group col-md-3">
+                    <input type="text" class="form-control" id="salarywages" value="">
+                </div>
+              </div>
+              <div class="form-row">
+                <div class="form-group col-md-3">
+                    <p class="text-center" >Contract Expense</p>
+                </div>
+                <div class="form-group col-md-3">
+                    <input type="text" class="form-control" id="contractexpense" value="">
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-3">
+                    <p class="text-center" >Capital Expenditure</p>
+                </div>
+                <div class="form-group col-md-3">
+                    <input type="text" class="form-control" id="capitalexpendture" value="">
+                </div>
+            </div>
+
+            <hr>
+
+            <button type="submit" class="btn btn-primary">Update</button>
+            <a href="accessment.html" role="button" class="btn btn-success">Start Over</a>
+        </form>
+        
         <!-- Pagination -->
         <div class="row">
             <div class="col">

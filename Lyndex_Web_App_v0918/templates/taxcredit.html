@@ -46,79 +46,143 @@
 
         <br>
 
-        <!-- tax credit content -->
-        <!-- tax statistics -->
-        <h4>Tax Statistics</h4>
-        <div class="row">
-            <div class="col-sm-4">
-                <table class="table table-borderless table-sm">
-                    <thead>
-                        <tr>
-                            <th>RBC</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>Industry Company Size: 10000</td>
-                        </tr>
-                        <tr>
-                            <td>Industry Sub-classification: Banking</td>
-                        </tr>
-                        <tr>
-                            <td>Industry Market Size: 20000</td>
-                        </tr>
-                        <tr>
-                            <td>Industry R&amp;D Expense: $50000</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-            <div class="col-sm-8">
-                <table class="table table-hover table-sm">
-                    <thead>
-                        <tr>
-                            <th></th>
-                            <th>2017</th>
-                            <th>2016</th>
-                            <th>2015</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <th>GST/HST</th>
-                            <td>30000</td>
-                            <td>20000</td>
-                            <td>10000</td>
-                        </tr>
-                        <tr>
-                            <th>Net Sales</th>
-                            <td>3000</td>
-                            <td>2000</td>
-                            <td>1000</td>
-                        </tr>
-                        <tr>
-                            <th>Investment Tax Credit</th>
-                            <td>3000</td>
-                            <td>2000</td>
-                            <td>1000</td>
-                        </tr>
-                        <tr>
-                            <th>SR&amp;ED Tax Credit</th>
-                            <td>300</td>
-                            <td>200</td>
-                            <td>100</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        </div>
-    
-        <hr>
-        <br>
-
-        <!-- tax history -->
-        <h4>History Tax Issue</h4>
+        <!-- tax analysis content -->
         <form>
+            <h5>Industry Benchmark</h5>
+            <div class="form-row">
+                <div class="form-group col-md-3">
+                    <p class="text-center"></p>
+                </div>
+                <div class="form-group col-md-3">
+                    <p class="text-center">2017</p>
+                </div>
+                <div class="form-group col-md-3">
+                    <p class="text-center">2016</p>
+                </div>
+                <div class="form-group col-md-3">
+                    <p class="text-center">2015</p>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-3">
+                    <p class="text-center">Canadian R&amp;D Expenditure</p>
+                </div>
+                <div class="form-group col-md-3">
+                    <input type="number" class="form-control" id="caRD2017" value="0">
+                </div>
+                <div class="form-group col-md-3">
+                    <input type="number" class="form-control" id="caRD2016" value="0">
+                </div>
+                <div class="form-group col-md-3">
+                    <input type="number" class="form-control" id="caRD2015" value="0">
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-3">
+                    <p class="text-center">SR&amp;ED Tax Credit</p>
+                </div>
+                <div class="form-group col-md-3">
+                    <input type="number" class="form-control" id="sredTaxCredits2017" value="0">
+                </div>
+                <div class="form-group col-md-3">
+                    <input type="number" class="form-control" id="sredTaxCredits2016" value="0">
+                </div>
+                <div class="form-group col-md-3">
+                    <input type="number" class="form-control" id="sredTaxCredits2015" value="0">
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-3">
+                    <p class="text-center">Industry Size</p>
+                </div>
+                <div class="form-group col-md-3">
+                    <input type="number" class="form-control" id="idustrySize2017" value="0">
+                </div>
+                <div class="form-group col-md-3">
+                    <input type="number" class="form-control" id="industrySize2016" value="0">
+                </div>
+                <div class="form-group col-md-3">
+                    <input type="number" class="form-control" id="industrySize2015" value="0">
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-3">
+                    <p class="text-center">Investment Tax Credits</p>
+                </div>
+                <div class="form-group col-md-3">
+                    <input type="number" class="form-control" id="indRdExpense2017" value="0">
+                </div>
+                <div class="form-group col-md-3">
+                    <input type="number" class="form-control" id="indRdExpense2016" value="0">
+                </div>
+                <div class="form-group col-md-3">
+                    <input type="number" class="form-control" id="indRdExpense2015" value="0">
+                </div>
+            </div>
+
+            <hr>
+
+            <h5>History Tax Credit</h5>
+            <div class="form-row">
+                <div class="form-group col-md-3">
+                    <p class="text-center"></p>
+                </div>
+                <div class="form-group col-md-3">
+                    <p class="text-center">2017</p>
+                </div>
+                <div class="form-group col-md-3">
+                    <p class="text-center">2016</p>
+                </div>
+                <div class="form-group col-md-3">
+                    <p class="text-center">2015</p>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-3">
+                    <p class="text-center" >GST/HST</p>
+                </div>
+                <div class="form-group col-md-3">
+                    <input type="text" class="form-control" id="GST2017" value="">
+                </div>
+                <div class="form-group col-md-3">
+                    <input type="text" class="form-control" id="GST2016" value="">
+                </div>
+                <div class="form-group col-md-3">
+                    <input type="text" class="form-control" id="GST2015" value="">
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-3">
+                    <p class="text-center" >Investment Tax Credit</p>
+                </div>
+                <div class="form-group col-md-3">
+                    <input type="text" class="form-control" id="investment2017" value="">
+                </div>
+                <div class="form-group col-md-3">
+                    <input type="text" class="form-control" id="investment2016" value="">
+                </div>
+                <div class="form-group col-md-3">
+                    <input type="text" class="form-control" id="investment2015" value="">
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-3">
+                    <p class="text-center" >SR&amp;ED Tax Credit</p>
+                </div>
+                <div class="form-group col-md-3">
+                    <input type="text" class="form-control" id="SRED2017" value="">
+                </div>
+                <div class="form-group col-md-3">
+                    <input type="text" class="form-control" id="SRED2016" value="">
+                </div>
+                <div class="form-group col-md-3">
+                    <input type="text" class="form-control" id="SRED2015" value="">
+                </div>
+            </div>
+
+            <hr>
+
+            <h5>History Tax Issue</h5>
             <div class="form-row">
                 <div class="form-group col-sm-6">
                     <label for="gst/hstIssue">GST/HST Tax Issue:</label>
@@ -137,7 +201,17 @@
                     <textarea class="form-control" id="transferPricingTaxIssue"></textarea>
                 </div>
             </div>
+            <div class="form-row">
+                <div class="form-group col-sm-6">
+                    <label for="transferPricingTaxIssue">Other Tax Issue:</label>
+                    <textarea class="form-control" id="transferPricingTaxIssue"></textarea>
+                </div>
+            </div>
+
+            <hr>
+            
             <button type="submit" class="btn btn-primary">Update</button>
+            <a href="accessment.html" role="button" class="btn btn-success">Start Over</a>
         </form>
 
         <!-- Pagination -->
