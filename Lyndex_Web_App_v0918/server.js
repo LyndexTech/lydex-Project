@@ -281,10 +281,8 @@ app.post('/post_companyinfo', function (req, res) {
     }
 
     var userName = req.session.user.userName;
-    var userEmail = req.session.user.email;
 
-    // TODO
-    if(SaveCompanyInfo(request, userName, userEmail)){
+    if(SaveCompanyInfo(request, userName)){
         res.redirect("/financialanalysis");
     }
     else{
@@ -293,6 +291,15 @@ app.post('/post_companyinfo', function (req, res) {
         );
     }
 })
+
+function SaveCompanyInfo(request,userName){
+    //TODO format the data
+    dataServiceAuth.updateCompanyTaxInfoData(userName,request);
+    return true;
+}
+
+
+
 // POST method for financial analysis form to be developed
 
 app.post('/post_financialanlysis', function (req, res) {
@@ -336,10 +343,9 @@ app.post('/post_financialanlysis', function (req, res) {
     }
 
     var userName = req.session.user.userName;
-    var userEmail = req.session.user.email;
 
     // TODO
-    if(SaveFinancialAnalysis(request, userName, userEmail)){
+    if(SaveFinancialAnalysis(request, userName)){
         res.redirect("/taxcredit");
     }
     else{
@@ -349,10 +355,17 @@ app.post('/post_financialanlysis', function (req, res) {
     }
 })
 
+function SaveFinancialAnalysis(request,userName){
+    //TODO format the data
+    dataServiceAuth.updatePublicFinancialData(userName,request);
+    return true;
+}
+
 // POST method for tax credit form to be developed
 
 app.post('/post_taxcredit', function (req, res) {
 
+// [financial_radio] should can be parsed as json data, listing all three years records
     var request = {
         "gsthstIssue":req.body.gsthstIssue,
         "employeeTaxIssue":req.body.employeeTaxIssue,
@@ -372,6 +385,16 @@ app.post('/post_taxcredit', function (req, res) {
         );
     }
 })
+
+
+// POST method for tax expense form to be developed
+
+function SaveTaxCredit(request,userName){
+    //TODO format the data
+    dataServiceAuth.updateCompanyTaxInfoData(userName,request);
+    return true;
+}
+
 
 //*** POST methods end */
 
