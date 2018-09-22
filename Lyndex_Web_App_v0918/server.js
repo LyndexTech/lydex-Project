@@ -194,13 +194,184 @@ app.post("/signin", (req, res) => {
 
 // POST method for company info form to be developed
 
+app.post('/post_companyinfo', function (req, res) {
+
+    var request = {
+        'basicInfo': {
+            'companyName': req.body.companyName,
+            'companyLocation': req.body.companyLocation,
+            'companyType': req.body.companyType,
+            'fiscalYear': req.body.fiscalYear
+        },
+        'incomeStatement':{
+            '2015':{
+                'ins_sales': req.body.sales2015,
+                'ins_workingCapital': req.body.workingCapital2015,
+                'ins_profitLoss': req.body.profit2015,
+                'ins_operatingProfit': req.body.operatingProfit2015,
+                'ins_incomeTax': req.body.incomeTax2015,
+                'ins_COGS': req.body.cogs2015,
+                'ins_rd': req.body.rd2015
+            },
+            '2016':{
+                'ins_sales': req.body.sales2016,
+                'ins_workingCapital': req.body.workingCapital2016,
+                'ins_profitLoss': req.body.profit2016,
+                'ins_operatingProfit': req.body.operatingProfit2016,
+                'ins_incomeTax': req.body.incomeTax2016,
+                'ins_COGS': req.body.cogs2016,
+                'ins_rd': req.body.rd2016
+            },
+            '2017':{
+                'ins_sales': req.body.sales2016,
+                'ins_workingCapital': req.body.workingCapital2017,
+                'ins_profitLoss': req.body.profit2017,
+                'ins_operatingProfit': req.body.operatingProfit2017,
+                'ins_incomeTax': req.body.incomeTax2017,
+                'ins_COGS': req.body.cogs2017,
+                'ins_rd': req.body.rd2017
+            },
+        },
+        'balancesheet':{
+
+            '2015':{
+                'bas_propertyPlantEquip': req.body.ppe2015,
+                'bas_constructInProgress': req.body.construction2015,
+                'bas_computerSoftwareEquip': req.body.cse2015,
+                'bas_otherPPE': req.body.OtherPpe2015,
+                'bas_accummulatedDepreciation': req.body.accumDep2015,
+                'bas_intangibleAsset': req.body.intangibleAssets2015
+            },
+            '2016':{
+                'bas_propertyPlantEquip': req.body.ppe2016,
+                'bas_constructInProgress': req.body.construction2016,
+                'bas_computerSoftwareEquip': req.body.cse2016,
+                'bas_otherPPE': req.body.OtherPpe2016,
+                'bas_accummulatedDepreciation': req.body.accumDep2016,
+                'bas_intangibleAsset': req.body.intangibleAssets2016
+            },
+            '2017':{
+                'bas_propertyPlantEquip': req.body.ppe2017,
+                'bas_constructInProgress': req.body.construction2017,
+                'bas_computerSoftwareEquip': req.body.cse2017,
+                'bas_otherPPE': req.body.OtherPpe2017,
+                'bas_accummulatedDepreciation': req.body.accumDep2017,
+                'bas_intangibleAsset': req.body.intangibleAssets2017
+            },
+
+        },
+        'cashflowStatement':{
+
+            '2015':{
+                'caf_deferredTax': req.body.deferredTax2015,
+                'caf_investmentTaxCredit': req.body.investmentTaxCredits2015,
+                'caf_capitalExpenditure':req.body.creditExpenditure2015
+            },
+            '2016':{
+                'caf_deferredTax': req.body.deferredTax2016,
+                'caf_investmentTaxCredit': req.body.investmentTaxCredits2016,
+                'caf_capitalExpenditure':req.body.creditExpenditure2016
+            },
+            '2017':{
+                'caf_deferredTax': req.body.deferredTax2017,
+                'caf_investmentTaxCredit': req.body.investmentTaxCredits2017,
+                'caf_capitalExpenditure':req.body.creditExpenditure2017
+            }
+        }
+    }
+
+    var userName = req.session.user.userName;
+    var userEmail = req.session.user.email;
+
+    // TODO
+    if(SaveCompanyInfo(request, userName, userEmail)){
+        res.redirect("/financialanalysis");
+    }
+    else{
+        res.render("companyinfo",
+            {errorMessage: "errorMessage", viewModel: request}
+        );
+    }
+})
 // POST method for financial analysis form to be developed
+
+app.post('/post_financialanlysis', function (req, res) {
+
+    var request = {
+        'industryBenchmark': {
+            'industry': req.body.industry,
+            'subCategory': req.body.subCategory,
+            'marketSize': req.body.marketSize,
+            'marketRdExpense': req.body.marketRdExpense
+        },
+        'financialratio':{
+            '2015':{
+                'peratio': req.body.pe2015,
+                'currentratio': req.body.currentRatio2015,
+                'quickratio': req.body.quickRatio2015,
+                'assetturnover': req.body.assetTurnover2015,
+                'grossmargin': req.body.grossMargin2015,
+                'operatingmargin': req.body.operatingMargin2015,
+                'netmargin': req.body.netMargin2015
+            },
+            '2016':{
+                'peratio': req.body.pe2016,
+                'currentratio': req.body.currentRatio2016,
+                'quickratio': req.body.quickRatio2016,
+                'assetturnover': req.body.assetTurnover2016,
+                'grossmargin': req.body.grossMargin2016,
+                'operatingmargin': req.body.operatingMargin2016,
+                'netmargin': req.body.netMargin2016
+            },
+            '2017':{
+                'peratio': req.body.pe2017,
+                'currentratio': req.body.currentRatio2017,
+                'quickratio': req.body.quickRatio2017,
+                'assetturnover': req.body.assetTurnover2017,
+                'grossmargin': req.body.grossMargin2017,
+                'operatingmargin': req.body.operatingMargin2017,
+                'netmargin': req.body.netMargin2017
+            }
+        }
+    }
+
+    var userName = req.session.user.userName;
+    var userEmail = req.session.user.email;
+
+    // TODO
+    if(SaveFinancialAnalysis(request, userName, userEmail)){
+        res.redirect("/taxcredit");
+    }
+    else{
+        res.render("financialanalysis",
+            {errorMessage: "errorMessage", viewModel: request}
+        );
+    }
+})
 
 // POST method for tax credit form to be developed
 
-// POST method for tax expense form to be developed
+app.post('/post_taxcredit', function (req, res) {
 
-// POST method for product form to be developed
+    var request = {
+        "gsthstIssue":req.body.gsthstIssue,
+        "employeeTaxIssue":req.body.employeeTaxIssue,
+        "transferPricingTaxIssue":req.body.transferPricingTaxIssue
+    };
+
+    var userName = req.session.user.userName;
+    var userEmail = req.session.user.email;
+
+    // TODO
+    if(SaveTaxCredit(request, userName, userEmail)){
+        res.redirect("/taxexpense");
+    }
+    else{
+        res.render("taxcredit",
+            {errorMessage: "errorMessage", viewModel: request}
+        );
+    }
+})
 
 //*** POST methods end */
 
