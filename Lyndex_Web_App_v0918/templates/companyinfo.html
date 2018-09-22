@@ -31,7 +31,7 @@
                     <a class="nav-link active" href="companyinfo.html">Company Information Review</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="financialanalysis.html">Financial Analysis Reports</a>
+                    <a class="nav-link" href="financialanalysis.html">General Financial Analysis</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="taxcredit.html">SR&amp;ED Tax Credit Review</a>
@@ -47,20 +47,26 @@
         <br>
         <!-- Company info content -->
         <form>
+            <h5>Company Basic Information</h5>
             <div class="form-row">
-                <div class="form-group col-md-4">
-                    <label for="companyName">Company</label>
+                <div class="form-group col-md-3">
+                    <label for="companyName">Company Name</label>
                     <input type="text" class="form-control" id="companyName" value="RBC">
                 </div>
-                <div class="form-group col-md-4">
-                    <label for="companyLocation">Location</label>
+                <div class="form-group col-md-3">
+                    <label for="companyLocation">Company Location</label>
                     <input type="text" class="form-control" id="companyLocation" value="Toronto">
                     </div>
-                <div class="form-group col-md-4">
-                    <label for="companyIndustry">Industry</label>
-                    <input type="text" class="form-control" id="companyIndustry" value="Financial">
+                <div class="form-group col-md-3">
+                    <label for="companyType">Company Type</label>
+                    <input type="text" class="form-control" id="companyType" value="Financial">
+                </div>
+                <div class="form-group col-md-3">
+                        <label for="fiscalYear">Fiscal Year</label>
+                        <input type="number" class="form-control" id="fiscalYear" value="2018">
                 </div>
             </div>
+            <!-- summary area disabled in new version
             <div class="form-row">
                 <div class="form-group col-md-12">
                     <label for="companySummary">Commany Summary</label>
@@ -68,55 +74,291 @@
                 </div>
             </div>
             <button type="submit" class="btn btn-primary">Update</button>
+            -->
+
+            <hr>
+
+            <h5>Income Statements</h5>
+            <div class="form-row">
+                <div class="form-group col-md-3">
+                    <p></p>
+                </div>
+                <div class="form-group col-md-3">
+                    <p class="text-center">2017</p>
+                </div>
+                <div class="form-group col-md-3">
+                    <p class="text-center">2016</p>
+                </div>
+                <div class="form-group col-md-3">
+                    <p class="text-center">2015</p>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-3">
+                    <p class="text-center">Sales</p>
+                </div>
+                <div class="form-group col-md-3">
+                    <input type="number" class="form-control" id="sales2017" value="0">
+                </div>
+                <div class="form-group col-md-3">
+                    <input type="number" class="form-control" id="sales2016" value="0">
+                </div>
+                <div class="form-group col-md-3">
+                    <input type="number" class="form-control" id="sales2015" value="0">
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-3">
+                    <p class="text-center">Working Capital</p>
+                </div>
+                <div class="form-group col-md-3">
+                    <input type="number" class="form-control" id="workingCapital2017" value="0">
+                </div>
+                <div class="form-group col-md-3">
+                    <input type="number" class="form-control" id="workingCapital2016" value="0">
+                </div>
+                <div class="form-group col-md-3">
+                    <input type="number" class="form-control" id="workingCapital2015" value="0">
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-3">
+                    <p class="text-center">Profit/Loss</p>
+                </div>
+                <div class="form-group col-md-3">
+                    <input type="number" class="form-control" id="profit2017" value="0">
+                </div>
+                <div class="form-group col-md-3">
+                    <input type="number" class="form-control" id="profit2016" value="0">
+                </div>
+                <div class="form-group col-md-3">
+                    <input type="number" class="form-control" id="profit2015" value="0">
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-3">
+                    <p class="text-center">Operating Profit</p>
+                </div>
+                <div class="form-group col-md-3">
+                    <input type="number" class="form-control" id="operatingProfit2017" value="0">
+                </div>
+                <div class="form-group col-md-3">
+                    <input type="number" class="form-control" id="operatingProfit2016" value="0">
+                </div>
+                <div class="form-group col-md-3">
+                    <input type="number" class="form-control" id="operatingProfit2015" value="0">
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-3">
+                    <p class="text-center">Income Tax</p>
+                </div>
+                <div class="form-group col-md-3">
+                    <input type="number" class="form-control" id="incomeTax2017" value="0">
+                </div>
+                <div class="form-group col-md-3">
+                    <input type="number" class="form-control" id="incomeTax2016" value="0">
+                </div>
+                <div class="form-group col-md-3">
+                    <input type="number" class="form-control" id="incomeTax2015" value="0">
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-3">
+                    <p class="text-center">COGS</p>
+                </div>
+                <div class="form-group col-md-3">
+                    <input type="number" class="form-control" id="cogs2017" value="0">
+                </div>
+                <div class="form-group col-md-3">
+                    <input type="number" class="form-control" id="cogs2016" value="0">
+                </div>
+                <div class="form-group col-md-3">
+                    <input type="number" class="form-control" id="cogs2015" value="0">
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-3">
+                    <p class="text-center">R&amp;D</p>
+                </div>
+                <div class="form-group col-md-3">
+                    <input type="number" class="form-control" id="rd2017" value="0">
+                </div>
+                <div class="form-group col-md-3">
+                    <input type="number" class="form-control" id="rd2016" value="0">
+                </div>
+                <div class="form-group col-md-3">
+                    <input type="number" class="form-control" id="rd2015" value="0">
+                </div>
+            </div>
+
+            <hr>
+
+            <h5>Balance Sheets</h5>
+            <div class="form-row">
+                <div class="form-group col-md-3">
+                    <p></p>
+                </div>
+                <div class="form-group col-md-3">
+                    <p class="text-center">2017</p>
+                </div>
+                <div class="form-group col-md-3">
+                    <p class="text-center">2016</p>
+                </div>
+                <div class="form-group col-md-3">
+                    <p class="text-center">2015</p>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-3">
+                    <p class="text-center">PPE (Property, Plant and Equipment)</p>
+                </div>
+                <div class="form-group col-md-3">
+                    <input type="number" class="form-control" id="ppe2017" value="0">
+                </div>
+                <div class="form-group col-md-3">
+                    <input type="number" class="form-control" id="ppe2016" value="0">
+                </div>
+                <div class="form-group col-md-3">
+                    <input type="number" class="form-control" id="ppe2015" value="0">
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-3">
+                    <p class="text-center">Construction in Process</p>
+                </div>
+                <div class="form-group col-md-3">
+                    <input type="number" class="form-control" id="construction2017" value="0">
+                </div>
+                <div class="form-group col-md-3">
+                    <input type="number" class="form-control" id="construction2016" value="0">
+                </div>
+                <div class="form-group col-md-3">
+                    <input type="number" class="form-control" id="construction2015" value="0">
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-3">
+                    <p class="text-center">Computer Software Equipment</p>
+                </div>
+                <div class="form-group col-md-3">
+                    <input type="number" class="form-control" id="cse2017" value="0">
+                </div>
+                <div class="form-group col-md-3">
+                    <input type="number" class="form-control" id="cse2016" value="0">
+                </div>
+                <div class="form-group col-md-3">
+                    <input type="number" class="form-control" id="cse2015" value="0">
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-3">
+                    <p class="text-center">Other PPE</p>
+                </div>
+                <div class="form-group col-md-3">
+                    <input type="number" class="form-control" id="otherPpe2017" value="0">
+                </div>
+                <div class="form-group col-md-3">
+                    <input type="number" class="form-control" id="otherPpe2016" value="0">
+                </div>
+                <div class="form-group col-md-3">
+                    <input type="number" class="form-control" id="OtherPpe2015" value="0">
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-3">
+                    <p class="text-center">Accum Dep</p>
+                </div>
+                <div class="form-group col-md-3">
+                    <input type="number" class="form-control" id="accumDep2017" value="0">
+                </div>
+                <div class="form-group col-md-3">
+                    <input type="number" class="form-control" id="accumDep2016" value="0">
+                </div>
+                <div class="form-group col-md-3">
+                    <input type="number" class="form-control" id="accumDep2015" value="0">
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-3">
+                    <p class="text-center">Intangible Assets</p>
+                </div>
+                <div class="form-group col-md-3">
+                    <input type="number" class="form-control" id="intangibleAssets2017" value="0">
+                </div>
+                <div class="form-group col-md-3">
+                    <input type="number" class="form-control" id="intangibleAssets2016" value="0">
+                </div>
+                <div class="form-group col-md-3">
+                    <input type="number" class="form-control" id="intangibleAssets2015" value="0">
+                </div>
+            </div>
+
+            <hr>
+
+            <h5>Cash Flow Statements</h5>
+            <div class="form-row">
+                <div class="form-group col-md-3">
+                    <p></p>
+                </div>
+                <div class="form-group col-md-3">
+                    <p class="text-center">2017</p>
+                </div>
+                <div class="form-group col-md-3">
+                    <p class="text-center">2016</p>
+                </div>
+                <div class="form-group col-md-3">
+                    <p class="text-center">2015</p>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-3">
+                    <p class="text-center">Deferred Tax</p>
+                </div>
+                <div class="form-group col-md-3">
+                    <input type="number" class="form-control" id="deferredTax2017" value="0">
+                </div>
+                <div class="form-group col-md-3">
+                    <input type="number" class="form-control" id="deferredTax2016" value="0">
+                </div>
+                <div class="form-group col-md-3">
+                    <input type="number" class="form-control" id="deferredTax2015" value="0">
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-3">
+                    <p class="text-center">Investment Tax Credits</p>
+                </div>
+                <div class="form-group col-md-3">
+                    <input type="number" class="form-control" id="investmentTaxCredits2017" value="0">
+                </div>
+                <div class="form-group col-md-3">
+                    <input type="number" class="form-control" id="investmentTaxCredits2016" value="0">
+                </div>
+                <div class="form-group col-md-3">
+                    <input type="number" class="form-control" id="investmentTaxCredits2015" value="0">
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-3">
+                    <p class="text-center">Credit Expenditure</p>
+                </div>
+                <div class="form-group col-md-3">
+                    <input type="number" class="form-control" id="creditExpenditure2017" value="0">
+                </div>
+                <div class="form-group col-md-3">
+                    <input type="number" class="form-control" id="creditExpenditure2016" value="0">
+                </div>
+                <div class="form-group col-md-3">
+                    <input type="number" class="form-control" id="creditExpenditure2015" value="0">
+                </div>
+            </div>
+
+            <hr>
+
+            <button type="submit" class="btn btn-primary">Update</button>
         </form>
-        <hr>
-        <!-- Company documents -->
-        <h4>Uploaded Documents 
-            <button type="button" class="btn btn-success" data-toggle="modal" data-target="#uploadFileModal">
-                Add New Files
-            </button>
-        </h4>
         
-        <!-- Modal -->
-        <div class="modal fade" id="uploadFileModal" tabindex="-1" role="dialog" aria-labelledby="uploadFileModalLabel" aria-hidden="true">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="uploadFileModalLabel">Upload New Files</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-            <div class="modal-body">
-              <input type="file" name="file" multiple>
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-              <button type="button" class="btn btn-primary">Upload</button>
-            </div>
-          </div>
-        </div>
-      </div>
-        <div class="table-responsive">
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th>Type</th>
-                        <th>Year</th>
-                        <th>File Name</th>
-                        <th></th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>Balance Sheet</td>
-                        <td>2017</td>
-                        <td>RBC_Balance_Sheet_2017.csv(a link to the file needed)</td>
-                        <td><a class="btn btn-danger" href="#">Delete</td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
         <!-- Pagination -->
         <div class="row">
             <div class="col">

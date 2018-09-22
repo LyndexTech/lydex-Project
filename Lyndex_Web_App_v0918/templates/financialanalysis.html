@@ -31,7 +31,7 @@
                     <a class="nav-link" href="companyinfo.html">Company Information Review</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link active" href="#">Financial Analysis Reports</a>
+                    <a class="nav-link active" href="financialanalysis.html">General Financial Analysis</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="taxcredit.html">SR&amp;ED Tax Credit Review</a>
@@ -40,13 +40,158 @@
                     <a class="nav-link" href="taxexpense.html">R&amp;D Tax Expense Analysis</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Product &amp; Tech vs R&amp;D Field</a>
+                    <a class="nav-link" href="product.html">Product &amp; Tech vs R&amp;D Field</a>
                 </li>
             </ul>
         </div> 
         
         <br>
+        <!-- financial analysis content -->
+        <form>
+            <h5>Industry Benchmark</h5>
+            <div class="form-row">
+                <div class="form-group col-md-3">
+                    <label for="industry">Industry</label>
+                    <input type="text" class="form-control" id="industry" value="">
+                </div>
+                <div class="form-group col-md-3">
+                    <label for="subCategory">Sub-Category</label>
+                    <input type="text" class="form-control" id="subCategory" value="">
+                </div>
+                <div class="form-group col-md-3">
+                    <label for="marketSize">Market Size (in Billion $)</label>
+                    <input type="number" class="form-control" id="marketSize" value="">
+                </div>
+                <div class="form-group col-md-3">
+                        <label for="marketRdExpense">R&amp;D Expense (in Billion $)</label>
+                        <input type="number" class="form-control" id="marketRdExpense" value="">
+                </div>
+            </div>
+            <div class="form-row">
+                <label for="mainCompany">Main Listed Companies</label>
+                <textarea class="form-control" id="mainCompany"></textarea>
+            </div>
 
+            <hr>
+
+            <h5>Financial Ratio</h5>
+            <div class="form-row">
+                <div class="form-group col-md-3">
+                    <p></p>
+                </div>
+                <div class="form-group col-md-3">
+                    <p class="text-center">2017</p>
+                </div>
+                <div class="form-group col-md-3">
+                    <p class="text-center">2016</p>
+                </div>
+                <div class="form-group col-md-3">
+                    <p class="text-center">2015</p>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-3">
+                    <p class="text-center">P/E Ratio</p>
+                </div>
+                <div class="form-group col-md-3">
+                    <input type="number" class="form-control" id="pe2017" value="0">
+                </div>
+                <div class="form-group col-md-3">
+                    <input type="number" class="form-control" id="pe2016" value="0">
+                </div>
+                <div class="form-group col-md-3">
+                    <input type="number" class="form-control" id="pe2015" value="0">
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-3">
+                    <p class="text-center">Current Ratio</p>
+                </div>
+                <div class="form-group col-md-3">
+                    <input type="number" class="form-control" id="currentRatio2017" value="0">
+                </div>
+                <div class="form-group col-md-3">
+                    <input type="number" class="form-control" id="currentRatio2016" value="0">
+                </div>
+                <div class="form-group col-md-3">
+                    <input type="number" class="form-control" id="currentRatio2015" value="0">
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-3">
+                    <p class="text-center">Quick Ratio</p>
+                </div>
+                <div class="form-group col-md-3">
+                    <input type="number" class="form-control" id="quickRatio2017" value="0">
+                </div>
+                <div class="form-group col-md-3">
+                    <input type="number" class="form-control" id="quickRatio2016" value="0">
+                </div>
+                <div class="form-group col-md-3">
+                    <input type="number" class="form-control" id="quickRatio2015" value="0">
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-3">
+                    <p class="text-center">Asset Turnover</p>
+                </div>
+                <div class="form-group col-md-3">
+                    <input type="number" class="form-control" id="assetTurnover2017" value="0">
+                </div>
+                <div class="form-group col-md-3">
+                    <input type="number" class="form-control" id="assetTurnover2016" value="0">
+                </div>
+                <div class="form-group col-md-3">
+                    <input type="number" class="form-control" id="assetTurnover2015" value="0">
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-3">
+                    <p class="text-center">Gross Margin</p>
+                </div>
+                <div class="form-group col-md-3">
+                    <input type="number" class="form-control" id="grossMargin2017" value="0">
+                </div>
+                <div class="form-group col-md-3">
+                    <input type="number" class="form-control" id="grossMargin2016" value="0">
+                </div>
+                <div class="form-group col-md-3">
+                    <input type="number" class="form-control" id="grossMargin2015" value="0">
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-3">
+                    <p class="text-center">Operating Margin</p>
+                </div>
+                <div class="form-group col-md-3">
+                    <input type="number" class="form-control" id="operatingMargin2017" value="0">
+                </div>
+                <div class="form-group col-md-3">
+                    <input type="number" class="form-control" id="operatingMargin2016" value="0">
+                </div>
+                <div class="form-group col-md-3">
+                    <input type="number" class="form-control" id="operatingMargin2015" value="0">
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-3">
+                    <p class="text-center">Net Margin</p>
+                </div>
+                <div class="form-group col-md-3">
+                    <input type="number" class="form-control" id="netMargin2017" value="0">
+                </div>
+                <div class="form-group col-md-3">
+                    <input type="number" class="form-control" id="netMargin2016" value="0">
+                </div>
+                <div class="form-group col-md-3">
+                    <input type="number" class="form-control" id="netMargin2015" value="0">
+                </div>
+            </div>
+
+            <hr>
+
+            <button type="submit" class="btn btn-primary">Update</button>
+        </form>
         <!-- Pagination -->
         <div class="row">
             <div class="col">
