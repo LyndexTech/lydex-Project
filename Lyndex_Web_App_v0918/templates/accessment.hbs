@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Lyndex Technology</title>
+
+    <!-- Bootstrap core CSS -->
+    <!-- import Bootstrap CDN: CSS, JS, Popper.js and jQuary-->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous"> 
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <!-- import Bootstrap end --> 
+
+    <!-- Custom styles for financial page -->
+    
+
+  </head>
+
+  <body>
+
+    <div class="container">
+        <br>
+        <h3 class="text-center">Before starting your R&amp;D Tax Accessment</h3>
+        <br>
+        <h5>You can upload your documents to let us fill in the accessment automatically for you: 
+            <button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#uploadFileModal">
+                Upload Files
+            </button>
+        </h5>
+        <p>Documents needed for the accessment:</p>
+        <ul>
+            <li>Balance Sheets for most recent 3 years</li>
+            <li>Income Statement for most recent 3 years</li>
+            <li>Cash Flow Statement for most recent 3 years</li>
+            <li>Other documents relative to tax or R&amp;D projects</li>
+        </ul>
+        <p>Or you can skip this uploading and start the accessment manually</p>
+        
+        <!-- upload Modal -->
+        <div class="modal fade" id="uploadFileModal" tabindex="-1" role="dialog" aria-labelledby="uploadFileModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="uploadFileModalLabel">Upload New Files</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+            <div class="modal-body">
+              <input type="file" name="file" multiple>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              <button type="button" class="btn btn-primary">Upload</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- upload modal end -->
+
+      <h5>Uploaded Documents</h5>
+        <div class="table-responsive">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Type</th>
+                        <th>Year</th>
+                        <th>File Name</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Balance Sheet</td>
+                        <td>2017</td>
+                        <td>RBC_Balance_Sheet_2017.csv(a link to the file needed)</td>
+                        <td><a class="btn btn-danger btn-sm" href="#">Delete</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="text-center">
+        <a href="companyinfo.html" class="btn btn-primary btn-lg center-block" role="button">Start Accessment</a>
+    </div>
+  </body>
+</html>

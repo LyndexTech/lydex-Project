@@ -1,5 +1,3 @@
-import { resolve } from "url";
-
 /*********************************************************************************
 * User data authentication with mongoDB database JavaScript file
 *
