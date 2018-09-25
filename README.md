@@ -11,3 +11,8 @@ Updates on Sep.21
 
 Updates on Sep.22
 1. latest frond end pages version uploaded.
+
+Updates on Sep.25
+1. Home, signin, register, forgetpassword pages display bug fixed.
+2. register and signin function not working properly, need to be fixed.
+3. other pages need to be tested after bug#2 is fixed.
