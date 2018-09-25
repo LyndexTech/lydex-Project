@@ -1,0 +1,87 @@
+<style>
+      #navbar {
+        box-shadow: 0px 3px 2px gray
+      }
+
+      #sidebarholder {
+        margin-top: 2px;
+        position: absolute;
+        height:100%;
+        width: 200px;
+        box-shadow: 3px 0px 2px darkgray;
+      }
+      #sidebar {
+        margin-top: 20px;
+      }
+      
+      #sidebarlink:hover {
+        font-weight: bold;
+      }
+
+      .material-icons {
+        display: inline-flex;
+        vertical-align: top;
+      }
+
+      #content {
+        position: absolute;
+        width:100%;
+        margin-left: 250px;
+        padding: 5px;
+      }
+      
+    </style>
+
+    <nav class="navbar navbar-dark bg-dark" id="navbar">
+          <div class="container-fluid">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              <span class="navbar-brand" href="#">Lyndex Technology</span>
+            </div>
+        
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+              <ul class="nav navbar-nav">
+                {{#navLink "/home"}}Home{{/navLink}}
+                {{#navLink "/about"}}About{{/navLink}}
+              </ul>
+              {{#if session.user}}
+                <form class="navbar-form nav-right">
+                <div class="dropdown">
+                  <button class="btn btn-primary dropdown-toggle" type="button" id="userMenu" data-toggle="dropdown">
+                    <span class="glyphicon glyphiconuser"></span>&nbsp;&nbsp;{{session.user.userName}}&nbsp;&nbsp;<span class="caret"></span>
+                  </button>
+                  <ul class="dropdown-menu" aria-labelledby="userMenu">
+                    <li><a href="/userprofile">Profile</a></li>
+                    <li><a href="/logout">Log Out</a></li>
+                  </ul>
+                </div>
+                </form>
+              {else}}
+                <form class="navbar-form nav-right">
+                  <a href="/register" class="btn btn-success"><span class="glyphicon glyphiconcog"></span>&nbsp;&nbsp;Register</a>
+                  <a href="/signin" class="btn btn-primary"><span class="glyphicon glyphicon-chevronright"></span>&nbsp;&nbsp;Sign in</a>
+                </form>
+              {{/if}}
+            </div><!-- /.navbar-collapse -->
+          </div><!-- /.container-fluid -->
+        </nav>
+   
+        <div class="bg-light" id="sidebarholder">
+            <nav class="nav flex-column" id="sidebar">
+                <a class="nav-link text-dark" id="sidebarlink" href="#"><i class="material-icons">dashboard</i>&nbsp;Dashboard</a>
+                <a class="nav-link text-dark" id="sidebarlink" href="/accessment"><i class="material-icons">create</i>&nbsp;Accessment</a>
+                <a class="nav-link text-dark" id="sidebarlink" href="#"><i class="material-icons">assessment</i>&nbsp;Report</a>
+                <a class="nav-link text-dark" id="sidebarlink" href="#"><i class="material-icons">add</i>&nbsp;More</a>
+            </nav>
+        </div>
+        
+      
+  
+
