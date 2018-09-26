@@ -26,6 +26,8 @@ var app = express();
 // express-handlebars function --  layout template and helper functions set up
 app.engine('.hbs', exphbs({extname: '.hbs', 
                            defaultLayout: 'main',
+                           layoutsDir:__dirname + '/views/layouts',
+                           partialsDir:__dirname + '/views/partials',
                            helpers: {
                             navLink: function(url, options){
                               return '<li' + ((url == app.locals.activeRoute) ? ' class="active" ' : '') + '><a href="' + url + '">' + options.fn(this) + '</a></li>';
@@ -61,6 +63,9 @@ const upload = multer({ storage: storage });
 // NEED TO BE MODIFIED *************************************************
 // to create AJAX call Javascript for front end uploading modal view
 app.post("/accessment", upload.array("files", 12), (req, res) => {
+
+    //STEVEN FILE - > DB
+
     res.redirect("/accessment");
 });
 //*********************************************************************/
@@ -133,86 +138,93 @@ app.get("/accessment", ensureLogin, (req, res) => {
 // setup a route to listen on /companyinfo
 app.get("/companyinfo", ensureLogin, (req, res) => {
     // Company info query from database need to be developed
-    var companyinfo = {
-        'basicInfo': {
-            'companyName': 'OE',
-            'companyLocation': 'Yantai',
-            'companyType': 'nB',
-            'fiscalYear': '1'
-        },
-        'incomeStatement':{
-            '2015':{
-                'ins_sales': 100,
-                'ins_workingCapital': 1,
-                'ins_profitLoss': 1,
-                'ins_operatingProfit': 1,
-                'ins_incomeTax': 1,
-                'ins_COGS': 1,
-                'ins_rd': 1
-            },
-            '2016':{
-                'ins_sales': 1,
-                'ins_workingCapital': 1,
-                'ins_profitLoss': 1,
-                'ins_operatingProfit': 1,
-                'ins_incomeTax': 1,
-                'ins_COGS': 1,
-                'ins_rd': 1
-            },
-            '2017':{
-                'ins_sales': 1,
-                'ins_workingCapital': 1,
-                'ins_profitLoss': 1,
-                'ins_operatingProfit': 1,
-                'ins_incomeTax': 1,
-                'ins_COGS': 1,
-                'ins_rd': 1
-            }
-        },
-        'balancesheet':{
 
-            '2015':{
-                'bas_propertyPlantEquip': 1,
-                'bas_constructInProgress': 1,
-                'bas_computerSoftwareEquip': 1,
-                'bas_otherPPE': 1,
-                'bas_accummulatedDepreciation': 1,
-                'bas_intangibleAsset': 1
-            },
-            '2016':{
-                'bas_propertyPlantEquip': 1,
-                'bas_constructInProgress': 1,
-                'bas_computerSoftwareEquip': 1,
-                'bas_otherPPE': 1,
-                'bas_accummulatedDepreciation': 1,
-                'bas_intangibleAsset': 1
-            },
-            '2017':{
-                'bas_propertyPlantEquip': 1,
-                'bas_constructInProgress': 1,
-                'bas_computerSoftwareEquip': 1,
-                'bas_otherPPE': 1,
-                'bas_accummulatedDepreciation': 1,
-                'bas_intangibleAsset': 1
-            }
+    var userName = req.session.user.email;
+    var companyTaxInfoData =dataServiceAuth.getCompanyTaxInfoData(userName);
+    var clientData = dataServiceAuth.getCompanyTaxInfoData(userName);
 
-        },
-        'cashflowStatement':{
+    if(clientData && companyTaxInfoData){
+        var companyinfo = {
+            'basicInfo': {
+                'companyName': clientData.cli_companyName,
+                'companyLocation': clientData.cli_officeLocation.cli_province,
+                'companyType': clientData.cli_LinkedInProfile.cli_companyType,
+                'fiscalYear': '2018'
+            },
+            'incomeStatement':{
+                '2015':{
+                    'ins_sales': '',
+                    'ins_workingCapital': '',
+                    'ins_profitLoss': '',
+                    'ins_operatingProfit': '',
+                    'ins_incomeTax': '',
+                    'ins_COGS': '',
+                    'ins_rd': ''
+                },
+                '2016':{
+                    'ins_sales': '',
+                    'ins_workingCapital': '',
+                    'ins_profitLoss': '',
+                    'ins_operatingProfit': '',
+                    'ins_incomeTax': '',
+                    'ins_COGS': '',
+                    'ins_rd': ''
+                },
+                '2017':{
+                    'ins_sales': '',
+                    'ins_workingCapital': '',
+                    'ins_profitLoss': '',
+                    'ins_operatingProfit': '',
+                    'ins_incomeTax': '',
+                    'ins_COGS': '',
+                    'ins_rd': ''
+                }
+            },
+            'balancesheet':{
 
-            '2015':{
-                'caf_deferredTax': 1,
-                'caf_investmentTaxCredit': 1,
-                'caf_capitalExpenditure':1
+                '2015':{
+                    'bas_propertyPlantEquip': '',
+                    'bas_constructInProgress': '',
+                    'bas_computerSoftwareEquip': '',
+                    'bas_otherPPE': '',
+                    'bas_accummulatedDepreciation': '',
+                    'bas_intangibleAsset': ''
+                },
+                '2016':{
+                    'bas_propertyPlantEquip': '',
+                    'bas_constructInProgress': '',
+                    'bas_computerSoftwareEquip': '',
+                    'bas_otherPPE': '',
+                    'bas_accummulatedDepreciation': '',
+                    'bas_intangibleAsset': ''
+                },
+                '2017':{
+                    'bas_propertyPlantEquip': '',
+                    'bas_constructInProgress': '',
+                    'bas_computerSoftwareEquip': '',
+                    'bas_otherPPE': '',
+                    'bas_accummulatedDepreciation': '',
+                    'bas_intangibleAsset': ''
+                }
+
             },
-            '2016':{
-                'caf_deferredTax': 1,
-                'caf_investmentTaxCredit': 1,
-                'caf_capitalExpenditure':1
-            },
-            '2017':{
-                'caf_deferredTax': 1,
-                'caf_investmentTaxCredit': 1,
-                'caf_capitalExpenditure':1
+            'cashflowStatement':{
+
+                '2015':{
+                    'caf_deferredTax': '',
+                    'caf_investmentTaxCredit': '',
+                    'caf_capitalExpenditure':''
+                },
+                '2016':{
+                    'caf_deferredTax': '',
+                    'caf_investmentTaxCredit': '',
+                    'caf_capitalExpenditure':''
+                },
+                '2017':{
+                    'caf_deferredTax': '',
+                    'caf_investmentTaxCredit': '',
+                    'caf_capitalExpenditure':''
+                }
             }
         }
     }
@@ -376,6 +388,7 @@ app.get("/product", ensureLogin, (req, res) => {
 
 // register user form
 app.post("/register", (req, res) => {
+
     dataServiceAuth.registerUser(req.body)
     .then(() => {
       res.render("register", {successMessage: "User created"});
@@ -607,8 +620,7 @@ app.post('/post_taxcredit', function (req, res) {
         }
     };
 
-    var userName = req.session.user.userName;
-    var userEmail = req.session.user.email;
+    var userName = req.session.user.email;
 
     // TODO
     if(SaveTaxCredit(request, userName, userEmail)){

@@ -188,12 +188,13 @@ module.exports.initialize = () => {
 //*** user authentication functions ***********************************/
 // register user
 module.exports.registerUser = (userData) => {
+
     return new Promise( (resolve, reject) => {
-        if (userData.password != userData.password2) {
+        if (userData.cli_password != userData.Password2) {
             reject("Passwords do not match");
         } else {
             bcrypt.genSalt(10, (err, salt) => {
-                bcrypt.hash(userData.password, salt, (err, hash) => {
+                bcrypt.hash(userData.cli_password, salt, (err, hash) => {
                     if (err) {
                         reject("There was an error encrypting the password");
                     } else {
@@ -237,7 +238,8 @@ module.exports.checkUser = (userData) => {
         Client.find({cli_loginName:userData.cli_loginName}) // need to be configured with front end form name attr
         .exec()
         .then((users) => {
-            bcrypt.compare(userData.password, users[0].password).then((res) => {
+            bcrypt.compare(userData.cli_password, users[0].cli_password).then((res) => {
+                res=true;
                 if (users.length == 0) {
                     reject("Unable to find user: " + userData.cli_loginName);
                 } else if (res === false) {
@@ -323,12 +325,20 @@ module.exports.updatePublicFinancialData = (userName, updateData) => {
 };
 
 module.exports.updateCompanyTaxInfoData = (userName, updateData) => {
-    CompanyTaxInfo.findOneAndUpdate({cli_loginName:userName},updateData)
-    .exec()
-    .then((newData) => {
-        resolve();
-    })
-    .catch((err) => {
-        reject("Error in updating company tax info data" + err);
-    })
+    // CompanyTaxInfo.findOneAndUpdate({cli_loginName:userName},updateData)
+    //     .exec()
+    // .then((newData) => {
+    //     console.log("success");
+    //     resolve();
+    // })
+    CompanyTaxInfo.update({cli_loginName:userName }, {updateData} , function (err, raw) {
+        console.log(err);
+        if(!err){
+            //  INSERT()
+        }
+        if (err) return handleError(err);
+        console.log('The raw response from Mongo was ', raw);
+
+    });
+
 };
