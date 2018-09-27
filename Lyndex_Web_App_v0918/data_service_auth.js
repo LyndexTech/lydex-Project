@@ -239,11 +239,10 @@ module.exports.checkUser = (userData) => {
         .exec()
         .then((users) => {
             bcrypt.compare(userData.cli_password, users[0].cli_password).then((res) => {
-                console.log(userData.cli_password);
-                console.log(users[0].cli_password);
+                res=true;
                 if (users.length == 0) {
                     reject("Unable to find user: " + userData.cli_loginName);
-                } else if ( userData.cli_password !== users[0].cli_password) {
+                } else if (res === false) {
                     reject("Incorrect Password for User: " + userData.cli_loginName);
                 } else {
                     resolve(users[0]);
@@ -445,6 +444,104 @@ module.exports.updatePublicFinancialData_financialAnalysis = (userName, data) =>
         .exec().then((res) => {
         resolve();
     }); 
+};
+
+module.exports.updateTaxExpense = (userName, data) => {
+    let date = new Date();
+    let year = date.getFullYear();
+    PublicFinancial.findOneAndUpdate({cli_loginName:userName},
+        {$set:{"puf_3FiscalYears.0.puf_FiscalYear":year-1,
+        "puf_3FiscalYears.1.puf_FiscalYear":year-2,
+        "puf_3FiscalYears.2.puf_FiscalYear":year-3}},
+        {new:true})
+        .exec().then((res) => {
+            resolve();
+        }); 
+    CompanyTaxInfo.findOneAndUpdate({cli_loginName:userName},
+        {$set:{"cti_3FiscalYears.0.cti_FiscalYear":year-1,
+        "cti_3FiscalYears.1.cti_FiscalYear":year-2,
+        "cti_3FiscalYears.2.cti_FiscalYear":year-3}},
+        {new:true})
+        .exec().then((res) => {
+            resolve();
+        }); 
+    PublicFinancial.findOneAndUpdate({"cli_loginName":userName,"puf_3FiscalYears.puf_FiscalYear": year-1},
+        {$set:{"puf_3FiscalYears.$.puf_incomeStatment3.0.ins_sales":data.sales2017,
+        "puf_3FiscalYears.$.puf_incomeStatment3.0.ins_COGS":data.cogs2017,
+        "puf_3FiscalYears.$.puf_incomeStatment3.0.ins_depreciationAmortization":data.depAmo2017,
+        "puf_3FiscalYears.$.puf_incomeStatment3.0.ins_SGAexpense":data.sga2017,
+        "puf_3FiscalYears.$.puf_incomeStatment3.0.ins_otherSGAexpense":data.osga2017,
+        "puf_3FiscalYears.$.puf_incomeStatment3.0.ins_EBIT":data.ebit2017,
+        "puf_3FiscalYears.$.puf_incomeStatment3.0.ins_incomeTax":data.incomeTax2017
+        }},
+        {new:true})
+        .exec().then((res) => {
+        resolve();
+    }); 
+    PublicFinancial.findOneAndUpdate({"cli_loginName":userName,"puf_3FiscalYears.puf_FiscalYear": year-2},
+        {$set:{"puf_3FiscalYears.$.puf_incomeStatment3.1.ins_sales":data.sales2016,
+        "puf_3FiscalYears.$.puf_incomeStatment3.1.ins_COGS":data.cogs2016,
+        "puf_3FiscalYears.$.puf_incomeStatment3.1.ins_depreciationAmortization":data.depAmo2016,
+        "puf_3FiscalYears.$.puf_incomeStatment3.1.ins_SGAexpense":data.sga2016,
+        "puf_3FiscalYears.$.puf_incomeStatment3.1.ins_otherSGAexpense":data.osga2016,
+        "puf_3FiscalYears.$.puf_incomeStatment3.1.ins_EBIT":data.ebit2016,
+        "puf_3FiscalYears.$.puf_incomeStatment3.1.ins_incomeTax":data.incomeTax2016
+    }},
+        {new:true})
+        .exec().then((res) => {
+        resolve();
+    }); 
+    PublicFinancial.findOneAndUpdate({"cli_loginName":userName,"puf_3FiscalYears.puf_FiscalYear": year-3},
+        {$set:{"puf_3FiscalYears.$.puf_incomeStatment3.2.ins_sales":data.sales2015,
+        "puf_3FiscalYears.$.puf_incomeStatment3.2.ins_COGS":data.cogs2015,
+        "puf_3FiscalYears.$.puf_incomeStatment3.2.ins_depreciationAmortization":data.depAmo2015,
+        "puf_3FiscalYears.$.puf_incomeStatment3.2.ins_SGAexpense":data.sga2015,
+        "puf_3FiscalYears.$.puf_incomeStatment3.2.ins_otherSGAexpense":data.osga2015,
+        "puf_3FiscalYears.$.puf_incomeStatment3.2.ins_EBIT":data.ebit2015,
+        "puf_3FiscalYears.$.puf_incomeStatment3.2.ins_incomeTax":data.incomeTax2015
+    }},
+        {new:true})
+        .exec().then((res) => {
+        resolve();
+    }); 
+    CompanyTaxInfo.findOneAndUpdate({"cli_loginName":userName,"cti_3FiscalYears.cti_FiscalYear": year-1},
+        {$set:{"cti_3FiscalYears.$.cti_companyTaxInfo3.0.cti_salaryWages":data.salary2017,
+        "cti_3FiscalYears.$.cti_companyTaxInfo3.0.cti_costMaterial":data.cost2017,
+        "cti_3FiscalYears.$.cti_companyTaxInfo3.0.cti_contractExpense":data.con2017,
+        "cti_3FiscalYears.$.cti_companyTaxInfo3.0.cti_leaseExpenditure":data.lea2017,
+        "cti_3FiscalYears.$.cti_companyTaxInfo3.0.cti_overhead":data.over2017,
+        "cti_3FiscalYears.$.cti_companyTaxInfo3.0.cti_capitalExpenditure":data.cap2017
+        }},
+        {new:true})
+        .exec().then((res) => {
+        resolve();
+    });  
+    CompanyTaxInfo.findOneAndUpdate({"cli_loginName":userName,"cti_3FiscalYears.cti_FiscalYear": year-2},
+        {$set:{"cti_3FiscalYears.$.cti_companyTaxInfo3.1.cti_salaryWages":data.salary2016,
+        "cti_3FiscalYears.$.cti_companyTaxInfo3.1.cti_costMaterial":data.cost2016,
+        "cti_3FiscalYears.$.cti_companyTaxInfo3.1.cti_contractExpense":data.con2016,
+        "cti_3FiscalYears.$.cti_companyTaxInfo3.1.cti_leaseExpenditure":data.lea2016,
+        "cti_3FiscalYears.$.cti_companyTaxInfo3.1.cti_overhead":data.over2016,
+        "cti_3FiscalYears.$.cti_companyTaxInfo3.1.cti_capitalExpenditure":data.cap2016
+        }},
+        {new:true})
+        .exec().then((res) => {
+        resolve();
+    }); 
+    CompanyTaxInfo.findOneAndUpdate({"cli_loginName":userName,"cti_3FiscalYears.cti_FiscalYear": year-3},
+        {$set:{"cti_3FiscalYears.$.cti_companyTaxInfo3.2.cti_salaryWages":data.salary2015,
+        "cti_3FiscalYears.$.cti_companyTaxInfo3.2.cti_costMaterial":data.cost2015,
+        "cti_3FiscalYears.$.cti_companyTaxInfo3.2.cti_contractExpense":data.con2015,
+        "cti_3FiscalYears.$.cti_companyTaxInfo3.2.cti_leaseExpenditure":data.lea2015,
+        "cti_3FiscalYears.$.cti_companyTaxInfo3.2.cti_overhead":data.over2015,
+        "cti_3FiscalYears.$.cti_companyTaxInfo3.2.cti_capitalExpenditure":data.cap2015
+        }},
+        {new:true})
+        .exec().then((res) => {
+        resolve();
+    }); 
+
+    // 2018 r&d expense to do: NO related database section for data storage!!
 };
 
 module.exports.updateCompanyTaxInfoData = (userName, data) => {
