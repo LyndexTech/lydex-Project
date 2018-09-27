@@ -1,22 +1,23 @@
 {{> navbar }}
+<div id="content">
 <!-- financial information nav -->
 
     <div class="row">
         <ul class="nav nav-tabs">
             <li class="nav-item">
-                <a class="nav-link" href="companyinfo.hbs">Company Information Review</a>
+                <a class="nav-link" href="/companyinfo">Company Information Review</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="financialanalysis.hbs">Financial Analysis Reports</a>
+                <a class="nav-link" href="/financialanalysis">Financial Analysis Reports</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link active" href="taxcredit.hbs">SR&amp;ED Tax Credit Review</a>
+                <a class="nav-link active" href="/taxcredit">SR&amp;ED Tax Credit Review</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="taxexpense.hbs">R&amp;D Tax Expense Analysis</a>
+                <a class="nav-link" href="/taxexpense">R&amp;D Tax Expense Analysis</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="product.hbs">Product &amp; Tech vs R&amp;D Field</a>
+                <a class="nav-link" href="/product">Product &amp; Tech vs R&amp;D Field</a>
             </li>
         </ul>
     </div>
@@ -45,13 +46,13 @@
                 <p class="text-center">Canadian R&amp;D Expenditure</p>
             </div>
             <div class="form-group col-md-3">
-                <input type="number" class="form-control" name ="caRD2017" id="caRD2017" value="{{content.IndustryBenchmark.caRD2017}}">
+                <input type="number" class="form-control" name ="caRD2017" id="caRD2017" value="{{content.IndustryBenchmark.caRD2017}}" readonly>
             </div>
             <div class="form-group col-md-3">
-                <input type="number" class="form-control" name="caRD2016" id="caRD2016" value="{{content.IndustryBenchmark.caRD2016}}">
+                <input type="number" class="form-control" name="caRD2016" id="caRD2016" value="{{content.IndustryBenchmark.caRD2016}}" readonly>
             </div>
             <div class="form-group col-md-3">
-                <input type="number" class="form-control" name="caRD2015" id="caRD2015" value="{{content.IndustryBenchmark.caRD2015}}">
+                <input type="number" class="form-control" name="caRD2015" id="caRD2015" value="{{content.IndustryBenchmark.caRD2015}}" readonly>
             </div>
         </div>
         <div class="form-row">
@@ -59,13 +60,13 @@
                 <p class="text-center">SR&amp;ED Tax Credit</p>
             </div>
             <div class="form-group col-md-3">
-                <input type="number" class="form-control" name="sredTaxCredits2017"  id="sredTaxCredits2017" value="{{content.IndustryBenchmark.sredTaxCredits2017}}">
+                <input type="number" class="form-control" name="sredTaxCredits2017"  id="sredTaxCredits2017" value="{{content.IndustryBenchmark.sredTaxCredits2017}}" readonly>
             </div>
             <div class="form-group col-md-3">
-                <input type="number" class="form-control" name="sredTaxCredits2016" id="sredTaxCredits2016" value="{{content.IndustryBenchmark.sredTaxCredits2016}}">
+                <input type="number" class="form-control" name="sredTaxCredits2016" id="sredTaxCredits2016" value="{{content.IndustryBenchmark.sredTaxCredits2016}}" readonly>
             </div>
             <div class="form-group col-md-3">
-                <input type="number" class="form-control" name="sredTaxCredits2015" id="sredTaxCredits2015" value="{{content.IndustryBenchmark.sredTaxCredits2015}}">
+                <input type="number" class="form-control" name="sredTaxCredits2015" id="sredTaxCredits2015" value="{{content.IndustryBenchmark.sredTaxCredits2015}}" readonly>
             </div>
         </div>
         <div class="form-row">
@@ -73,13 +74,13 @@
                 <p class="text-center">Industry Size</p>
             </div>
             <div class="form-group col-md-3">
-                <input type="number" class="form-control" name ="idustrySize2017" id="idustrySize2017" value="{{content.IndustryBenchmark.idustrySize2017}}">
+                <input type="number" class="form-control" name ="idustrySize2017" id="idustrySize2017" value="{{content.IndustryBenchmark.idustrySize2017}}" readonly>
             </div>
             <div class="form-group col-md-3">
-                <input type="number" class="form-control" name ="idustrySize2016" id="industrySize2016" value="{{content.IndustryBenchmark.idustrySize2016}}">
+                <input type="number" class="form-control" name ="idustrySize2016" id="industrySize2016" value="{{content.IndustryBenchmark.idustrySize2016}}" readonly>
             </div>
             <div class="form-group col-md-3">
-                <input type="number" class="form-control" name ="idustrySize2015" id="industrySize2015" value="{{content.IndustryBenchmark.idustrySize2015}}">
+                <input type="number" class="form-control" name ="idustrySize2015" id="industrySize2015" value="{{content.IndustryBenchmark.idustrySize2015}}" readonly>
             </div>
         </div>
         <div class="form-row">
@@ -87,13 +88,13 @@
                 <p class="text-center">Investment Tax Credits</p>
             </div>
             <div class="form-group col-md-3">
-                <input type="number" class="form-control" name ="indRdExpense2017" id="indRdExpense2017" value="{{content.IndustryBenchmark.indRdExpense2017}}">
+                <input type="number" class="form-control" name ="indRdExpense2017" id="indRdExpense2017" value="{{content.IndustryBenchmark.indRdExpense2017}}" readonly>
             </div>
             <div class="form-group col-md-3">
-                <input type="number" class="form-control" name ="indRdExpense2016" id="indRdExpense2016" value="{{content.IndustryBenchmark.indRdExpense2016}}">
+                <input type="number" class="form-control" name ="indRdExpense2016" id="indRdExpense2016" value="{{content.IndustryBenchmark.indRdExpense2016}}" readonly>
             </div>
             <div class="form-group col-md-3">
-                <input type="number" class="form-control" name ="indRdExpense2015" id="indRdExpense2015" value="{{content.IndustryBenchmark.indRdExpense2015}}">
+                <input type="number" class="form-control" name ="indRdExpense2015" id="indRdExpense2015" value="{{content.IndustryBenchmark.indRdExpense2015}}" readonly>
             </div>
         </div>
 
@@ -163,7 +164,7 @@
         <div class="form-row">
             <div class="form-group col-sm-6">
                 <label for="gst/hstIssue">GST/HST Tax Issue:</label>
-                <textarea class="form-control" name="gst/hstIssue" id="gst/hstIssue" value="{{content.HistoryTaxIssue.gsthstIssue}}"></textarea>
+                <textarea class="form-control" name="gstHstIssue" id="gstHstIssue" value="{{content.HistoryTaxIssue.gsthstIssue}}"></textarea>
             </div>
         </div>
         <div class="form-row">
@@ -181,14 +182,14 @@
         <div class="form-row">
             <div class="form-group col-sm-6">
                 <label for="transferPricingTaxIssue">Other Tax Issue:</label>
-                <textarea class="form-control" name ="othertransferPricingTaxIssue" id="othertransferPricingTaxIssue"  value="{{content.HistoryTaxIssue.othertransferPricingTaxIssue}}"></textarea>
+                <textarea class="form-control" name ="otherTaxIssue" id="otherTaxIssue"  value="{{content.HistoryTaxIssue.othertransferPricingTaxIssue}}"></textarea>
             </div>
         </div>
 
         <hr>
 
         <button type="submit" class="btn btn-primary">Update</button>
-        <a href="accessment.hbs" role="button" class="btn btn-success">Start Over</a>
+        <a href="/assessment" role="button" class="btn btn-success">Start Over</a>
     </form>
 
     <!-- Pagination -->
@@ -212,3 +213,4 @@
         </div>
     </div>
 
+</div>

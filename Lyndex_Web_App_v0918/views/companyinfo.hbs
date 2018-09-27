@@ -1,4 +1,5 @@
-
+{{> navbar }}
+<div id="content">
         <!-- financial information nav -->
         <div class="row">
             <ul class="nav nav-tabs">
@@ -104,7 +105,7 @@
                     <p class="text-center">Profit/Loss</p>
                 </div>
                 <div class="form-group col-md-3">
-                    <input type="number" class="form-control"  name ="profit2017"  id="profit2017" value="value="{{content.incomeStatement.2017.ins_profitLoss}}">
+                    <input type="number" class="form-control"  name ="profit2017"  id="profit2017" value="{{content.incomeStatement.2017.ins_profitLoss}}">
                 </div>
                 <div class="form-group col-md-3">
                     <input type="number" class="form-control" name ="profit2016" id="profit2016" value="{{content.incomeStatement.2016.ins_profitLoss}}">
@@ -335,6 +336,7 @@
             <hr>
 
             <button type="submit" class="btn btn-primary">Update</button>
+            <a href="/assessment" role="button" class="btn btn-success">Start Over</a>
         </form>
         
         <!-- Pagination -->
@@ -357,6 +359,6 @@
                 </nav>
             </div>    
         </div>
-
+</div>
 
     

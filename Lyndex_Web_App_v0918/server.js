@@ -132,8 +132,8 @@ app.get("/logout", (req, res) => {
     res.redirect("/");
 });
 
-app.get("/accessment", ensureLogin, (req, res) => {
-    res.render("accessment");
+app.get("/assessment", ensureLogin, (req, res) => {
+    res.render("assessment");
 });
 // setup a route to listen on /companyinfo
 app.get("/companyinfo", ensureLogin, (req, res) => {
@@ -406,7 +406,7 @@ app.post("/signin", (req, res) => {
       req.session.user = {
       cli_loginName: user.cli_loginName,
       }
-      res.redirect("/accessment");
+      res.redirect("/assessment");
      })
     .catch((err) => {
       res.render("signin", {errorMessage: err, cli_loginName: req.body.cli_loginName});
@@ -416,7 +416,7 @@ app.post("/signin", (req, res) => {
 // POST method for company info form to be developed
 
 app.post('/post_companyinfo', function (req, res) {
-
+/*
     var request = {
         'basicInfo': {
             'companyName': req.body.companyName,
@@ -500,10 +500,12 @@ app.post('/post_companyinfo', function (req, res) {
             }
         }
     }
+*/
+    var request = req.body;  
+    var userName = req.session.user.cli_loginName;
+    console.log(userName);
 
-    var userName = req.session.user.userName;
-
-    if(SaveCompanyInfo(request, userName)){
+    if(SaveCompanyInfo(userName, request)){
         res.redirect("/financialanalysis");
     }
     else{
@@ -513,16 +515,18 @@ app.post('/post_companyinfo', function (req, res) {
     }
 })
 
-function SaveCompanyInfo(request,userName){
+function SaveCompanyInfo(userName,request){
     //TODO format the data
-    dataServiceAuth.updateCompanyTaxInfoData(userName,request);
+    console.log(request);
+    dataServiceAuth.updateClientData(userName, request);
+    dataServiceAuth.updatePublicFinancialData_companyInfo(userName, request);
     return true;
 }
 
 // POST method for financial analysis form to be developed
 
 app.post('/post_financialanlysis', function (req, res) {
-
+/*
     var request = {
         'industryBenchmark': {
             'industry': req.body.industry,
@@ -560,11 +564,12 @@ app.post('/post_financialanlysis', function (req, res) {
             }
         }
     }
-
-    var userName = req.session.user.userName;
-
+*/
+    var userName = req.session.user.cli_loginName;
+    var request = req.body;
+    console.log(request);
     // TODO
-    if(SaveFinancialAnalysis(request, userName)){
+    if(SaveFinancialAnalysis(userName, request)){
         res.redirect("/taxcredit");
     }
     else{
@@ -574,9 +579,9 @@ app.post('/post_financialanlysis', function (req, res) {
     }
 })
 
-function SaveFinancialAnalysis(request,userName){
+function SaveFinancialAnalysis(userName, request){
     //TODO format the data
-    dataServiceAuth.updatePublicFinancialData(userName,request);
+    dataServiceAuth.updatePublicFinancialData_financialAnalysis(userName,request);
     return true;
 }
 
@@ -585,7 +590,7 @@ function SaveFinancialAnalysis(request,userName){
 app.post('/post_taxcredit', function (req, res) {
 
 // [financial_radio] should can be parsed as json data, listing all three years records
-    var request = {
+ /*   var request = {
         'Industry Benchmark':{
             'caRD2017':req.body.caRD2017,
             'caRD2016':req.body.caRD2016,
@@ -619,11 +624,11 @@ app.post('/post_taxcredit', function (req, res) {
             'othertransferPricingTaxIssue':req.body.othertransferPricingTaxIssue
         }
     };
-
-    var userName = req.session.user.email;
-
+*/
+    var userName = req.session.user.cli_loginName;
+    var request = req.body;
     // TODO
-    if(SaveTaxCredit(request, userName, userEmail)){
+    if(SaveTaxCredit(userName, request)){
         res.redirect("/taxexpense");
     }
     else{
@@ -636,7 +641,7 @@ app.post('/post_taxcredit', function (req, res) {
 
 // POST method for tax expense form to be developed
 
-function SaveTaxCredit(request,userName){
+function SaveTaxCredit(userName,request){
     //TODO format the data
     dataServiceAuth.updateCompanyTaxInfoData(userName,request);
     return true;
