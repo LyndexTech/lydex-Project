@@ -87,7 +87,7 @@ app.use(clientSessions({
 }));
 app.use(function(req, res, next) {
   res.locals.session = req.session;
- next();
+  next();
  });
 
  //helper middleware function to check login status

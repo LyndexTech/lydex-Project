@@ -239,8 +239,7 @@ module.exports.checkUser = (userData) => {
         .exec()
         .then((users) => {
             bcrypt.compare(userData.cli_password, users[0].cli_password).then((res) => {
-                console.log(userData.cli_password);
-                console.log(users[0].cli_password);
+                console.log(users[0].cli_companyName);
                 if (users.length == 0) {
                     reject("Unable to find user: " + userData.cli_loginName);
                 } else if ( userData.cli_password !== users[0].cli_password) {
