@@ -293,24 +293,29 @@ module.exports.getPublicFinancialData = (userName) => {
 };
 
 module.exports.getCompanyTaxInfoData = (userName) => {
-    CompanyTaxInfo.find({cli_loginName:userName})
-    .exec()
-    .then((user) => {
-        resolve();
+    return new Promise((resolve) => {
+        CompanyTaxInfo.find({cli_loginName:userName})
+            .exec()
+            .then((info) => {
+                resolve(info[0]);
+            });
     })
-    .catch((err) => {
-        reject("Error in getting company tax info data" + err);
-    });
+        .catch((err) => {
+            reject("Error in getting company tax info data" + err);
+        });
 };
 
 module.exports.getIndustryBenchmarkData = (userIndustry) => {
-    IndustryBenchmark.find({inb_industry:userIndustry})
-    .exec()
-    .then((user) => {
-        resolve();
-    })
-    .catch((err) => {
-        reject("Error in getting client data" + err);
+
+    return new Promise((resolve) => {
+        IndustryBenchmark.find({inb_industry:userIndustry})
+            .exec()
+            .then((user) => {
+                resolve();
+            })
+            .catch((err) => {
+                reject("Error in getting client data" + err);
+            });
     });
 };
 
