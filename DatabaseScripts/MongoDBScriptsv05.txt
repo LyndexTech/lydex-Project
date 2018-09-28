@@ -1,0 +1,208 @@
+/***********************************************************************************/
+/*Collection: Client */
+/*5st version
+
+Fields Dropped:
+   cli_engineeringHeadcount
+   cli_informationTechHeadcount
+   cli_salesHeadcount
+
+Fields Added:
+    cli_employeeHeadcounts
+    cli_employeeInformationTech
+    cli_employeeEngineers
+    cli_employeeSales
+    cli_employeeQualityAssurance
+    cli_employeeResearch
+    cli_employeeOperation
+    cli_employeeCommunitySocialServices
+    cli_employeeHealthcareServices
+*/
+
+db.client.insert({	
+	cli_loginName: "User1",		
+	cli_password : "%User1@",		
+	cli_userLinkedInURL: "https://www.linkedin.com/company/hp/",
+	cli_companyName: "XPTO Ltd.",	
+	cli_specialities: "Specialities of XPTO Ltd.",
+    cli_progProjManagementHeadcount: "Female competition project",
+    cli_employeeHeadcounts: 3,
+    cli_employeeInformationTech: 40,
+    cli_employeeEngineers:12,
+    cli_employeeSales:5,
+    cli_employeeQualityAssurance:3,
+    cli_employeeResearch:10,
+    cli_employeeOperation: 15,
+    cli_employeeCommunitySocialServices: 12,
+    cli_employeeHealthcareServices: 8,
+	cli_LinkedInProfile: {cli_website:"www.xpto.ca",
+                        cli_headquarters:"Toronto, Ontario",
+                        cli_yearFounded:2001,
+                        cli_companyType:"Public Company",
+                        cli_companySize:"10001 + employees"},
+	cli_officeLocation: {cli_address_line1: " 123 Yonge St.", 
+                        cli_address_line2: "suite 230",
+                        cli_city: "Toronto", 
+                        cli_province: "ON", 
+                        cli_country: "Canada", 
+                        cli_phone: "123-123-1234", 
+                        cli_fax: "123-123-1234", 
+                        cli_email: "info@xpto.ca"}
+})
+
+/***********************************************************************************/
+/*Collection: Public Financial */
+/*5st version
+
+Fields Dropped:
+ins_workingCapital
+ins_profitLoss
+ins_operatingProfit
+ins_RDexpenditure
+
+caf_investmentTaxCredit
+
+Fields Added:
+ins_grossProfitIncome
+ins_netIncome
+
+ bas_machineryEquipment
+ bas_deferredTax
+
+ caf_changesWorkingCapital
+   
+*/
+
+db.publicFinancial.insert({
+		cli_loginName: "User1",
+		puf_3FiscalYears:[{puf_FiscalYear: 2015,
+                   puf_incomeStatment3: [{ins_sales: 10000,
+                                        ins_grossProfitIncome:12345,
+                                        ins_netIncome:234524,
+                                        ins_incomeTax: 20, 
+                                        ins_COGS: 10000,
+                                        ins_depreciationAmortization: 10000,
+                                        ins_SGAexpense: 10000, 
+                                        ins_otherSGAexpense: 10000, 
+                                        ins_EBIT: 10000}],
+                   puf_balanceSheet: [{bas_propertyPlantEquip: 10000, 
+                                        bas_constructInProgress: 10000,
+                                        bas_computerSoftwareEquip: 10000, 
+                                        bas_otherPPE: 10000,
+                                        bas_accummulatedDepreciation: 10000, 
+                                        bas_intangibleAsset: 10000,
+                                        bas_machineryEquipment: 3456,
+                                        bas_deferredTax: 4354}],
+                   puf_cashFlow: [{caf_deferredTax: 10000,
+                                    caf_changesWorkingCapital:354354,
+                                    caf_capitalExpenditure: 10000}],	
+                   puf_financialRatio:[{fir_PEratio: 10000, 
+                                        fir_currentRatio: 10000, 
+                                        fir_quitckRatio: 10000,
+                                        fir_assetTurnover: 10000, 
+                                        fir_grossMargin: 10000, 
+                                        fir_operatingMargin: 10000,
+                                        fir_netMargin: 10000}]
+		}],
+		puf_5FiscalYears:[{puf_FiscalYear: 2013,	
+				   puf_incomeStatment5: [{ins_researchDevelopment: 10000}]
+		}]	
+		
+})			
+
+/***********************************************************************************/
+
+/*Collection: Industry Benchmark 
+/*5st version
+
+NO UPDATES
+
+*/
+db.industryBenchmark.insert({			
+	cli_loginName: "User1",		
+	inb_industry: "Write a Text here...",		
+	inb_subClassification: "Write a Text here...",		
+	inb_mainListedCompany: "Write a Text here...",		
+	inb_marketSizeBillion: 10000,		
+	inb_RDexpense: 10000,
+	inb_3FiscalYears:[ {inb_3FYear: 2015,
+                        inb_industryBenchmark3: {inb_canadianRDexpenditure: 10000,
+                                                inb_SREDtaxCredit: 10000,
+                                                inb_industrySize: 10000,
+                                                inb_RDexpense: 10000}},
+			            {inb_3FYear: 2016,
+                        inb_industryBenchmark3: {inb_canadianRDexpenditure: 20000,
+                                                inb_SREDtaxCredit: 10000,
+                                                inb_industrySize: 10000,
+                                                inb_RDexpense: 10000}},
+			            {inb_3FYear: 2017,
+                        inb_industryBenchmark3: {inb_canadianRDexpenditure: 30000,
+                                                inb_SREDtaxCredit: 10000,
+                                                inb_industrySize: 10000,
+                                                inb_RDexpense: 10000}
+                        }],
+	inb_5FiscalYears:[ {inb_5FYear: 2013,
+			            inb_industryBenchmark5: {inb_marketSize: 12000},
+			            inb_5FYear: 2014,
+			            inb_industryBenchmark5: {inb_marketSize: 13000},
+			            inb_5FYear: 2015,
+			            inb_industryBenchmark5: {inb_marketSize: 14000},
+			            inb_5FYear: 2016,
+			            inb_industryBenchmark5: {inb_marketSize: 15000},
+		                inb_5FYear: 2017,
+			            inb_industryBenchmark5: {inb_marketSize: 16000}	
+			        }]
+		
+})	
+
+
+/***********************************************************************************/
+
+/*Collection: Company Tax Info 
+/*5st version
+
+NO UPDATES
+
+*/
+db.companyTaxInfo.insert({cli_loginName: "User1", 
+	cti_salaryWages:10000, 
+	cti_contractExpense:10000, 
+	cti_capitalExpenditure:10000, 
+	cti_GSThstTaxIssues: "Write a Text here...", 
+	cti_employeeTaxIssue: "Write a Text here...",
+	cti_transferPricingTaxIssue: "Write a Text here...", 
+	cti_otherTaxIssue: "Write a Text here...",
+	cti_3FiscalYears:[ {cti_FiscalYear: 2015,
+                        cti_companyTaxInfo3: {  cti_gstHST: 10000, 
+                                                cti_investmentTaxCredit: 10000, 
+                                                cti_SREDtaxCredit: 10000, 
+                                                cti_salaryWages: 10000, 
+                                                cti_costMaterial: 10000, 
+                                                cti_contractExpense: 10000, 
+                                                cti_leaseExpenditure: 10000, 
+                                                cti_capitalExpenditure: 10000, 
+                                                cti_overhead: 10000}},
+			            {cti_FiscalYear: 2016,
+                          cti_companyTaxInfo3: {  cti_gstHST: 20000, 
+                                                cti_investmentTaxCredit: 20000, 
+                                                cti_SREDtaxCredit: 10000, 
+                                                cti_salaryWages: 10000, 
+                                                cti_costMaterial: 10000, 
+                                                cti_contractExpense: 10000, 
+                                                cti_leaseExpenditure: 10000, 
+                                                cti_capitalExpenditure: 10000, 
+                                                cti_overhead: 10000}},
+			            {cti_FiscalYear: 2017,
+                              cti_companyTaxInfo3: {cti_gstHST: 30000, 
+                                                    cti_investmentTaxCredit: 30000, 
+                                                    cti_SREDtaxCredit: 10000,
+                                                    cti_salaryWages: 10000, 
+                                                    cti_costMaterial: 10000, 
+                                                    cti_contractExpense: 10000, 
+                                                    cti_leaseExpenditure: 10000, 
+                                                    cti_capitalExpenditure: 10000, 
+                                                    cti_overhead: 10000}}
+                         ]
+})
+
+/***********************************************************************************/

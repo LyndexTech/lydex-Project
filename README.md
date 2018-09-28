@@ -16,3 +16,8 @@ Updates on Sep.25
 1. Home, signin, register, forgetpassword pages display bug fixed.
 2. register and signin function not working properly, need to be fixed.
 3. other pages need to be tested after bug#2 is fixed.
+
+Updates on Sep 26
+1. register, signin function bug fixed.
+2. update functions bug fixed.
+3. front end pages display bugs fixed.

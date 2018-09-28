@@ -649,7 +649,7 @@ function SaveTaxCredit(userName,request){
 
 
 app.post('/post_taxexpense', function (req, res) {
-
+/*
     var req ={
         'OperatingExpense':{
             'sales2017':req.body.sales2017,
@@ -701,18 +701,24 @@ app.post('/post_taxexpense', function (req, res) {
         }
 
     };
-
-    var userName = req.session.user.userName;
-    var userEmail = req.session.user.email;
+*/
+    var userName = req.session.user.cli_loginName;
+    var request = req.body;
 
     // TODO
-    if(SaveTaxCredit(request, userName, userEmail)){
-        res.redirect("/taxexpense");
+    if(SaveTaxExpense(userName, request)){
+        res.redirect("/product");
     }
     else{
         res.render("taxcredit",
             {errorMessage: "errorMessage", viewModel: request}
         );
+    }
+
+    function SaveTaxExpense(userName,request){
+        //TODO format the data
+        dataServiceAuth.updateTaxExpense(userName,request);
+        return true;
     }
 })
 
