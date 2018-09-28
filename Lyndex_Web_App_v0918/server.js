@@ -139,20 +139,29 @@ app.get("/assessment", ensureLogin, (req, res) => {
 app.get("/companyinfo", ensureLogin, (req, res) => {
     // Company info query from database need to be developed
 
-    var userName = req.session.user.email;
-    var companyTaxInfoData =dataServiceAuth.getCompanyTaxInfoData(userName);
-    var clientData = dataServiceAuth.getCompanyTaxInfoData(userName);
+    var userName = req.session.user.cli_loginName;
 
-    if(clientData && companyTaxInfoData){
+    dataServiceAuth.getclientData(userName).then((clientData) => {
+
+        var companyTaxInfoData =dataServiceAuth.getPublicFinancialData(userName).then((info) => {
+
+            console.log();
+            const info17 = info.puf_3FiscalYears[0].puf_incomeStatment3[0];
+            console.log(info17);
+            const info16 = info.puf_3FiscalYears[1].puf_incomeStatment3[0];
+            const info15 = info.puf_3FiscalYears[2].puf_incomeStatment3[0];
+
+        });
+
         var companyinfo = {
             'basicInfo': {
                 'companyName': clientData.cli_companyName,
-                'companyLocation': clientData.cli_officeLocation.cli_province,
+                'companyLocation': clientData.cli_officeLocation.cli_city,
                 'companyType': clientData.cli_LinkedInProfile.cli_companyType,
                 'fiscalYear': '2018'
             },
-            'incomeStatement':{
-                '2015':{
+            'incomeStatement': {
+                '2015': {
                     'ins_sales': '',
                     'ins_workingCapital': '',
                     'ins_profitLoss': '',
@@ -161,7 +170,7 @@ app.get("/companyinfo", ensureLogin, (req, res) => {
                     'ins_COGS': '',
                     'ins_rd': ''
                 },
-                '2016':{
+                '2016': {
                     'ins_sales': '',
                     'ins_workingCapital': '',
                     'ins_profitLoss': '',
@@ -170,7 +179,7 @@ app.get("/companyinfo", ensureLogin, (req, res) => {
                     'ins_COGS': '',
                     'ins_rd': ''
                 },
-                '2017':{
+                '2017': {
                     'ins_sales': '',
                     'ins_workingCapital': '',
                     'ins_profitLoss': '',
@@ -180,9 +189,9 @@ app.get("/companyinfo", ensureLogin, (req, res) => {
                     'ins_rd': ''
                 }
             },
-            'balancesheet':{
+            'balancesheet': {
 
-                '2015':{
+                '2015': {
                     'bas_propertyPlantEquip': '',
                     'bas_constructInProgress': '',
                     'bas_computerSoftwareEquip': '',
@@ -190,7 +199,7 @@ app.get("/companyinfo", ensureLogin, (req, res) => {
                     'bas_accummulatedDepreciation': '',
                     'bas_intangibleAsset': ''
                 },
-                '2016':{
+                '2016': {
                     'bas_propertyPlantEquip': '',
                     'bas_constructInProgress': '',
                     'bas_computerSoftwareEquip': '',
@@ -198,7 +207,7 @@ app.get("/companyinfo", ensureLogin, (req, res) => {
                     'bas_accummulatedDepreciation': '',
                     'bas_intangibleAsset': ''
                 },
-                '2017':{
+                '2017': {
                     'bas_propertyPlantEquip': '',
                     'bas_constructInProgress': '',
                     'bas_computerSoftwareEquip': '',
@@ -208,27 +217,27 @@ app.get("/companyinfo", ensureLogin, (req, res) => {
                 }
 
             },
-            'cashflowStatement':{
+            'cashflowStatement': {
 
-                '2015':{
+                '2015': {
                     'caf_deferredTax': '',
                     'caf_investmentTaxCredit': '',
-                    'caf_capitalExpenditure':''
+                    'caf_capitalExpenditure': ''
                 },
-                '2016':{
+                '2016': {
                     'caf_deferredTax': '',
                     'caf_investmentTaxCredit': '',
-                    'caf_capitalExpenditure':''
+                    'caf_capitalExpenditure': ''
                 },
-                '2017':{
+                '2017': {
                     'caf_deferredTax': '',
                     'caf_investmentTaxCredit': '',
-                    'caf_capitalExpenditure':''
+                    'caf_capitalExpenditure': ''
                 }
             }
-        }
-    }
-    res.render('companyinfo', {content: companyinfo});
+        };
+        res.render('companyinfo',{content: companyinfo});
+    });
 });
 
 // setup a route to listen on /financialanalysis
@@ -503,7 +512,6 @@ app.post('/post_companyinfo', function (req, res) {
 */
     var request = req.body;  
     var userName = req.session.user.cli_loginName;
-    console.log(userName);
 
     if(SaveCompanyInfo(userName, request)){
         res.redirect("/financialanalysis");
@@ -517,7 +525,6 @@ app.post('/post_companyinfo', function (req, res) {
 
 function SaveCompanyInfo(userName,request){
     //TODO format the data
-    console.log(request);
     dataServiceAuth.updateClientData(userName, request);
     dataServiceAuth.updatePublicFinancialData_companyInfo(userName, request);
     return true;
@@ -567,7 +574,6 @@ app.post('/post_financialanlysis', function (req, res) {
 */
     var userName = req.session.user.cli_loginName;
     var request = req.body;
-    console.log(request);
     // TODO
     if(SaveFinancialAnalysis(userName, request)){
         res.redirect("/taxcredit");

@@ -265,25 +265,31 @@ module.exports.checkUser = (userData) => {
 //*** data query functions **********************************************/
 
 module.exports.getclientData = (userName) => {
-    Client.find({cli_loginName:userName})
-    .exec()
-    .then((user) => {
-        resolve();
+    return new Promise((resolve) => {
+        Client.find({cli_loginName:userName})
+            .exec()
+            .then((clients) => {
+                resolve(clients[0]);
+            });
     })
-    .catch((err) => {
-        reject("Error in getting client data" + err);
-    });
+        .catch((err) => {
+            reject("Unable to find user: " + userData.cli_loginName);
+        });
 };
 
 module.exports.getPublicFinancialData = (userName) => {
-    PublicFinancial.find({cli_loginName:userName})
-    .exec()
-    .then((user) => {
-        resolve();
+    return new Promise((resolve) => {
+        PublicFinancial.find({cli_loginName:userName})
+            .exec()
+            .then((info) => {
+                resolve(info[0]);
+            });
     })
-    .catch((err) => {
-        reject("Error in getting public financial data" + err);
-    });
+        .catch((err) => {
+            reject("Error in getting public financial data" + err);
+        });
+
+
 };
 
 module.exports.getCompanyTaxInfoData = (userName) => {
