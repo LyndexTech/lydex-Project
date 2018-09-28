@@ -15,15 +15,21 @@ var Schema = mongoose.Schema;
 //*** Define to MongoDB collections ********************************************/
 // client collection 
 var clientSchema = new Schema({					
-	cli_loginName: {"type": String, "unique": true},		
+	cli_loginName: {type: String, unique: true},		
 	cli_password : String,		
 	cli_userLinkedInURL: String,
 	cli_companyName: String,	
-	cli_engineeringHeadcount: String,
-	cli_informationTechHeadcount: String,
 	cli_specialities: String,
-	cli_salesHeadcount: String,
-	cli_progProjManagementHeadcount: String,
+	cli_employeeHeadcounts: Number,
+    cli_employeeInformationTech:Number,
+    cli_employeeEngineers:Number,
+    cli_employeeSales:Number,
+    cli_employeeQualityAssurance:Number,
+    cli_employeeResearch:Number,
+    cli_employeeOperation:Number,
+    cli_employeeCommunitySocialServices:Number,
+    cli_employeeHealthcareServices:Number,
+	cli_progProjManagementHeadcount: Number,
 	cli_LinkedInProfile: {cli_website:String,
                         cli_headquarters:String,
                         cli_yearFounded:Number,
@@ -46,9 +52,8 @@ var publicFinancialSchema = new Schema({
     cli_loginName:{"type": String, "unique": true},
     puf_3FiscalYears:[{puf_FiscalYear: Number,
                puf_incomeStatment3: [{ins_sales: Number,
-                                    ins_workingCapital: Number,
-                                    ins_profitLoss: Number, 
-                                    ins_operatingProfit: Number,
+                                    ins_grossProfitIncome:Number,
+                                    ins_netIncome:Number,
                                     ins_incomeTax: Number, 
                                     ins_COGS: Number,
                                     ins_depreciationAmortization: Number, 
@@ -60,8 +65,10 @@ var publicFinancialSchema = new Schema({
                                 bas_computerSoftwareEquip: Number, 
                                 bas_otherPPE: Number,
                                 bas_accummulatedDepreciation: Number, 
-                                bas_intangibleAsset: Number}],
-               puf_cashFlow: [{caf_deferredTax: Number,
+                                bas_intangibleAsset: Number,
+                                bas_machineryEquipment:Number,
+                                bas_deferredTax:Number}],
+               puf_cashFlow: [{ caf_changesWorkingCapital: Number,
                                 caf_investmentTaxCredit: Number, 
                                 caf_capitalExpenditure: Number}],	
                puf_financialRatio: [{fir_PEratio: Number, 
@@ -190,7 +197,7 @@ module.exports.initialize = () => {
 module.exports.registerUser = (userData) => {
 
     return new Promise( (resolve, reject) => {
-        if (userData.cli_password != userData.Password2) {
+        if (userData.cli_password != userData.cli_password2) {
             reject("Passwords do not match");
         } else {
             bcrypt.genSalt(10, (err, salt) => {
@@ -198,7 +205,7 @@ module.exports.registerUser = (userData) => {
                     if (err) {
                         reject("There was an error encrypting the password");
                     } else {
-                        userData.password = hash;
+                        userData.cli_password = hash;
                         let newClient = new Client(userData);
                         newClient.save((err) => {
                             if (err && err.code == 11000) {
@@ -239,7 +246,6 @@ module.exports.checkUser = (userData) => {
         .exec()
         .then((users) => {
             bcrypt.compare(userData.cli_password, users[0].cli_password).then((res) => {
-                res=true;
                 if (users.length == 0) {
                     reject("Unable to find user: " + userData.cli_loginName);
                 } else if (res === false) {
@@ -327,15 +333,18 @@ module.exports.updatePublicFinancialData_companyInfo = (userName, data) => {
         }); 
     PublicFinancial.findOneAndUpdate({"cli_loginName":userName,"puf_3FiscalYears.puf_FiscalYear": year-1},
         {$set:{"puf_3FiscalYears.$.puf_incomeStatment3.0.ins_sales":data.sales2017,
-        "puf_3FiscalYears.$.puf_incomeStatment3.0.ins_workingCapital":data.workingCapital2017,
-        "puf_3FiscalYears.$.puf_incomeStatment3.0.ins_profitLoss":data.profit2017,
-        "puf_3FiscalYears.$.puf_incomeStatment3.0.ins_operatingProfit":data.operatingProfit2017,
+        "puf_3FiscalYears.$.puf_cashFlow.0.caf_changesWorkingCapital":data.workingCapital2017,
+       // "puf_3FiscalYears.$.puf_incomeStatment3.0.ins_profitLoss":data.profit2017,
+       // "puf_3FiscalYears.$.puf_incomeStatment3.0.ins_operatingProfit":data.operatingProfit2017,
         "puf_3FiscalYears.$.puf_incomeStatment3.0.ins_incomeTax":data.incomeTax2017,
         "puf_3FiscalYears.$.puf_incomeStatment3.0.ins_COGS":data.cogs2017,
-        "puf_3FiscalYears.$.puf_incomeStatment3.0.ins_depreciationAmortization":data.rd2017,
+        "puf_3FiscalYears.$.puf_incomeStatment3.0.ins_depreciationAmortization":data.acc2017,
+        "puf_3FiscalYears.$.puf_incomeStatment3.0.ins_grossProfitIncome":data.grossIncome2017,
+        "puf_3FiscalYears.$.puf_incomeStatment3.0.ins_netIncome":data.netIncome2017,
         "puf_3FiscalYears.$.puf_balanceSheet.0.bas_propertyPlantEquip":data.ppe2017,
         "puf_3FiscalYears.$.puf_balanceSheet.0.bas_constructInProgressp":data.construction2017,
         "puf_3FiscalYears.$.puf_balanceSheet.0.bas_computerSoftwareEquip":data.cse2017,
+        "puf_3FiscalYears.$.puf_balanceSheet.0.bas_machineryEquipment":data.machinery2017,
         "puf_3FiscalYears.$.puf_balanceSheet.0.bas_otherPPE":data.otherPpe2017,
         "puf_3FiscalYears.$.puf_balanceSheet.0.bas_accummulatedDepreciation":data.accumDep2017,
         "puf_3FiscalYears.$.puf_balanceSheet.0.bas_intangibleAsset":data.intangibleAssets2017,
@@ -349,15 +358,18 @@ module.exports.updatePublicFinancialData_companyInfo = (userName, data) => {
     }); 
     PublicFinancial.findOneAndUpdate({"cli_loginName":userName,"puf_3FiscalYears.puf_FiscalYear": year-2},
         {$set:{"puf_3FiscalYears.$.puf_incomeStatment3.1.ins_sales":data.sales2016,
-        "puf_3FiscalYears.$.puf_incomeStatment3.1.ins_workingCapital":data.workingCapital2016,
-        "puf_3FiscalYears.$.puf_incomeStatment3.1.ins_profitLoss":data.profit2016,
-        "puf_3FiscalYears.$.puf_incomeStatment3.1.ins_operatingProfit":data.operatingProfit2016,
+        "puf_3FiscalYears.$.puf_cashFlow.1.caf_changesWorkingCapital":data.workingCapital2016,
+        //"puf_3FiscalYears.$.puf_incomeStatment3.1.ins_profitLoss":data.profit2016,
+       // "puf_3FiscalYears.$.puf_incomeStatment3.1.ins_operatingProfit":data.operatingProfit2016,
         "puf_3FiscalYears.$.puf_incomeStatment3.1.ins_incomeTax":data.incomeTax2016,
         "puf_3FiscalYears.$.puf_incomeStatment3.1.ins_COGS":data.cogs2016,
-        "puf_3FiscalYears.$.puf_incomeStatment3.1.ins_depreciationAmortization":data.rd2016,
+        "puf_3FiscalYears.$.puf_incomeStatment3.1.ins_depreciationAmortization":data.acc2016,
+        "puf_3FiscalYears.$.puf_incomeStatment3.1.ins_grossProfitIncome":data.grossIncome2016,
+        "puf_3FiscalYears.$.puf_incomeStatment3.1.ins_netIncome":data.netIncome2016,
         "puf_3FiscalYears.$.puf_balanceSheet.1.bas_propertyPlantEquip":data.ppe2016,
         "puf_3FiscalYears.$.puf_balanceSheet.1.bas_constructInProgressp":data.construction2016,
         "puf_3FiscalYears.$.puf_balanceSheet.1.bas_computerSoftwareEquip":data.cse2016,
+        "puf_3FiscalYears.$.puf_balanceSheet.1.bas_machineryEquipment":data.machinery2016,
         "puf_3FiscalYears.$.puf_balanceSheet.1.bas_otherPPE":data.otherPpe2016,
         "puf_3FiscalYears.$.puf_balanceSheet.1.bas_accummulatedDepreciation":data.accumDep2016,
         "puf_3FiscalYears.$.puf_balanceSheet.1.bas_intangibleAsset":data.intangibleAssets2016,
@@ -371,15 +383,18 @@ module.exports.updatePublicFinancialData_companyInfo = (userName, data) => {
     }); 
     PublicFinancial.findOneAndUpdate({"cli_loginName":userName,"puf_3FiscalYears.puf_FiscalYear": year-3},
         {$set:{"puf_3FiscalYears.$.puf_incomeStatment3.2.ins_sales":data.sales2015,
-        "puf_3FiscalYears.$.puf_incomeStatment3.2.ins_workingCapital":data.workingCapital2015,
-        "puf_3FiscalYears.$.puf_incomeStatment3.2.ins_profitLoss":data.profit2015,
-        "puf_3FiscalYears.$.puf_incomeStatment3.2.ins_operatingProfit":data.operatingProfit2015,
+        "puf_3FiscalYears.$.puf_cashFlow.2.caf_changesWorkingCapital":data.workingCapital2015,
+        //"puf_3FiscalYears.$.puf_incomeStatment3.2.ins_profitLoss":data.profit2015,
+        //"puf_3FiscalYears.$.puf_incomeStatment3.2.ins_operatingProfit":data.operatingProfit2015,
         "puf_3FiscalYears.$.puf_incomeStatment3.2.ins_incomeTax":data.incomeTax2015,
         "puf_3FiscalYears.$.puf_incomeStatment3.2.ins_COGS":data.cogs2015,
-        "puf_3FiscalYears.$.puf_incomeStatment3.2.ins_depreciationAmortization":data.rd2015,
+        "puf_3FiscalYears.$.puf_incomeStatment3.2.ins_depreciationAmortization":data.acc2015,
+        "puf_3FiscalYears.$.puf_incomeStatment3.0.ins_grossProfitIncome":data.grossIncome2015,
+        "puf_3FiscalYears.$.puf_incomeStatment3.0.ins_netIncome":data.netIncome2015,
         "puf_3FiscalYears.$.puf_balanceSheet.2.bas_propertyPlantEquip":data.ppe2015,
         "puf_3FiscalYears.$.puf_balanceSheet.2.bas_constructInProgressp":data.construction2015,
         "puf_3FiscalYears.$.puf_balanceSheet.2.bas_computerSoftwareEquip":data.cse2015,
+        "puf_3FiscalYears.$.puf_balanceSheet.2.bas_machineryEquipment":data.machinery2015,
         "puf_3FiscalYears.$.puf_balanceSheet.2.bas_otherPPE":data.otherPpe2015,
         "puf_3FiscalYears.$.puf_balanceSheet.2.bas_accummulatedDepreciation":data.accumDep2015,
         "puf_3FiscalYears.$.puf_balanceSheet.2.bas_intangibleAsset":data.intangibleAssets2015,

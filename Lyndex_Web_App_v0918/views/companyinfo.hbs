@@ -28,19 +28,19 @@
         <form action="/post_companyinfo" method="post">
             <h5>Company Basic Information</h5>
             <div class="form-row">
-                <div class="form-group col-md-3">
+                <div class="form-group col-sm-3">
                     <label for="companyName">Company Name</label>
                     <input type="text" class="form-control" name="companyName" id="companyName" value="{{content.basicInfo.companyName}}">
                 </div>
-                <div class="form-group col-md-3">
+                <div class="form-group col-sm-2">
                     <label for="companyLocation">Company Location</label>
                     <input type="text" class="form-control" name="companyLocation" id="companyLocation" value="{{content.basicInfo.companyLocation}}">
                     </div>
-                <div class="form-group col-md-3">
+                <div class="form-group col-sm-2">
                     <label for="companyType">Company Type</label>
                     <input type="text" class="form-control" name="companyType" id="companyType" value="{{content.basicInfo.companyType}}">
                 </div>
-                <div class="form-group col-md-3">
+                <div class="form-group col-sm-2">
                         <label for="fiscalYear">Fiscal Year</label>
                         <input type="number" class="form-control" name="fiscalYear" id="fiscalYear" value="{{content.basicInfo.fiscalYear}}">
                 </div>
@@ -59,115 +59,157 @@
 
             <h5>Income Statements</h5>
             <div class="form-row">
-                <div class="form-group col-md-3">
+                <div class="form-group col-sm-3">
                     <p></p>
                 </div>
-                <div class="form-group col-md-3">
+                <div class="form-group col-sm-2">
                     <p class="text-center">2017</p>
                 </div>
-                <div class="form-group col-md-3">
+                <div class="form-group col-sm-2">
                     <p class="text-center">2016</p>
                 </div>
-                <div class="form-group col-md-3">
+                <div class="form-group col-sm-2">
                     <p class="text-center">2015</p>
                 </div>
             </div>
             <div class="form-row">
-                <div class="form-group col-md-3">
+                <div class="form-group col-sm-3">
                     <p class="text-center">Sales</p>
                 </div>
-                <div class="form-group col-md-3">
+                <div class="form-group col-sm-2">
                     <input type="number" class="form-control" name="sales2017" id="sales2017" value="{{content.incomeStatement.2017.ins_sales}}">
                 </div>
-                <div class="form-group col-md-3">
+                <div class="form-group col-sm-2">
                     <input type="number" class="form-control" name="sales2016" id="sales2016" value="{{content.incomeStatement.2016.ins_sales}}">
                 </div>
-                <div class="form-group col-md-3">
+                <div class="form-group col-sm-2">
                     <input type="number" class="form-control" name="sales2015" id="sales2015" value="{{content.incomeStatement.2015.ins_sales}}">
                 </div>
             </div>
             <div class="form-row">
-                <div class="form-group col-md-3">
-                    <p class="text-center">Working Capital</p>
+                <div class="form-group col-sm-3">
+                    <p class="text-center">Changes in Working Capital</p>
                 </div>
-                <div class="form-group col-md-3">
+                <div class="form-group col-sm-2">
                     <input type="number" class="form-control" name ="workingCapital2017" id="workingCapital2017" value="{{content.incomeStatement.2017.ins_workingCapital}}">
                 </div>
-                <div class="form-group col-md-3">
+                <div class="form-group col-sm-2">
                     <input type="number" class="form-control" name ="workingCapital2016" id="workingCapital2016" value="{{content.incomeStatement.2016.ins_workingCapital}}">
                 </div>
-                <div class="form-group col-md-3">
+                <div class="form-group col-sm-2">
                     <input type="number" class="form-control" name ="workingCapital2015" id="workingCapital2015" value="{{content.incomeStatement.2015.ins_workingCapital}}">
                 </div>
-            </div>
-            <div class="form-row">
-                <div class="form-group col-md-3">
+            </div> 
+           <!-- <div class="form-row">
+                <div class="form-group col-sm-3">
                     <p class="text-center">Profit/Loss</p>
                 </div>
-                <div class="form-group col-md-3">
+                <div class="form-group col-sm-2">
                     <input type="number" class="form-control"  name ="profit2017"  id="profit2017" value="{{content.incomeStatement.2017.ins_profitLoss}}">
                 </div>
-                <div class="form-group col-md-3">
+                <div class="form-group col-sm-2">
                     <input type="number" class="form-control" name ="profit2016" id="profit2016" value="{{content.incomeStatement.2016.ins_profitLoss}}">
                 </div>
-                <div class="form-group col-md-3">
+                <div class="form-group col-sm-2">
                     <input type="number" class="form-control" name ="profit2015" id="profit2015" value="{{content.incomeStatement.2015.ins_profitLoss}}">
                 </div>
             </div>
             <div class="form-row">
-                <div class="form-group col-md-3">
+                <div class="form-group col-sm-3">
                     <p class="text-center">Operating Profit</p>
                 </div>
-                <div class="form-group col-md-3">
+                <div class="form-group col-sm-2">
                     <input type="number" class="form-control" name ="operatingProfit2017" id="operatingProfit2017" value="{{content.incomeStatement.2017.ins_operatingProfit}}">
                 </div>
-                <div class="form-group col-md-3">
+                <div class="form-group col-sm-2">
                     <input type="number" class="form-control" name ="operatingProfit2016" id="operatingProfit2016" value="{{content.incomeStatement.2016.ins_operatingProfit}}">
                 </div>
-                <div class="form-group col-md-3">
+                <div class="form-group col-sm-2">
                     <input type="number" class="form-control" name ="operatingProfit2015" id="operatingProfit2015" value="{{content.incomeStatement.2015.ins_operatingProfit}}">
                 </div>
-            </div>
+            </div>-->
             <div class="form-row">
-                <div class="form-group col-md-3">
+                <div class="form-group col-sm-3">
                     <p class="text-center">Income Tax</p>
                 </div>
-                <div class="form-group col-md-3">
+                <div class="form-group col-sm-2">
                     <input type="number" class="form-control" name="incomeTax2017"  id="incomeTax2017" value="{{content.incomeStatement.2017.ins_incomeTax}}">
                 </div>
-                <div class="form-group col-md-3">
+                <div class="form-group col-sm-2">
                     <input type="number" class="form-control" name="incomeTax2016" id="incomeTax2016" value="{{content.incomeStatement.2016.ins_incomeTax}}">
                 </div>
-                <div class="form-group col-md-3">
+                <div class="form-group col-sm-2">
                     <input type="number" class="form-control" name="incomeTax2015" id="incomeTax2015" value="{{content.incomeStatement.2015.ins_incomeTax}}">
                 </div>
             </div>
             <div class="form-row">
-                <div class="form-group col-md-3">
+                <div class="form-group col-sm-3">
                     <p class="text-center">COGS</p>
                 </div>
-                <div class="form-group col-md-3">
+                <div class="form-group col-sm-2">
                     <input type="number" class="form-control" name="cogs2017" id="cogs2017" value="{{content.incomeStatement.2017.ins_COGS}}">
                 </div>
-                <div class="form-group col-md-3">
+                <div class="form-group col-sm-2">
                     <input type="number" class="form-control" name="cogs2016" id="cogs2016" value="{{content.incomeStatement.2016.ins_COGS}}">
                 </div>
-                <div class="form-group col-md-3">
+                <div class="form-group col-sm-2">
                     <input type="number" class="form-control" name="cogs2015" id="cogs2015" value="{{content.incomeStatement.2015.ins_COGS}}">
                 </div>
             </div>
-            <div class="form-row">
-                <div class="form-group col-md-3">
+         <!--   <div class="form-row">
+                <div class="form-group col-sm-3">
                     <p class="text-center">R&amp;D</p>
                 </div>
-                <div class="form-group col-md-3">
+                <div class="form-group col-sm-2">
                     <input type="number" class="form-control" name="rd2017" id="rd2017" value="{{content.incomeStatement.2017.ins_rd}}">
                 </div>
-                <div class="form-group col-md-3">
+                <div class="form-group col-sm-2">
                     <input type="number" class="form-control" name="rd2016" id="rd2016" value="{{content.incomeStatement.2016.ins_rd}}">
                 </div>
-                <div class="form-group col-md-3">
+                <div class="form-group col-sm-2">
                     <input type="number" class="form-control" name="rd2015" id="rd2015" value="{{content.incomeStatement.2015.ins_rd}}">
+                </div>
+            </div> -->
+            <div class="form-row">
+                <div class="form-group col-sm-3">
+                    <p class="text-center">Accummulated Depreciation</p>
+                </div>
+                <div class="form-group col-sm-2">
+                    <input type="number" class="form-control" name="acc2017" id="acc2017" value="{{content.incomeStatement.2017.ins_rd}}">
+                </div>
+                <div class="form-group col-sm-2">
+                    <input type="number" class="form-control" name="acc2016" id="acc2016" value="{{content.incomeStatement.2016.ins_rd}}">
+                </div>
+                <div class="form-group col-sm-2">
+                    <input type="number" class="form-control" name="acc2015" id="acc2015" value="{{content.incomeStatement.2015.ins_rd}}">
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-sm-3">
+                    <p class="text-center">Gross Profit Income</p>
+                </div>
+                <div class="form-group col-sm-2">
+                    <input type="number" class="form-control" name="grossIncome2017" id="grossIncome2017" value="{{content.incomeStatement.2017.ins_rd}}">
+                </div>
+                <div class="form-group col-sm-2">
+                    <input type="number" class="form-control" name="grossIncome2016" id="grossIncome2016" value="{{content.incomeStatement.2016.ins_rd}}">
+                </div>
+                <div class="form-group col-sm-2">
+                    <input type="number" class="form-control" name="grossIncome2015" id="grossIncome2015" value="{{content.incomeStatement.2015.ins_rd}}">
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-sm-3">
+                    <p class="text-center">Net Income</p>
+                </div>
+                <div class="form-group col-sm-2">
+                    <input type="number" class="form-control" name="netIncome2017" id="netIncome2017" value="{{content.incomeStatement.2017.ins_rd}}">
+                </div>
+                <div class="form-group col-sm-2">
+                    <input type="number" class="form-control" name="netIncome2016" id="netIncome2016" value="{{content.incomeStatement.2016.ins_rd}}">
+                </div>
+                <div class="form-group col-sm-2">
+                    <input type="number" class="form-control" name="netIncome2015" id="netIncome2015" value="{{content.incomeStatement.2015.ins_rd}}">
                 </div>
             </div>
 
@@ -175,100 +217,114 @@
 
             <h5>Balance Sheets</h5>
             <div class="form-row">
-                <div class="form-group col-md-3">
+                <div class="form-group col-sm-3">
                     <p></p>
                 </div>
-                <div class="form-group col-md-3">
+                <div class="form-group col-sm-2">
                     <p class="text-center">2017</p>
                 </div>
-                <div class="form-group col-md-3">
+                <div class="form-group col-sm-2">
                     <p class="text-center">2016</p>
                 </div>
-                <div class="form-group col-md-3">
+                <div class="form-group col-sm-2">
                     <p class="text-center">2015</p>
                 </div>
             </div>
             <div class="form-row">
-                <div class="form-group col-md-3">
+                <div class="form-group col-sm-3">
                     <p class="text-center">PPE (Property, Plant and Equipment)</p>
                 </div>
-                <div class="form-group col-md-3">
+                <div class="form-group col-sm-2">
                     <input type="number" class="form-control" name="ppe2017" id="ppe2017" value="{{content.balancesheet.2017.bas_propertyPlantEquip}}">
                 </div>
-                <div class="form-group col-md-3">
+                <div class="form-group col-sm-2">
                     <input type="number" class="form-control" name="ppe2016" id="ppe2016" value="{{content.balancesheet.2016.bas_propertyPlantEquip}}">
                 </div>
-                <div class="form-group col-md-3">
+                <div class="form-group col-sm-2">
                     <input type="number" class="form-control" name="ppe2015" id="ppe2015" value="{{content.balancesheet.2015.bas_propertyPlantEquip}}">
                 </div>
             </div>
             <div class="form-row">
-                <div class="form-group col-md-3">
+                <div class="form-group col-sm-3">
                     <p class="text-center">Construction in Process</p>
                 </div>
-                <div class="form-group col-md-3">
+                <div class="form-group col-sm-2">
                     <input type="number" class="form-control" name="construction2017" id="construction2017" value="{{content.balancesheet.2017.bas_constructInProgress}}">
                 </div>
-                <div class="form-group col-md-3">
+                <div class="form-group col-sm-2">
                     <input type="number" class="form-control" name="construction2016" id="construction2016" value="{{content.balancesheet.2016.bas_constructInProgress}}">
                 </div>
-                <div class="form-group col-md-3">
+                <div class="form-group col-sm-2">
                     <input type="number" class="form-control" name="construction2015" id="construction2015" value="{{content.balancesheet.2015.bas_constructInProgress}}">
                 </div>
             </div>
             <div class="form-row">
-                <div class="form-group col-md-3">
+                <div class="form-group col-sm-3">
                     <p class="text-center">Computer Software Equipment</p>
                 </div>
-                <div class="form-group col-md-3">
+                <div class="form-group col-sm-2">
                     <input type="number" class="form-control" name="cse2017" id="cse2017" value="{{content.balancesheet.2017.bas_computerSoftwareEquip}}">
                 </div>
-                <div class="form-group col-md-3">
+                <div class="form-group col-sm-2">
                     <input type="number" class="form-control" name="cse2016" id="cse2016" value="{{content.balancesheet.2016.bas_computerSoftwareEquip}}">
                 </div>
-                <div class="form-group col-md-3">
+                <div class="form-group col-sm-2">
                     <input type="number" class="form-control" name="cse2015" id="cse2015" value="{{content.balancesheet.2015.bas_computerSoftwareEquip}}">
                 </div>
             </div>
             <div class="form-row">
-                <div class="form-group col-md-3">
+                <div class="form-group col-sm-3">
+                    <p class="text-center">Machinery &amp; Equipment</p>
+                </div>
+                <div class="form-group col-sm-2">
+                    <input type="number" class="form-control" name="machinery2017" id="machinery2017" value="{{content.balancesheet.2017.bas_computerSoftwareEquip}}">
+                </div>
+                <div class="form-group col-sm-2">
+                    <input type="number" class="form-control" name="machinery2016" id="machinery2016" value="{{content.balancesheet.2016.bas_computerSoftwareEquip}}">
+                </div>
+                <div class="form-group col-sm-2">
+                    <input type="number" class="form-control" name="machinery2015" id="machinery2015" value="{{content.balancesheet.2015.bas_computerSoftwareEquip}}">
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-sm-3">
                     <p class="text-center">Other PPE</p>
                 </div>
-                <div class="form-group col-md-3">
+                <div class="form-group col-sm-2">
                     <input type="number" class="form-control" name ="otherPpe2017" id="otherPpe2017" value="{{content.balancesheet.2017.bas_otherPPE}}">
                 </div>
-                <div class="form-group col-md-3">
+                <div class="form-group col-sm-2">
                     <input type="number" class="form-control" name ="otherPpe2016" id="otherPpe2016" value="{{content.balancesheet.2016.bas_otherPPE}}">
                 </div>
-                <div class="form-group col-md-3">
+                <div class="form-group col-sm-2">
                     <input type="number" class="form-control" name ="otherPpe2015" id="OtherPpe2015" value="{{content.balancesheet.2015.bas_otherPPE}}">
                 </div>
             </div>
             <div class="form-row">
-                <div class="form-group col-md-3">
+                <div class="form-group col-sm-3">
                     <p class="text-center">Accum Dep</p>
                 </div>
-                <div class="form-group col-md-3">
+                <div class="form-group col-sm-2">
                     <input type="number" class="form-control" name="accumDep2017" id="accumDep2017" value="{{content.balancesheet.2017.bas_accummulatedDepreciation}}">
                 </div>
-                <div class="form-group col-md-3">
+                <div class="form-group col-sm-2">
                     <input type="number" class="form-control" name="accumDep2016" id="accumDep2016" value="{{content.balancesheet.2016.bas_accummulatedDepreciation}}">
                 </div>
-                <div class="form-group col-md-3">
+                <div class="form-group col-sm-2">
                     <input type="number" class="form-control" name="accumDep2015" id="accumDep2015" value="{{content.balancesheet.2015.bas_accummulatedDepreciation}}">
                 </div>
             </div>
             <div class="form-row">
-                <div class="form-group col-md-3">
+                <div class="form-group col-sm-3">
                     <p class="text-center">Intangible Assets</p>
                 </div>
-                <div class="form-group col-md-3">
+                <div class="form-group col-sm-2">
                     <input type="number" class="form-control" name="intangibleAssets2017" id="intangibleAssets2017" value="{{content.balancesheet.2017.bas_intangibleAsset}}">
                 </div>
-                <div class="form-group col-md-3">
+                <div class="form-group col-sm-2">
                     <input type="number" class="form-control" name="intangibleAssets2016" id="intangibleAssets2016" value="{{content.balancesheet.2016.bas_intangibleAsset}}">
                 </div>
-                <div class="form-group col-md-3">
+                <div class="form-group col-sm-2">
                     <input type="number" class="form-control" name="intangibleAssets2015" id="intangibleAssets2015" value="{{content.balancesheet.2015.bas_intangibleAsset}}">
                 </div>
             </div>
@@ -277,58 +333,58 @@
 
             <h5>Cash Flow Statements</h5>
             <div class="form-row">
-                <div class="form-group col-md-3">
+                <div class="form-group col-sm-3">
                     <p></p>
                 </div>
-                <div class="form-group col-md-3">
+                <div class="form-group col-sm-2">
                     <p class="text-center">2017</p>
                 </div>
-                <div class="form-group col-md-3">
+                <div class="form-group col-sm-2">
                     <p class="text-center">2016</p>
                 </div>
-                <div class="form-group col-md-3">
+                <div class="form-group col-sm-2">
                     <p class="text-center">2015</p>
                 </div>
             </div>
             <div class="form-row">
-                <div class="form-group col-md-3">
+                <div class="form-group col-sm-3">
                     <p class="text-center">Deferred Tax</p>
                 </div>
-                <div class="form-group col-md-3">
+                <div class="form-group col-sm-2">
                     <input type="number" class="form-control" name="deferredTax2017" id="deferredTax2017" value="{{content.cashflowStatement.2017.caf_deferredTax}}">
                 </div>
-                <div class="form-group col-md-3">
+                <div class="form-group col-sm-2">
                     <input type="number" class="form-control" name="deferredTax2016" id="deferredTax2016" value="{{content.cashflowStatement.2016.caf_deferredTax}}">
                 </div>
-                <div class="form-group col-md-3">
+                <div class="form-group col-sm-2">
                     <input type="number" class="form-control" name="deferredTax2015" id="deferredTax2015" value="{{content.cashflowStatement.2015.caf_deferredTax}}">
                 </div>
             </div>
             <div class="form-row">
-                <div class="form-group col-md-3">
+                <div class="form-group col-sm-3">
                     <p class="text-center">Investment Tax Credits</p>
                 </div>
-                <div class="form-group col-md-3">
+                <div class="form-group col-sm-2">
                     <input type="number" class="form-control" name="investmentTaxCredits2017" id="investmentTaxCredits2017" value="{{content.cashflowStatement.2017.caf_investmentTaxCredit}}">
                 </div>
-                <div class="form-group col-md-3">
+                <div class="form-group col-sm-2">
                     <input type="number" class="form-control" name="investmentTaxCredits2016" id="investmentTaxCredits2016" value="{{content.cashflowStatement.2016.caf_investmentTaxCredit}}">
                 </div>
-                <div class="form-group col-md-3">
+                <div class="form-group col-sm-2">
                     <input type="number" class="form-control" name="investmentTaxCredits2015" id="investmentTaxCredits2015" value="{{content.cashflowStatement.2015.caf_investmentTaxCredit}}">
                 </div>
             </div>
             <div class="form-row">
-                <div class="form-group col-md-3">
+                <div class="form-group col-sm-3">
                     <p class="text-center">Credit Expenditure</p>
                 </div>
-                <div class="form-group col-md-3">
+                <div class="form-group col-sm-2">
                     <input type="number" class="form-control" name="creditExpenditure2017" id="creditExpenditure2017" value="{{content.cashflowStatement.2017.caf_capitalExpenditure}}">
                 </div>
-                <div class="form-group col-md-3">
+                <div class="form-group col-sm-2">
                     <input type="number" class="form-control" name="creditExpenditure2016" id="creditExpenditure2016" value="{{content.cashflowStatement.2016.caf_capitalExpenditure}}">
                 </div>
-                <div class="form-group col-md-3">
+                <div class="form-group col-sm-2">
                     <input type="number" class="form-control" name="creditExpenditure2015" id="creditExpenditure2015" value="{{content.cashflowStatement.2015.caf_capitalExpenditure}}">
                 </div>
             </div>

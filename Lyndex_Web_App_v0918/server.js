@@ -82,12 +82,12 @@ app.use(function(req,res,next){
 app.use(clientSessions({
   cookieName: "session",
   secret: "lyndex_web_app",
-  duration: 2*60*1000,
-  activeDuration: 60*1000
+  duration: 20*60*1000,
+  activeDuration: 10*60*1000
 }));
 app.use(function(req, res, next) {
   res.locals.session = req.session;
-  next();
+ next();
  });
 
  //helper middleware function to check login status
@@ -394,7 +394,7 @@ app.post("/register", (req, res) => {
       res.render("register", {successMessage: "User created"});
     })
     .catch((err) => {
-      res.render("register", {errorMessage: err, userName: req.body.userName});
+      res.render("register", {errorMessage: err, cli_loginName: req.body.cli_loginName});
     });
 });
 
