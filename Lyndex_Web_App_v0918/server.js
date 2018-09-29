@@ -88,14 +88,14 @@ app.post("/assessment/upload", upload.array("files", 12), (req, res) => {
     const filePath = req.files[0].destination+req.files[0].filename;
     const userName = req.session.user.cli_loginName;
 
-    console.log(filePath);
-    console.log(userName);
+    // console.log(filePath);
+    // console.log(userName);
 
     const pythonProcess = spawn('python',["Insert.py", filePath, userName]);
 
     pythonProcess.stdout.on('data', (data) => {
         // Do something with the data returned from python script
-        console.log(data.toString());
+        // console.log(data.toString());
     });
     res.redirect("/assessment");
 });
@@ -175,6 +175,9 @@ app.get("/companyinfo", (req, res) => {
 
             if(!info) res.render('companyinfo');
 
+
+            console.log(info);
+
             var info15 = info.puf_3FiscalYears[0].puf_incomeStatment3[0];
             var info16 = info.puf_3FiscalYears[1].puf_incomeStatment3[0];
             var info17 = info.puf_3FiscalYears[2].puf_incomeStatment3[0];
@@ -186,9 +189,6 @@ app.get("/companyinfo", (req, res) => {
             var caf15 = info.puf_3FiscalYears[0].puf_cashFlow[0];
             var caf16 = info.puf_3FiscalYears[1].puf_cashFlow[0];
             var caf17 = info.puf_3FiscalYears[2].puf_cashFlow[0];
-
-            console.log(caf15);
-            console.log(caf15.caf_deferredTax);
 
             // var info16 = objectToJson(info.puf_3FiscalYears[1].puf_incomeStatment3[0])['0'];
             // var info17 = objectToJson(info.puf_3FiscalYears[2].puf_incomeStatment3[0])['0'];
@@ -417,7 +417,6 @@ app.get("/taxexpense", ensureLogin, (req, res) => {
             var tax16 = tax.cti_3FiscalYears[1].cti_companyTaxInfo3;
             var tax17 = tax.cti_3FiscalYears[2].cti_companyTaxInfo3;
 
-            console.log(tax15);
             var taxexpense ={
                 'OperatingExpense':{
                     'sales2017':info17.ins_sales,

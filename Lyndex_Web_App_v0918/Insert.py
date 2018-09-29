@@ -24,6 +24,12 @@ dataset = dict(zip(a,b))
 connection = pymongo.MongoClient('mongodb+srv://Lyndex:Lyndex09@cluster0-ldnj9.mongodb.net/dblyndex?retryWrites=true')
 
 table = connection.dblyndex
+
+print("12345")
+sys.stdout.flush()
+table.publicFinancial.remove({
+'cli_loginName': sys.argv[2]
+});
 table.publicFinancial.insert({
 		'cli_loginName': sys.argv[2],
 		'puf_3FiscalYears':[{'puf_FiscalYear': 2015,
@@ -130,5 +136,7 @@ table.publicFinancial.insert({
 		}]
 
 })
+
+
 
 
