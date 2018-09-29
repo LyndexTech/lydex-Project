@@ -21,3 +21,6 @@ Updates on Sep 26
 1. register, signin function bug fixed.
 2. update functions bug fixed.
 3. front end pages display bugs fixed.
+
+Updates on Sep 29
+Please check the latest version in v0918 folder. Pyhon extraction need to be called from the web page.
