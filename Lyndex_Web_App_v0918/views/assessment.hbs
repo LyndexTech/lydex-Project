@@ -71,6 +71,17 @@
         </div>
     
     <div class="text-center">
-        <a href="/companyinfo" class="btn btn-primary btn-lg center-block" role="button">Start Assessment</a>
+        <a href="/companyinfo" id="insert" class="btn btn-primary btn-lg center-block" role="button" onclick="extractFile">Start Assessment</a>
     </div>
 </div>
+
+<script>
+    var ele = Document.getElementById("insert");
+    ele.onclick = extractFile(){
+        const { execFile } = require('child_process');
+        const child = execFile('./insert.py', [session.user.cli_loginName], (error, stdout, stderr) => {
+        if(stdout){console.log(stdout);}
+        if(err){console.log(err);}
+        });
+    }
+</script>

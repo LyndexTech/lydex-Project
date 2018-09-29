@@ -52,18 +52,6 @@ function onHttpStart() {
   console.log("Express http server listening on: " + HTTP_PORT);
 }
 
-// user upload functions middleware
-const storage = multer.diskStorage({
-    destination: "./public/files/uploaded",
-    filename: function (req, file, cb) {
-      cb(null, Date.now() + path.extname(file.originalname));
-    }
-});
-const upload = multer({ storage: storage });
-app.post("/accessment/upload", upload.array("files", 12), (req, res) => {
-    res.redirect("/accessment");
-});
-
 
 // middlewares setup functions
 app.use(express.static('public')); 
@@ -84,6 +72,19 @@ app.use(function(req, res, next) {
   res.locals.session = req.session;
  next();
  });
+
+ // user upload functions middleware
+const storage = multer.diskStorage({
+    destination: "./public/files/uploaded/",
+    filename: function (req, file, cb) {
+      //cb(null, Date.now() + path.extname(file.originalname));
+      cb(null, file.originalname);
+    }
+});
+const upload = multer({ storage: storage });
+app.post("/assessment/upload", upload.array("files", 12), (req, res) => {
+    res.redirect("/assessment");
+});
 
  //helper middleware function to check login status
 function ensureLogin(req, res, next) {
@@ -797,6 +798,7 @@ app.post("/signin", (req, res) => {
       res.render("signin", {errorMessage: err, cli_loginName: req.body.cli_loginName});
     });
 });
+
 
 // POST method for company info form to be developed
 

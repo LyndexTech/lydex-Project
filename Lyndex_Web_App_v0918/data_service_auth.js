@@ -9,7 +9,7 @@
 *
 ********************************************************************************/ 
 const bcrypt = require("bcryptjs");
-var mongoose = require("mongoose");
+const mongoose = require("mongoose");
 var Schema = mongoose.Schema;
 
 //*** Define to MongoDB collections ********************************************/
