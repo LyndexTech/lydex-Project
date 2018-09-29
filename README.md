@@ -23,4 +23,4 @@ Updates on Sep 26
 3. front end pages display bugs fixed.
 
 Updates on Sep 29
-Please check the latest version in v0918 folder. Pyhon extraction need to be called from the web page.
+1. Please check the latest version in v0918 folder. Pyhon extraction need to be called from the web page.
