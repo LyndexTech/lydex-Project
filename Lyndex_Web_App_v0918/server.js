@@ -129,11 +129,17 @@ app.get("/logout", (req, res) => {
 });
 
 app.get("/assessment", ensureLogin, (req, res) => {
-    res.render("assessment");
+    fs.readdir("./public/files/uploaded", function(err, items) {
+        res.render("assessment", {files:items});
+      });
 });
 
 app.get("/upload", ensureLogin, (req, res) => {
     res.render("upload");
+});
+
+app.get("/report", ensureLogin, (req, res) => {
+    res.render("report");
 });
 
 // setup a route to listen on /companyinfo

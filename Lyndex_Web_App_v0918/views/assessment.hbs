@@ -47,29 +47,17 @@
         </div>
       </div>
         upload modal end -->
-        
+      <hr>  
       <h5>Uploaded Documents</h5>
-        <div class="table-responsive">
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th>Type</th>
-                        <th>Year</th>
-                        <th colspan="2">File Name</th>
-                        
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>Balance Sheet</td>
-                        <td>2017</td>
-                        <td>RBC_Balance_Sheet_2017.csv</td>
-                        <td><a class="btn btn-danger btn-sm" href="#">Delete</td>
-                    </tr>
-                </tbody>
-            </table>
+      <hr>
+      {{#each files}}
+        <div class="col-md-12"><strong>{{this}}</strong></div>
+      {{else}}
+        <div class="col-md-12">
+            <strong>No files Available</strong>
         </div>
-    
+    {{/each}}
+        
     <div class="text-center">
         <a href="/companyinfo" id="insert" class="btn btn-primary btn-lg center-block" role="button" onclick="extractFile">Start Assessment</a>
     </div>

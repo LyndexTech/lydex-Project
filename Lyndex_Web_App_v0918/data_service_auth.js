@@ -197,7 +197,10 @@ module.exports.initialize = () => {
 module.exports.registerUser = (userData) => {
 
     return new Promise( (resolve, reject) => {
-        if (userData.cli_password != userData.cli_password2) {
+        if (userData.cli_loginName != userData.cli_loginName2) {
+            reject("User names do not match");
+        }
+        else if (userData.cli_password != userData.cli_password2) {
             reject("Passwords do not match");
         } else {
             bcrypt.genSalt(10, (err, salt) => {
@@ -527,9 +530,9 @@ module.exports.updatePublicFinancialData_companyInfo = (userName, data) => {
     let date = new Date();
     let year = date.getFullYear();
     PublicFinancial.findOneAndUpdate({cli_loginName:userName},
-        {$set:{"puf_3FiscalYears.0.puf_FiscalYear":year-1,
+        {$set:{"puf_3FiscalYears.0.puf_FiscalYear":year-3,
         "puf_3FiscalYears.1.puf_FiscalYear":year-2,
-        "puf_3FiscalYears.2.puf_FiscalYear":year-3}},
+        "puf_3FiscalYears.2.puf_FiscalYear":year-1}},
         {new:true})
         .exec().then((res) => {
             resolve();
@@ -560,50 +563,50 @@ module.exports.updatePublicFinancialData_companyInfo = (userName, data) => {
         resolve();
     }); 
     PublicFinancial.findOneAndUpdate({"cli_loginName":userName,"puf_3FiscalYears.puf_FiscalYear": year-2},
-        {$set:{"puf_3FiscalYears.$.puf_incomeStatment3.1.ins_sales":data.sales2016,
-        "puf_3FiscalYears.$.puf_cashFlow.1.caf_changesWorkingCapital":data.workingCapital2016,
+        {$set:{"puf_3FiscalYears.$.puf_incomeStatment3.0.ins_sales":data.sales2016,
+        "puf_3FiscalYears.$.puf_cashFlow.0.caf_changesWorkingCapital":data.workingCapital2016,
         //"puf_3FiscalYears.$.puf_incomeStatment3.1.ins_profitLoss":data.profit2016,
        // "puf_3FiscalYears.$.puf_incomeStatment3.1.ins_operatingProfit":data.operatingProfit2016,
-        "puf_3FiscalYears.$.puf_incomeStatment3.1.ins_incomeTax":data.incomeTax2016,
-        "puf_3FiscalYears.$.puf_incomeStatment3.1.ins_COGS":data.cogs2016,
-        "puf_3FiscalYears.$.puf_incomeStatment3.1.ins_depreciationAmortization":data.acc2016,
-        "puf_3FiscalYears.$.puf_incomeStatment3.1.ins_grossProfitIncome":data.grossIncome2016,
-        "puf_3FiscalYears.$.puf_incomeStatment3.1.ins_netIncome":data.netIncome2016,
-        "puf_3FiscalYears.$.puf_balanceSheet.1.bas_propertyPlantEquip":data.ppe2016,
-        "puf_3FiscalYears.$.puf_balanceSheet.1.bas_constructInProgress":data.construction2016,
-        "puf_3FiscalYears.$.puf_balanceSheet.1.bas_computerSoftwareEquip":data.cse2016,
-        "puf_3FiscalYears.$.puf_balanceSheet.1.bas_machineryEquipment":data.machinery2016,
-        "puf_3FiscalYears.$.puf_balanceSheet.1.bas_otherPPE":data.otherPpe2016,
-        "puf_3FiscalYears.$.puf_balanceSheet.1.bas_accummulatedDepreciation":data.accumDep2016,
-        "puf_3FiscalYears.$.puf_balanceSheet.1.bas_intangibleAsset":data.intangibleAssets2016,
-        "puf_3FiscalYears.$.puf_balanceSheet.1.bas_deferredTax":data.defferredTax2016,
-        "puf_3FiscalYears.$.puf_cashFlow.1.caf_investmentTaxCredit":data.investmentTaxCredits2016,
-        "puf_3FiscalYears.$.puf_cashFlow.1.caf_capitalExpenditure":data.creditExpenditure2016
+        "puf_3FiscalYears.$.puf_incomeStatment3.0.ins_incomeTax":data.incomeTax2016,
+        "puf_3FiscalYears.$.puf_incomeStatment3.0.ins_COGS":data.cogs2016,
+        "puf_3FiscalYears.$.puf_incomeStatment3.0.ins_depreciationAmortization":data.acc2016,
+        "puf_3FiscalYears.$.puf_incomeStatment3.0.ins_grossProfitIncome":data.grossIncome2016,
+        "puf_3FiscalYears.$.puf_incomeStatment3.0.ins_netIncome":data.netIncome2016,
+        "puf_3FiscalYears.$.puf_balanceSheet.0.bas_propertyPlantEquip":data.ppe2016,
+        "puf_3FiscalYears.$.puf_balanceSheet.0.bas_constructInProgress":data.construction2016,
+        "puf_3FiscalYears.$.puf_balanceSheet.0.bas_computerSoftwareEquip":data.cse2016,
+        "puf_3FiscalYears.$.puf_balanceSheet.0.bas_machineryEquipment":data.machinery2016,
+        "puf_3FiscalYears.$.puf_balanceSheet.0.bas_otherPPE":data.otherPpe2016,
+        "puf_3FiscalYears.$.puf_balanceSheet.0.bas_accummulatedDepreciation":data.accumDep2016,
+        "puf_3FiscalYears.$.puf_balanceSheet.0.bas_intangibleAsset":data.intangibleAssets2016,
+        "puf_3FiscalYears.$.puf_balanceSheet.0.bas_deferredTax":data.defferredTax2016,
+        "puf_3FiscalYears.$.puf_cashFlow.0.caf_investmentTaxCredit":data.investmentTaxCredits2016,
+        "puf_3FiscalYears.$.puf_cashFlow.0.caf_capitalExpenditure":data.creditExpenditure2016
         }},
         {new:true})
         .exec().then((res) => {
         resolve();
     }); 
     PublicFinancial.findOneAndUpdate({"cli_loginName":userName,"puf_3FiscalYears.puf_FiscalYear": year-3},
-        {$set:{"puf_3FiscalYears.$.puf_incomeStatment3.2.ins_sales":data.sales2015,
-        "puf_3FiscalYears.$.puf_cashFlow.2.caf_changesWorkingCapital":data.workingCapital2015,
+        {$set:{"puf_3FiscalYears.$.puf_incomeStatment3.0.ins_sales":data.sales2015,
+        "puf_3FiscalYears.$.puf_cashFlow.0.caf_changesWorkingCapital":data.workingCapital2015,
         //"puf_3FiscalYears.$.puf_incomeStatment3.2.ins_profitLoss":data.profit2015,
         //"puf_3FiscalYears.$.puf_incomeStatment3.2.ins_operatingProfit":data.operatingProfit2015,
-        "puf_3FiscalYears.$.puf_incomeStatment3.2.ins_incomeTax":data.incomeTax2015,
-        "puf_3FiscalYears.$.puf_incomeStatment3.2.ins_COGS":data.cogs2015,
-        "puf_3FiscalYears.$.puf_incomeStatment3.2.ins_depreciationAmortization":data.acc2015,
+        "puf_3FiscalYears.$.puf_incomeStatment3.0.ins_incomeTax":data.incomeTax2015,
+        "puf_3FiscalYears.$.puf_incomeStatment3.0.ins_COGS":data.cogs2015,
+        "puf_3FiscalYears.$.puf_incomeStatment3.0.ins_depreciationAmortization":data.acc2015,
         "puf_3FiscalYears.$.puf_incomeStatment3.0.ins_grossProfitIncome":data.grossIncome2015,
         "puf_3FiscalYears.$.puf_incomeStatment3.0.ins_netIncome":data.netIncome2015,
-        "puf_3FiscalYears.$.puf_balanceSheet.2.bas_propertyPlantEquip":data.ppe2015,
-        "puf_3FiscalYears.$.puf_balanceSheet.2.bas_constructInProgress":data.construction2015,
-        "puf_3FiscalYears.$.puf_balanceSheet.2.bas_computerSoftwareEquip":data.cse2015,
-        "puf_3FiscalYears.$.puf_balanceSheet.2.bas_machineryEquipment":data.machinery2015,
-        "puf_3FiscalYears.$.puf_balanceSheet.2.bas_otherPPE":data.otherPpe2015,
-        "puf_3FiscalYears.$.puf_balanceSheet.2.bas_accummulatedDepreciation":data.accumDep2015,
-        "puf_3FiscalYears.$.puf_balanceSheet.2.bas_intangibleAsset":data.intangibleAssets2015,
-        "puf_3FiscalYears.$.puf_balanceSheet.2.bas_deferredTax":data.defferredTax2015,
-        "puf_3FiscalYears.$.puf_cashFlow.2.caf_investmentTaxCredit":data.investmentTaxCredits2015,
-        "puf_3FiscalYears.$.puf_cashFlow.2.caf_capitalExpenditure":data.creditExpenditure2015
+        "puf_3FiscalYears.$.puf_balanceSheet.0.bas_propertyPlantEquip":data.ppe2015,
+        "puf_3FiscalYears.$.puf_balanceSheet.0.bas_constructInProgress":data.construction2015,
+        "puf_3FiscalYears.$.puf_balanceSheet.0.bas_computerSoftwareEquip":data.cse2015,
+        "puf_3FiscalYears.$.puf_balanceSheet.0.bas_machineryEquipment":data.machinery2015,
+        "puf_3FiscalYears.$.puf_balanceSheet.0.bas_otherPPE":data.otherPpe2015,
+        "puf_3FiscalYears.$.puf_balanceSheet.0.bas_accummulatedDepreciation":data.accumDep2015,
+        "puf_3FiscalYears.$.puf_balanceSheet.0.bas_intangibleAsset":data.intangibleAssets2015,
+        "puf_3FiscalYears.$.puf_balanceSheet.0.bas_deferredTax":data.defferredTax2015,
+        "puf_3FiscalYears.$.puf_cashFlow.0.caf_investmentTaxCredit":data.investmentTaxCredits2015,
+        "puf_3FiscalYears.$.puf_cashFlow.0.caf_capitalExpenditure":data.creditExpenditure2015
         }},
         {new:true})
         .exec().then((res) => {
@@ -616,9 +619,9 @@ module.exports.updatePublicFinancialData_financialAnalysis = (userName, data) =>
     let date = new Date();
     let year = date.getFullYear();
     PublicFinancial.findOneAndUpdate({cli_loginName:userName},
-        {$set:{"puf_3FiscalYears.0.puf_FiscalYear":year-1,
+        {$set:{"puf_3FiscalYears.0.puf_FiscalYear":year-3,
         "puf_3FiscalYears.1.puf_FiscalYear":year-2,
-        "puf_3FiscalYears.2.puf_FiscalYear":year-3}},
+        "puf_3FiscalYears.2.puf_FiscalYear":year-1}},
         {new:true})
         .exec().then((res) => {
             resolve();
@@ -637,26 +640,26 @@ module.exports.updatePublicFinancialData_financialAnalysis = (userName, data) =>
         resolve();
     }); 
     PublicFinancial.findOneAndUpdate({"cli_loginName":userName,"puf_3FiscalYears.puf_FiscalYear": year-2},
-        {$set:{"puf_3FiscalYears.$.puf_financialRatio.1.fir_PEratio":data.pe2016,
-        "puf_3FiscalYears.$.puf_financialRatio.1.fir_currentRatio":data.currentRatio2016,
-        "puf_3FiscalYears.$.puf_financialRatio.1.fir_quitckRatio":data.quickRatio2016,
-        "puf_3FiscalYears.$.puf_financialRatio.1.fir_assetTurnover":data.assetTurnover2016,
-        "puf_3FiscalYears.$.puf_financialRatio.1.fir_grossMargin":data.grossMargin2016,
-        "puf_3FiscalYears.$.puf_financialRatio.1.fir_operatingMargin":data.operatingMargin2016,
-        "puf_3FiscalYears.$.puf_financialRatio.1.fir_netMargin":data.netMargin2016
+        {$set:{"puf_3FiscalYears.$.puf_financialRatio.0.fir_PEratio":data.pe2016,
+        "puf_3FiscalYears.$.puf_financialRatio.0.fir_currentRatio":data.currentRatio2016,
+        "puf_3FiscalYears.$.puf_financialRatio.0.fir_quitckRatio":data.quickRatio2016,
+        "puf_3FiscalYears.$.puf_financialRatio.0.fir_assetTurnover":data.assetTurnover2016,
+        "puf_3FiscalYears.$.puf_financialRatio.0.fir_grossMargin":data.grossMargin2016,
+        "puf_3FiscalYears.$.puf_financialRatio.0.fir_operatingMargin":data.operatingMargin2016,
+        "puf_3FiscalYears.$.puf_financialRatio.0.fir_netMargin":data.netMargin2016
         }},
         {new:true})
         .exec().then((res) => {
         resolve();
     }); 
     PublicFinancial.findOneAndUpdate({"cli_loginName":userName,"puf_3FiscalYears.puf_FiscalYear": year-3},
-        {$set:{"puf_3FiscalYears.$.puf_financialRatio.2.fir_PEratio":data.pe2015,
-        "puf_3FiscalYears.$.puf_financialRatio.2.fir_currentRatio":data.currentRatio2015,
-        "puf_3FiscalYears.$.puf_financialRatio.2.fir_quitckRatio":data.quickRatio2015,
-        "puf_3FiscalYears.$.puf_financialRatio.2.fir_assetTurnover":data.assetTurnover2015,
-        "puf_3FiscalYears.$.puf_financialRatio.2.fir_grossMargin":data.grossMargin2015,
-        "puf_3FiscalYears.$.puf_financialRatio.2.fir_operatingMargin":data.operatingMargin2015,
-        "puf_3FiscalYears.$.puf_financialRatio.2.fir_netMargin":data.netMargin2015
+        {$set:{"puf_3FiscalYears.$.puf_financialRatio.0.fir_PEratio":data.pe2015,
+        "puf_3FiscalYears.$.puf_financialRatio.0.fir_currentRatio":data.currentRatio2015,
+        "puf_3FiscalYears.$.puf_financialRatio.0.fir_quitckRatio":data.quickRatio2015,
+        "puf_3FiscalYears.$.puf_financialRatio.0.fir_assetTurnover":data.assetTurnover2015,
+        "puf_3FiscalYears.$.puf_financialRatio.0.fir_grossMargin":data.grossMargin2015,
+        "puf_3FiscalYears.$.puf_financialRatio.0.fir_operatingMargin":data.operatingMargin2015,
+        "puf_3FiscalYears.$.puf_financialRatio.0.fir_netMargin":data.netMargin2015
         }},
         {new:true})
         .exec().then((res) => {
@@ -668,17 +671,17 @@ module.exports.updateTaxExpense = (userName, data) => {
     let date = new Date();
     let year = date.getFullYear();
     PublicFinancial.findOneAndUpdate({cli_loginName:userName},
-        {$set:{"puf_3FiscalYears.0.puf_FiscalYear":year-1,
+        {$set:{"puf_3FiscalYears.0.puf_FiscalYear":year-3,
         "puf_3FiscalYears.1.puf_FiscalYear":year-2,
-        "puf_3FiscalYears.2.puf_FiscalYear":year-3}},
+        "puf_3FiscalYears.2.puf_FiscalYear":year-1}},
         {new:true})
         .exec().then((res) => {
             resolve();
         }); 
     CompanyTaxInfo.findOneAndUpdate({cli_loginName:userName},
-        {$set:{"cti_3FiscalYears.0.cti_FiscalYear":year-1,
+        {$set:{"cti_3FiscalYears.0.cti_FiscalYear":year-3,
         "cti_3FiscalYears.1.cti_FiscalYear":year-2,
-        "cti_3FiscalYears.2.cti_FiscalYear":year-3}},
+        "cti_3FiscalYears.2.cti_FiscalYear":year-1}},
         {new:true})
         .exec().then((res) => {
             resolve();
@@ -697,26 +700,26 @@ module.exports.updateTaxExpense = (userName, data) => {
         resolve();
     }); 
     PublicFinancial.findOneAndUpdate({"cli_loginName":userName,"puf_3FiscalYears.puf_FiscalYear": year-2},
-        {$set:{"puf_3FiscalYears.$.puf_incomeStatment3.1.ins_sales":data.sales2016,
-        "puf_3FiscalYears.$.puf_incomeStatment3.1.ins_COGS":data.cogs2016,
-        "puf_3FiscalYears.$.puf_incomeStatment3.1.ins_depreciationAmortization":data.depAmo2016,
-        "puf_3FiscalYears.$.puf_incomeStatment3.1.ins_SGAexpense":data.sga2016,
-        "puf_3FiscalYears.$.puf_incomeStatment3.1.ins_otherSGAexpense":data.osga2016,
-        "puf_3FiscalYears.$.puf_incomeStatment3.1.ins_EBIT":data.ebit2016,
-        "puf_3FiscalYears.$.puf_incomeStatment3.1.ins_incomeTax":data.incomeTax2016
+        {$set:{"puf_3FiscalYears.$.puf_incomeStatment3.0.ins_sales":data.sales2016,
+        "puf_3FiscalYears.$.puf_incomeStatment3.0.ins_COGS":data.cogs2016,
+        "puf_3FiscalYears.$.puf_incomeStatment3.0.ins_depreciationAmortization":data.depAmo2016,
+        "puf_3FiscalYears.$.puf_incomeStatment3.0.ins_SGAexpense":data.sga2016,
+        "puf_3FiscalYears.$.puf_incomeStatment3.0.ins_otherSGAexpense":data.osga2016,
+        "puf_3FiscalYears.$.puf_incomeStatment3.0.ins_EBIT":data.ebit2016,
+        "puf_3FiscalYears.$.puf_incomeStatment3.0.ins_incomeTax":data.incomeTax2016
     }},
         {new:true})
         .exec().then((res) => {
         resolve();
     }); 
     PublicFinancial.findOneAndUpdate({"cli_loginName":userName,"puf_3FiscalYears.puf_FiscalYear": year-3},
-        {$set:{"puf_3FiscalYears.$.puf_incomeStatment3.2.ins_sales":data.sales2015,
-        "puf_3FiscalYears.$.puf_incomeStatment3.2.ins_COGS":data.cogs2015,
-        "puf_3FiscalYears.$.puf_incomeStatment3.2.ins_depreciationAmortization":data.depAmo2015,
-        "puf_3FiscalYears.$.puf_incomeStatment3.2.ins_SGAexpense":data.sga2015,
-        "puf_3FiscalYears.$.puf_incomeStatment3.2.ins_otherSGAexpense":data.osga2015,
-        "puf_3FiscalYears.$.puf_incomeStatment3.2.ins_EBIT":data.ebit2015,
-        "puf_3FiscalYears.$.puf_incomeStatment3.2.ins_incomeTax":data.incomeTax2015
+        {$set:{"puf_3FiscalYears.$.puf_incomeStatment3.0.ins_sales":data.sales2015,
+        "puf_3FiscalYears.$.puf_incomeStatment3.0.ins_COGS":data.cogs2015,
+        "puf_3FiscalYears.$.puf_incomeStatment3.0.ins_depreciationAmortization":data.depAmo2015,
+        "puf_3FiscalYears.$.puf_incomeStatment3.0.ins_SGAexpense":data.sga2015,
+        "puf_3FiscalYears.$.puf_incomeStatment3.0.ins_otherSGAexpense":data.osga2015,
+        "puf_3FiscalYears.$.puf_incomeStatment3.0.ins_EBIT":data.ebit2015,
+        "puf_3FiscalYears.$.puf_incomeStatment3.0.ins_incomeTax":data.incomeTax2015
     }},
         {new:true})
         .exec().then((res) => {
@@ -735,24 +738,24 @@ module.exports.updateTaxExpense = (userName, data) => {
         resolve();
     });  
     CompanyTaxInfo.findOneAndUpdate({"cli_loginName":userName,"cti_3FiscalYears.cti_FiscalYear": year-2},
-        {$set:{"cti_3FiscalYears.$.cti_companyTaxInfo3.1.cti_salaryWages":data.salary2016,
-        "cti_3FiscalYears.$.cti_companyTaxInfo3.1.cti_costMaterial":data.cost2016,
-        "cti_3FiscalYears.$.cti_companyTaxInfo3.1.cti_contractExpense":data.con2016,
-        "cti_3FiscalYears.$.cti_companyTaxInfo3.1.cti_leaseExpenditure":data.lea2016,
-        "cti_3FiscalYears.$.cti_companyTaxInfo3.1.cti_overhead":data.over2016,
-        "cti_3FiscalYears.$.cti_companyTaxInfo3.1.cti_capitalExpenditure":data.cap2016
+        {$set:{"cti_3FiscalYears.$.cti_companyTaxInfo3.0.cti_salaryWages":data.salary2016,
+        "cti_3FiscalYears.$.cti_companyTaxInfo3.0.cti_costMaterial":data.cost2016,
+        "cti_3FiscalYears.$.cti_companyTaxInfo3.0.cti_contractExpense":data.con2016,
+        "cti_3FiscalYears.$.cti_companyTaxInfo3.0.cti_leaseExpenditure":data.lea2016,
+        "cti_3FiscalYears.$.cti_companyTaxInfo3.0.cti_overhead":data.over2016,
+        "cti_3FiscalYears.$.cti_companyTaxInfo3.0.cti_capitalExpenditure":data.cap2016
         }},
         {new:true})
         .exec().then((res) => {
         resolve();
     }); 
     CompanyTaxInfo.findOneAndUpdate({"cli_loginName":userName,"cti_3FiscalYears.cti_FiscalYear": year-3},
-        {$set:{"cti_3FiscalYears.$.cti_companyTaxInfo3.2.cti_salaryWages":data.salary2015,
-        "cti_3FiscalYears.$.cti_companyTaxInfo3.2.cti_costMaterial":data.cost2015,
-        "cti_3FiscalYears.$.cti_companyTaxInfo3.2.cti_contractExpense":data.con2015,
-        "cti_3FiscalYears.$.cti_companyTaxInfo3.2.cti_leaseExpenditure":data.lea2015,
-        "cti_3FiscalYears.$.cti_companyTaxInfo3.2.cti_overhead":data.over2015,
-        "cti_3FiscalYears.$.cti_companyTaxInfo3.2.cti_capitalExpenditure":data.cap2015
+        {$set:{"cti_3FiscalYears.$.cti_companyTaxInfo3.0.cti_salaryWages":data.salary2015,
+        "cti_3FiscalYears.$.cti_companyTaxInfo3.0.cti_costMaterial":data.cost2015,
+        "cti_3FiscalYears.$.cti_companyTaxInfo3.0.cti_contractExpense":data.con2015,
+        "cti_3FiscalYears.$.cti_companyTaxInfo3.0.cti_leaseExpenditure":data.lea2015,
+        "cti_3FiscalYears.$.cti_companyTaxInfo3.0.cti_overhead":data.over2015,
+        "cti_3FiscalYears.$.cti_companyTaxInfo3.0.cti_capitalExpenditure":data.cap2015
         }},
         {new:true})
         .exec().then((res) => {
@@ -766,9 +769,9 @@ module.exports.updateCompanyTaxInfoData = (userName, data) => {
     let date = new Date();
     let year = date.getFullYear();
     CompanyTaxInfo.findOneAndUpdate({cli_loginName:userName},
-        {$set:{"cti_3FiscalYears.0.cti_FiscalYear":year-1,
+        {$set:{"cti_3FiscalYears.0.cti_FiscalYear":year-3,
         "cti_3FiscalYears.1.cti_FiscalYear":year-2,
-        "cti_3FiscalYears.2.cti_FiscalYear":year-3}},
+        "cti_3FiscalYears.2.cti_FiscalYear":year-1}},
         {new:true})
         .exec().then((res) => {
             resolve();
@@ -783,18 +786,18 @@ module.exports.updateCompanyTaxInfoData = (userName, data) => {
         resolve();
     });  
     CompanyTaxInfo.findOneAndUpdate({"cli_loginName":userName,"cti_3FiscalYears.cti_FiscalYear": year-2},
-        {$set:{"cti_3FiscalYears.$.cti_companyTaxInfo3.1.cti_gstHST":data.GST2016,
-        "cti_3FiscalYears.$.cti_companyTaxInfo3.1.cti_investmentTaxCredit":data.investment2016,
-        "cti_3FiscalYears.$.cti_companyTaxInfo3.1.cti_SREDtaxCredit":data.SRED2016
+        {$set:{"cti_3FiscalYears.$.cti_companyTaxInfo3.0.cti_gstHST":data.GST2016,
+        "cti_3FiscalYears.$.cti_companyTaxInfo3.0.cti_investmentTaxCredit":data.investment2016,
+        "cti_3FiscalYears.$.cti_companyTaxInfo3.0.cti_SREDtaxCredit":data.SRED2016
         }},
         {new:true})
         .exec().then((res) => {
         resolve();
     });  
     CompanyTaxInfo.findOneAndUpdate({"cli_loginName":userName,"cti_3FiscalYears.cti_FiscalYear": year-3},
-        {$set:{"cti_3FiscalYears.$.cti_companyTaxInfo3.2.cti_gstHST":data.GST2015,
-        "cti_3FiscalYears.$.cti_companyTaxInfo3.2.cti_investmentTaxCredit":data.investment2015,
-        "cti_3FiscalYears.$.cti_companyTaxInfo3.2.cti_SREDtaxCredit":data.SRED2015
+        {$set:{"cti_3FiscalYears.$.cti_companyTaxInfo3.0.cti_gstHST":data.GST2015,
+        "cti_3FiscalYears.$.cti_companyTaxInfo3.0.cti_investmentTaxCredit":data.investment2015,
+        "cti_3FiscalYears.$.cti_companyTaxInfo3.0.cti_SREDtaxCredit":data.SRED2015
         }},
         {new:true})
         .exec().then((res) => {
