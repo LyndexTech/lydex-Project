@@ -19,6 +19,7 @@ const exphbs = require("express-handlebars");
 const clientSessions = require("client-sessions");
 // load custom JavaScript  
 const dataServiceAuth = require("./data_service_auth.js");
+const spawn = require("child_process").spawn;
 
 // set up web app
 var app = express();
@@ -83,6 +84,19 @@ const storage = multer.diskStorage({
 });
 const upload = multer({ storage: storage });
 app.post("/assessment/upload", upload.array("files", 12), (req, res) => {
+    // console.log(req.files[0].destination);
+    const filePath = req.files[0].destination+req.files[0].filename;
+    const userName = req.session.user.cli_loginName;
+
+    console.log(filePath);
+    console.log(userName);
+
+    const pythonProcess = spawn('python',["Insert.py", filePath, userName]);
+
+    pythonProcess.stdout.on('data', (data) => {
+        // Do something with the data returned from python script
+        console.log(data.toString());
+    });
     res.redirect("/assessment");
 });
 
