@@ -5,9 +5,10 @@
         <h3>Before starting your R&amp;D Tax Assessment</h3>
         <br>
         <h5>You can upload your documents to let us fill in the assessment automatically for you: 
-            <button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#uploadFileModal">
+           <!-- <button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#uploadFileModal">
                 Upload Files
-            </button>
+            </button> -->
+            <a href="/upload" role="button" class="btn btn-sm btn-success">Upload files</a>
         </h5>
         <p>Documents needed for the assessment:</p>
         <ul>
@@ -18,7 +19,8 @@
         </ul>
         <p>Or you can skip this uploading and start the assessment manually</p>
         
-        <!-- upload Modal -->
+        <!-- model
+         
         <div class="modal fade" id="uploadFileModal" tabindex="-1" role="dialog" aria-labelledby="uploadFileModalLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
@@ -29,17 +31,23 @@
                         </button>
                     </div>
             <div class="modal-body">
-              <input type="file" name="file" multiple>
+                <form method="POST" action="/assessment" enctype="multipart/form-data">
+                    
+                    <input type="file" class="form-control" id="files" name="files" multiple>
+                    
+                    <br><br>
+                    <button type="submit" class="btn btn-success btn-sm float-right">Upload</button>
+                </form>
+              
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-              <button type="button" class="btn btn-primary">Upload</button>
             </div>
           </div>
         </div>
       </div>
-      <!-- upload modal end -->
-
+        upload modal end -->
+        
       <h5>Uploaded Documents</h5>
         <div class="table-responsive">
             <table class="table">

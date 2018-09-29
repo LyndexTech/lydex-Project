@@ -217,6 +217,48 @@ module.exports.registerUser = (userData) => {
                             }
                         });
                         let newCompanyTaxInfo = new CompanyTaxInfo(userData);
+                        newCompanyTaxInfo.set({
+                            cti_salaryWages:0, 
+	                        cti_contractExpense:0, 
+	                        cti_capitalExpenditure:0, 
+	                        cti_GSThstTaxIssues: "Write a Text here...", 
+	                        cti_employeeTaxIssue: "Write a Text here...",
+	                        cti_transferPricingTaxIssue: "Write a Text here...", 
+	                        cti_otherTaxIssue: "Write a Text here...",
+	                        cti_3FiscalYears:[ {cti_FiscalYear: 2015,
+                            cti_companyTaxInfo3: {  cti_gstHST: 0, 
+                                                cti_investmentTaxCredit: 0, 
+                                                cti_SREDtaxCredit: 0, 
+                                                cti_salaryWages: 0, 
+                                                cti_costMaterial: 0, 
+                                                cti_contractExpense: 0, 
+                                                cti_leaseExpenditure: 0, 
+                                                cti_capitalExpenditure: 0, 
+                                                cti_overhead: 0}},
+			            {cti_FiscalYear: 2016,
+                          cti_companyTaxInfo3: {  cti_gstHST: 0, 
+                                                cti_investmentTaxCredit: 0, 
+                                                cti_SREDtaxCredit: 0, 
+                                                cti_salaryWages: 0, 
+                                                cti_costMaterial: 0, 
+                                                cti_contractExpense: 0, 
+                                                cti_leaseExpenditure: 0, 
+                                                cti_capitalExpenditure: 0, 
+                                                cti_overhead: 0}},
+			            {cti_FiscalYear: 2017,
+                              cti_companyTaxInfo3: {cti_gstHST: 0, 
+                                                    cti_investmentTaxCredit: 0, 
+                                                    cti_SREDtaxCredit: 0,
+                                                    cti_salaryWages: 0, 
+                                                    cti_costMaterial: 0, 
+                                                    cti_contractExpense: 0, 
+                                                    cti_leaseExpenditure: 0, 
+                                                    cti_capitalExpenditure: 0, 
+                                                    cti_overhead: 0}}
+                                    ]
+                            }
+
+                        );
                         newCompanyTaxInfo.save((err) => {
                             if (err) {
                                 reject("There was an error creating the user: " + err);
@@ -225,6 +267,112 @@ module.exports.registerUser = (userData) => {
                             }
                         });
                         let newPublicFinancial = new PublicFinancial(userData);
+                        newPublicFinancial.set({
+                            puf_3FiscalYears:[
+                                {puf_FiscalYear: 2015,
+                                puf_incomeStatment3: [{ins_sales: 0,
+                                                     ins_grossProfitIncome:0,
+                                                     ins_netIncome:0,
+                                                     ins_incomeTax: 0, 
+                                                     ins_COGS: 0,
+                                                     ins_depreciationAmortization: 0,
+                                                     ins_SGAexpense: 0, 
+                                                     ins_otherSGAexpense: 0, 
+                                                     ins_EBIT: 0}],
+                                puf_balanceSheet: [{bas_propertyPlantEquip: 0, 
+                                                     bas_constructInProgress: 0,
+                                                     bas_computerSoftwareEquip: 0, 
+                                                     bas_otherPPE: 0,
+                                                     bas_accummulatedDepreciation: 0, 
+                                                     bas_intangibleAsset: 0,
+                                                     bas_machineryEquipment: 0,
+                                                     bas_deferredTax: 0}],
+                                puf_cashFlow: [{caf_deferredTax: 0,
+                                                 caf_changesWorkingCapital:0,
+                                                 caf_capitalExpenditure: 0}],	
+                                puf_financialRatio:[{fir_PEratio: 0, 
+                                                     fir_currentRatio: 0, 
+                                                     fir_quitckRatio: 0,
+                                                     fir_assetTurnover: 0, 
+                                                     fir_grossMargin: 0, 
+                                                     fir_operatingMargin: 0,
+                                                     fir_netMargin: 0}],
+                                },
+                                {puf_FiscalYear: 2016,
+                                 puf_incomeStatment3: [{ins_sales: 0,
+                                                        ins_grossProfitIncome:0,
+                                                        ins_netIncome:0,
+                                                        ins_incomeTax: 0, 
+                                                        ins_COGS: 0,
+                                                        ins_depreciationAmortization: 0,
+                                                        ins_SGAexpense: 0, 
+                                                        ins_otherSGAexpense: 0, 
+                                                        ins_EBIT: 0}],
+                                puf_balanceSheet: [{bas_propertyPlantEquip: 0, 
+                                                    bas_constructInProgress: 0,
+                                                    bas_computerSoftwareEquip: 0, 
+                                                    bas_otherPPE: 0,
+                                                    bas_accummulatedDepreciation: 0, 
+                                                    bas_intangibleAsset: 0,
+                                                    bas_machineryEquipment: 0,
+                                                    bas_deferredTax: 0}],
+                                puf_cashFlow: [{caf_deferredTax: 0,
+                                                caf_changesWorkingCapital:0,
+                                                caf_capitalExpenditure: 0}],	
+                                                puf_financialRatio:[{fir_PEratio: 0, 
+                                                fir_currentRatio: 0, 
+                                                fir_quitckRatio: 0,
+                                                fir_assetTurnover: 0, 
+                                                fir_grossMargin: 0, 
+                                                fir_operatingMargin: 0,
+                                                fir_netMargin: 0},]
+                                },
+                               {puf_FiscalYear: 2017,
+                                 puf_incomeStatment3: [{ins_sales: 0,
+                                                        ins_grossProfitIncome:0,
+                                                        ins_netIncome:0,
+                                                        ins_incomeTax: 0, 
+                                                        ins_COGS: 0,
+                                                        ins_depreciationAmortization: 0,
+                                                        ins_SGAexpense: 0, 
+                                                        ins_otherSGAexpense: 0, 
+                                                        ins_EBIT: 0}],
+                                puf_balanceSheet: [{bas_propertyPlantEquip: 0, 
+                                                    bas_constructInProgress: 0,
+                                                    bas_computerSoftwareEquip: 0, 
+                                                    bas_otherPPE: 0,
+                                                    bas_accummulatedDepreciation: 0, 
+                                                    bas_intangibleAsset: 0,
+                                                    bas_machineryEquipment: 0,
+                                                    bas_deferredTax: 0}],
+                                puf_cashFlow: [{caf_deferredTax: 0,
+                                                caf_changesWorkingCapital:0,
+                                                caf_capitalExpenditure: 0}],	
+                                                puf_financialRatio:[{fir_PEratio: 0, 
+                                                fir_currentRatio: 0, 
+                                                fir_quitckRatio: 0,
+                                                fir_assetTurnover: 0, 
+                                                fir_grossMargin: 0, 
+                                                fir_operatingMargin: 0,
+                                                fir_netMargin: 0},]                 
+                            }],
+                            puf_5FiscalYears:[{puf_FiscalYear: 2013,	
+                                        puf_incomeStatment5: [{ins_researchDevelopment: 0}]
+                                        },
+                                        {puf_FiscalYear: 2014,	
+                                        puf_incomeStatment5: [{ins_researchDevelopment: 0}]
+                                        },
+                                        {puf_FiscalYear: 2015,	
+                                         puf_incomeStatment5: [{ins_researchDevelopment: 0}]
+                                        },
+                                        {puf_FiscalYear: 2016,	
+                                        puf_incomeStatment5: [{ins_researchDevelopment: 0}]
+                                        },
+                                        {puf_FiscalYear: 2017,	
+                                         puf_incomeStatment5: [{ins_researchDevelopment: 0}]
+                                        }
+                                        ]	
+                        });
                         newPublicFinancial.save((err) => {
                             if (err) {
                                 reject("There was an error creating the user: " + err);
@@ -232,6 +380,48 @@ module.exports.registerUser = (userData) => {
                                 resolve();
                             }
                         });
+                        let newIndustryBenchmark = new IndustryBenchmark(userData)
+                        newIndustryBenchmark.set({
+                            inb_industry: "Write a Text here...",		
+	                        inb_subClassification: "Write a Text here...",		
+	                        inb_mainListedCompany: "Write a Text here...",		
+	                        inb_marketSizeBillion: 10000,		
+	                        inb_RDexpense: 10000,
+	                        inb_3FiscalYears:[ {inb_3FYear: 2015,
+                            inb_industryBenchmark3: {inb_canadianRDexpenditure: 10000,
+                                                inb_SREDtaxCredit: 10000,
+                                                inb_industrySize: 10000,
+                                                inb_RDexpense: 10000}},
+			                                    {inb_3FYear: 2016,
+                            inb_industryBenchmark3: {inb_canadianRDexpenditure: 20000,
+                                                inb_SREDtaxCredit: 10000,
+                                                inb_industrySize: 10000,
+                                                inb_RDexpense: 10000}},
+			                                    {inb_3FYear: 2017,
+                            inb_industryBenchmark3: {inb_canadianRDexpenditure: 30000,
+                                                inb_SREDtaxCredit: 10000,
+                                                inb_industrySize: 10000,
+                                                inb_RDexpense: 10000}
+                             }],
+	                        inb_5FiscalYears:[ {inb_5FYear: 2013,
+			                inb_industryBenchmark5: {inb_marketSize: 12000},
+			                    inb_5FYear: 2014,
+			                    inb_industryBenchmark5: {inb_marketSize: 13000},
+			                     inb_5FYear: 2015,
+			                    inb_industryBenchmark5: {inb_marketSize: 14000},
+			                    inb_5FYear: 2016,
+			                    inb_industryBenchmark5: {inb_marketSize: 15000},
+		                        inb_5FYear: 2017,
+			                    inb_industryBenchmark5: {inb_marketSize: 16000}	
+			                    }]
+                        }); 
+                        newIndustryBenchmark.save((err) => {
+                            if (err) {
+                                reject("There was an error creating the user: " + err);
+                            } else {
+                                resolve();
+                            }
+                        });  
                     }
                 });
             });
@@ -265,10 +455,11 @@ module.exports.checkUser = (userData) => {
 //*** data query functions **********************************************/
 
 module.exports.getclientData = (userName) => {
-    return new Promise((resolve) => {
+    return new Promise((resolve, reject) => {
         Client.find({cli_loginName:userName})
             .exec()
             .then((clients) => {
+                console.log("get client:" + clients[0]);
                 resolve(clients[0]);
             });
     })
@@ -278,10 +469,11 @@ module.exports.getclientData = (userName) => {
 };
 
 module.exports.getPublicFinancialData = (userName) => {
-    return new Promise((resolve) => {
+    return new Promise((resolve, reject) => {
         PublicFinancial.find({cli_loginName:userName})
             .exec()
             .then((info) => {
+                console.log("get info:" + info[0])
                 resolve(info[0]);
             });
     })
@@ -293,7 +485,7 @@ module.exports.getPublicFinancialData = (userName) => {
 };
 
 module.exports.getCompanyTaxInfoData = (userName) => {
-    return new Promise((resolve) => {
+    return new Promise((resolve, reject) => {
         CompanyTaxInfo.find({cli_loginName:userName})
             .exec()
             .then((info) => {
@@ -305,13 +497,13 @@ module.exports.getCompanyTaxInfoData = (userName) => {
         });
 };
 
-module.exports.getIndustryBenchmarkData = (userIndustry) => {
+module.exports.getIndustryBenchmarkData = (userName) => {
 
-    return new Promise((resolve) => {
-        IndustryBenchmark.find({inb_industry:userIndustry})
+    return new Promise((resolve, reject) => {
+        IndustryBenchmark.find({cli_loginName: userName})
             .exec()
-            .then((user) => {
-                resolve();
+            .then((info) => {
+                resolve(info[0]);
             })
             .catch((err) => {
                 reject("Error in getting client data" + err);
@@ -353,13 +545,13 @@ module.exports.updatePublicFinancialData_companyInfo = (userName, data) => {
         "puf_3FiscalYears.$.puf_incomeStatment3.0.ins_grossProfitIncome":data.grossIncome2017,
         "puf_3FiscalYears.$.puf_incomeStatment3.0.ins_netIncome":data.netIncome2017,
         "puf_3FiscalYears.$.puf_balanceSheet.0.bas_propertyPlantEquip":data.ppe2017,
-        "puf_3FiscalYears.$.puf_balanceSheet.0.bas_constructInProgressp":data.construction2017,
+        "puf_3FiscalYears.$.puf_balanceSheet.0.bas_constructInProgress":data.construction2017,
         "puf_3FiscalYears.$.puf_balanceSheet.0.bas_computerSoftwareEquip":data.cse2017,
         "puf_3FiscalYears.$.puf_balanceSheet.0.bas_machineryEquipment":data.machinery2017,
         "puf_3FiscalYears.$.puf_balanceSheet.0.bas_otherPPE":data.otherPpe2017,
         "puf_3FiscalYears.$.puf_balanceSheet.0.bas_accummulatedDepreciation":data.accumDep2017,
         "puf_3FiscalYears.$.puf_balanceSheet.0.bas_intangibleAsset":data.intangibleAssets2017,
-        "puf_3FiscalYears.$.puf_cashFlow.0.caf_deferredTax":data.defferredTax2017,
+        "puf_3FiscalYears.$.puf_balanceSheet.0.bas_deferredTax":data.defferredTax2017,
         "puf_3FiscalYears.$.puf_cashFlow.0.caf_investmentTaxCredit":data.investmentTaxCredits2017,
         "puf_3FiscalYears.$.puf_cashFlow.0.caf_capitalExpenditure":data.creditExpenditure2017
         }},
@@ -378,13 +570,13 @@ module.exports.updatePublicFinancialData_companyInfo = (userName, data) => {
         "puf_3FiscalYears.$.puf_incomeStatment3.1.ins_grossProfitIncome":data.grossIncome2016,
         "puf_3FiscalYears.$.puf_incomeStatment3.1.ins_netIncome":data.netIncome2016,
         "puf_3FiscalYears.$.puf_balanceSheet.1.bas_propertyPlantEquip":data.ppe2016,
-        "puf_3FiscalYears.$.puf_balanceSheet.1.bas_constructInProgressp":data.construction2016,
+        "puf_3FiscalYears.$.puf_balanceSheet.1.bas_constructInProgress":data.construction2016,
         "puf_3FiscalYears.$.puf_balanceSheet.1.bas_computerSoftwareEquip":data.cse2016,
         "puf_3FiscalYears.$.puf_balanceSheet.1.bas_machineryEquipment":data.machinery2016,
         "puf_3FiscalYears.$.puf_balanceSheet.1.bas_otherPPE":data.otherPpe2016,
         "puf_3FiscalYears.$.puf_balanceSheet.1.bas_accummulatedDepreciation":data.accumDep2016,
         "puf_3FiscalYears.$.puf_balanceSheet.1.bas_intangibleAsset":data.intangibleAssets2016,
-        "puf_3FiscalYears.$.puf_cashFlow.1.caf_deferredTax":data.defferredTax2016,
+        "puf_3FiscalYears.$.puf_balanceSheet.1.bas_deferredTax":data.defferredTax2016,
         "puf_3FiscalYears.$.puf_cashFlow.1.caf_investmentTaxCredit":data.investmentTaxCredits2016,
         "puf_3FiscalYears.$.puf_cashFlow.1.caf_capitalExpenditure":data.creditExpenditure2016
         }},
@@ -403,13 +595,13 @@ module.exports.updatePublicFinancialData_companyInfo = (userName, data) => {
         "puf_3FiscalYears.$.puf_incomeStatment3.0.ins_grossProfitIncome":data.grossIncome2015,
         "puf_3FiscalYears.$.puf_incomeStatment3.0.ins_netIncome":data.netIncome2015,
         "puf_3FiscalYears.$.puf_balanceSheet.2.bas_propertyPlantEquip":data.ppe2015,
-        "puf_3FiscalYears.$.puf_balanceSheet.2.bas_constructInProgressp":data.construction2015,
+        "puf_3FiscalYears.$.puf_balanceSheet.2.bas_constructInProgress":data.construction2015,
         "puf_3FiscalYears.$.puf_balanceSheet.2.bas_computerSoftwareEquip":data.cse2015,
         "puf_3FiscalYears.$.puf_balanceSheet.2.bas_machineryEquipment":data.machinery2015,
         "puf_3FiscalYears.$.puf_balanceSheet.2.bas_otherPPE":data.otherPpe2015,
         "puf_3FiscalYears.$.puf_balanceSheet.2.bas_accummulatedDepreciation":data.accumDep2015,
         "puf_3FiscalYears.$.puf_balanceSheet.2.bas_intangibleAsset":data.intangibleAssets2015,
-        "puf_3FiscalYears.$.puf_cashFlow.2.caf_deferredTax":data.defferredTax2015,
+        "puf_3FiscalYears.$.puf_balanceSheet.2.bas_deferredTax":data.defferredTax2015,
         "puf_3FiscalYears.$.puf_cashFlow.2.caf_investmentTaxCredit":data.investmentTaxCredits2015,
         "puf_3FiscalYears.$.puf_cashFlow.2.caf_capitalExpenditure":data.creditExpenditure2015
         }},

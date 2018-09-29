@@ -60,15 +60,10 @@ const storage = multer.diskStorage({
     }
 });
 const upload = multer({ storage: storage });
-// NEED TO BE MODIFIED *************************************************
-// to create AJAX call Javascript for front end uploading modal view
-app.post("/accessment", upload.array("files", 12), (req, res) => {
-
-    //STEVEN FILE - > DB
-
+app.post("/accessment/upload", upload.array("files", 12), (req, res) => {
     res.redirect("/accessment");
 });
-//*********************************************************************/
+
 
 // middlewares setup functions
 app.use(express.static('public')); 
@@ -135,6 +130,11 @@ app.get("/logout", (req, res) => {
 app.get("/assessment", ensureLogin, (req, res) => {
     res.render("assessment");
 });
+
+app.get("/upload", ensureLogin, (req, res) => {
+    res.render("upload");
+});
+
 // setup a route to listen on /companyinfo
 
 function objectToJson(object){
@@ -143,27 +143,43 @@ function objectToJson(object){
     return js;
 }
 
-app.get("/companyinfo", ensureLogin, (req, res) => {
+app.get("/companyinfo", (req, res) => {
     // Company info query from database need to be developed
 
     var userName = req.session.user.cli_loginName;
-
+    //var userName="User1";
     dataServiceAuth.getclientData(userName).then((clientData) => {
 
         var companyTaxInfoData =dataServiceAuth.getPublicFinancialData(userName).then((info) => {
 
-            var info17 = objectToJson(info.puf_3FiscalYears[0].puf_incomeStatment3[0])['0'];
-            var info16 = objectToJson(info.puf_3FiscalYears[1].puf_incomeStatment3[0])['1'];
-            var info15 = objectToJson(info.puf_3FiscalYears[2].puf_incomeStatment3[0])['0'];
-            var info15b = objectToJson(info.puf_3FiscalYears[2].puf_incomeStatment3[0])['2'];
+            if(!info) res.render('companyinfo');
 
-            var bs17=objectToJson(info.puf_3FiscalYears[0].puf_balanceSheet[0])['0'];
-            var bs16=objectToJson(info.puf_3FiscalYears[1].puf_balanceSheet[0])['1'];
-            var bs15=objectToJson(info.puf_3FiscalYears[2].puf_balanceSheet[0])['2'];
+            var info15 = info.puf_3FiscalYears[0].puf_incomeStatment3[0];
+            var info16 = info.puf_3FiscalYears[1].puf_incomeStatment3[0];
+            var info17 = info.puf_3FiscalYears[2].puf_incomeStatment3[0];
 
-            var caf17 = objectToJson(info.puf_3FiscalYears[0].puf_cashFlow[0])['0'];
-            var caf16 = objectToJson(info.puf_3FiscalYears[1].puf_cashFlow[0])['1'];
-            var caf15 = objectToJson(info.puf_3FiscalYears[2].puf_cashFlow[0])['2'];
+            var bs15=info.puf_3FiscalYears[0].puf_balanceSheet[0];
+            var bs16=info.puf_3FiscalYears[1].puf_balanceSheet[0];
+            var bs17=info.puf_3FiscalYears[2].puf_balanceSheet[0];
+
+            var caf15 = info.puf_3FiscalYears[0].puf_cashFlow[0];
+            var caf16 = info.puf_3FiscalYears[1].puf_cashFlow[0];
+            var caf17 = info.puf_3FiscalYears[2].puf_cashFlow[0];
+
+            console.log(caf15);
+            console.log(caf15.caf_deferredTax);
+
+            // var info16 = objectToJson(info.puf_3FiscalYears[1].puf_incomeStatment3[0])['0'];
+            // var info17 = objectToJson(info.puf_3FiscalYears[2].puf_incomeStatment3[0])['0'];
+            // var info15b = objectToJson(info.puf_3FiscalYears[2].puf_incomeStatment3[0])['2'];
+
+            // var bs17=objectToJson(info.puf_3FiscalYears[0].puf_balanceSheet[0])['0'];
+            // var bs16=objectToJson(info.puf_3FiscalYears[1].puf_balanceSheet[0])['0'];
+            // var bs15=objectToJson(info.puf_3FiscalYears[2].puf_balanceSheet[0])['0'];
+            //
+            // var caf17 = objectToJson(info.puf_3FiscalYears[0].puf_cashFlow[0])['0'];
+            // var caf16 = objectToJson(info.puf_3FiscalYears[1].puf_cashFlow[0])['0'];
+            // var caf15 = objectToJson(info.puf_3FiscalYears[2].puf_cashFlow[0])['0'];
 
             var companyinfo = {
                 'basicInfo': {
@@ -174,17 +190,17 @@ app.get("/companyinfo", ensureLogin, (req, res) => {
                 },
                 'incomeStatement': {
                     '2015': {
-                        'ins_sales': info15b.ins_sales,
-                        'ins_workingCapital': '',
+                        'ins_sales': info15.ins_sales,
+                        'ins_workingCapital': caf15.caf_changesWorkingCapital,
                         'ins_grossProfitIncome': info15.ins_grossProfitIncome,
-                        'ins_accumulatedDepreciation': info15b.ins_depreciationAmortization,
-                        'ins_incomeTax': info15b.ins_incomeTax,
-                        'ins_COGS': info15b.ins_COGS,
+                        'ins_accumulatedDepreciation': info15.ins_depreciationAmortization,
+                        'ins_incomeTax': info15.ins_incomeTax,
+                        'ins_COGS': info15.ins_COGS,
                         'ins_netIncome': info15.ins_netIncome
                     },
                     '2016': {
                         'ins_sales': info16.ins_sales,
-                        'ins_workingCapital': '',
+                        'ins_workingCapital': caf16.caf_changesWorkingCapital,
                         'ins_grossProfitIncome': info16.ins_grossProfitIncome,
                         'ins_accumulatedDepreciation': info16.ins_depreciationAmortization,
                         'ins_incomeTax': info16.ins_incomeTax,
@@ -193,7 +209,7 @@ app.get("/companyinfo", ensureLogin, (req, res) => {
                     },
                     '2017': {
                         'ins_sales': info17.ins_sales,
-                        'ins_workingCapital': '',
+                        'ins_workingCapital': caf17.caf_changesWorkingCapital,
                         'ins_grossProfitIncome': info17.ins_grossProfitIncome,
                         'ins_accumulatedDepreciation': info17.ins_depreciationAmortization,
                         'ins_incomeTax': info17.ins_incomeTax,
@@ -230,16 +246,332 @@ app.get("/companyinfo", ensureLogin, (req, res) => {
                 'cashflowStatement': {
                     '2015': {
                         'caf_deferredTax': caf15.caf_deferredTax,
-                        'caf_investmentTaxCredit': caf15.caf_investmentTaxCredit,
+                        'caf_investmentTaxCredit': caf15.caf_changesWorkingCapital,
                         'caf_capitalExpenditure': caf15.caf_capitalExpenditure
                     },
                     '2016': {
                         'caf_deferredTax': caf16.caf_deferredTax,
-                        'caf_investmentTaxCredit': caf16.caf_investmentTaxCredit,
+                        'caf_investmentTaxCredit': caf16.caf_changesWorkingCapital,
                         'caf_capitalExpenditure': caf16.caf_capitalExpenditure
                     },
                     '2017': {
                         'caf_deferredTax': caf17.caf_deferredTax,
+                        'caf_investmentTaxCredit': caf17.caf_changesWorkingCapital,
+                        'caf_capitalExpenditure': caf17.caf_capitalExpenditure
+                    }
+                }
+            };
+
+            res.render('companyinfo',{content:companyinfo});
+        });
+
+    });
+});
+
+// setup a route to listen on /financialanalysis
+app.get("/financialanalysis", ensureLogin, (req, res) => {
+    // financial analysis query from database need to be developed
+
+    var userName = req.session.user.cli_loginName;
+    //var userName="User1";
+    dataServiceAuth.getPublicFinancialData(userName).then((info) => {
+        dataServiceAuth.getIndustryBenchmarkData(userName).then((bm) => {
+
+            var puf15 = info.puf_3FiscalYears[0].puf_financialRatio[0];
+            var puf16 = info.puf_3FiscalYears[1].puf_financialRatio[0];
+            var puf17 = info.puf_3FiscalYears[2].puf_financialRatio[0];
+
+            var financialanlysis = {
+                'industryBenchmark': {
+                    'industry': bm.inb_industry,
+                    'subCategory': bm.inb_subClassification,
+                    'marketSize': bm.inb_marketSizeBillion,
+                    'marketRdExpense': bm.inb_RDexpense,
+                    'mainListedCompany':bm.inb_mainListedCompany
+                },
+                'financialratio': {
+                    '2015': {
+                        'peratio': puf15.fir_PEratio,
+                        'currentratio': puf15.fir_currentRatio,
+                        'quickratio': puf15.fir_quitckRatio,
+                        'assetturnover': puf15.fir_assetTurnover,
+                        'grossmargin': puf15.fir_grossMargin,
+                        'operatingmargin': puf15.fir_operatingMargin,
+                        'netmargin': puf15.fir_netMargin
+                    },
+                    '2016': {
+                        'peratio': puf16.fir_PEratio,
+                        'currentratio': puf16.fir_currentRatio,
+                        'quickratio': puf16.fir_quitckRatio,
+                        'assetturnover': puf16.fir_assetTurnover,
+                        'grossmargin': puf16.fir_grossMargin,
+                        'operatingmargin': puf16.fir_operatingMargin,
+                        'netmargin': puf16.fir_netMargin
+                    },
+                    '2017': {
+                        'peratio': puf17.fir_PEratio,
+                        'currentratio': puf17.fir_currentRatio,
+                        'quickratio': puf17.fir_quitckRatio,
+                        'assetturnover': puf17.fir_assetTurnover,
+                        'grossmargin': puf17.fir_grossMargin,
+                        'operatingmargin': puf17.fir_operatingMargin,
+                        'netmargin': puf17.fir_netMargin
+                    }
+                }
+            };
+            res.render('financialanalysis', {content: financialanlysis});
+        });
+    });
+});
+
+// setup a route to listen on /taxcredit
+app.get("/taxcredit", ensureLogin, (req, res) => {
+    // tax credit query from database need to be developed
+    var userName = req.session.user.cli_loginName;
+    //var userName="User1";
+    dataServiceAuth.getCompanyTaxInfoData(userName).then((info) => {
+        dataServiceAuth.getIndustryBenchmarkData(userName).then((bm) => {
+            dataServiceAuth.getCompanyTaxInfoData(userName).then((tax) => {
+
+                var bm15 = bm.inb_3FiscalYears[0].inb_industryBenchmark3;
+                var bm16 = bm.inb_3FiscalYears[1].inb_industryBenchmark3;
+                var bm17 = bm.inb_3FiscalYears[2].inb_industryBenchmark3;
+
+                var tax15 = tax.cti_3FiscalYears[0].cti_companyTaxInfo3;
+                var tax16 = tax.cti_3FiscalYears[1].cti_companyTaxInfo3;
+                var tax17 = tax.cti_3FiscalYears[2].cti_companyTaxInfo3;
+
+                var taxcredit = {
+                    'IndustryBenchmark': {
+                        'caRD2017': bm17.inb_canadianRDexpenditure,
+                        'caRD2016': bm16.inb_canadianRDexpenditure,
+                        'caRD2015': bm15.inb_canadianRDexpenditure,
+                        'sredTaxCredits2017': bm17.inb_SREDtaxCredit,
+                        'sredTaxCredits2016': bm16.inb_SREDtaxCredit,
+                        'sredTaxCredits2015': bm15.inb_SREDtaxCredit,
+                        'idustrySize2017': bm17.inb_industrySize,
+                        'idustrySize2016': bm16.inb_industrySize,
+                        'idustrySize2015': bm15.inb_industrySize,
+                        'indRdExpense2017': bm17.inb_RDexpense,
+                        'indRdExpense2016': bm16.inb_RDexpense,
+                        'indRdExpense2015': bm15.inb_RDexpense,
+                    },
+                    'HistoryTaxCredit': {
+
+                        'GST2017': tax17.cti_gstHST,
+                        'GST2016': tax16.cti_gstHST,
+                        'GST2015': tax15.cti_gstHST,
+                        'investment2017': tax17.cti_investmentTaxCredit,
+                        'investment2016': tax16.cti_investmentTaxCredit,
+                        'investment2015': tax15.cti_investmentTaxCredit,
+                        'SRED2017': tax17.cti_SREDtaxCredit,
+                        'SRED2016': tax16.cti_SREDtaxCredit,
+                        'SRED2015': tax15.cti_SREDtaxCredit
+                    },
+                    'HistoryTaxIssue': {
+                        'gsthstIssue': info.cti_GSThstTaxIssues,
+                        'employeeTaxIssue': info.cti_employeeTaxIssue,
+                        'transferPricingTaxIssue': info.cti_transferPricingTaxIssue,
+                        'othertransferPricingTaxIssue': info.cti_otherTaxIssue
+                    }
+                };
+                res.render("taxcredit", {content: taxcredit});
+            });
+        });
+    });
+});
+
+// setup a route to listen on /taxexpense
+app.get("/taxexpense", ensureLogin, (req, res) => {
+    // tax expense query from database need to be developed
+    //var userName="User1";
+    var userName = req.session.user.cli_loginName;
+    dataServiceAuth.getPublicFinancialData(userName).then((info) => {
+        dataServiceAuth.getCompanyTaxInfoData(userName).then((tax) => {
+            var info15 = info.puf_3FiscalYears[0].puf_incomeStatment3[0];
+            var info16 = info.puf_3FiscalYears[1].puf_incomeStatment3[0];
+            var info17 = info.puf_3FiscalYears[2].puf_incomeStatment3[0];
+
+            var tax15 = tax.cti_3FiscalYears[0].cti_companyTaxInfo3;
+            var tax16 = tax.cti_3FiscalYears[1].cti_companyTaxInfo3;
+            var tax17 = tax.cti_3FiscalYears[2].cti_companyTaxInfo3;
+
+            console.log(tax15);
+            var taxexpense ={
+                'OperatingExpense':{
+                    'sales2017':info17.ins_sales,
+                    'sales2016':info16.ins_sales,
+                    'sales2015':info15.ins_sales,
+                    'cogs2017':info17.ins_COGS,
+                    'cogs2016':info16.ins_COGS,
+                    'cogs2015':info15.ins_COGS,
+                    'depAmo2017':info17.ins_depreciationAmortization,
+                    'depAmo2016':info16.ins_depreciationAmortization,
+                    'depAmo2015':info15.ins_depreciationAmortization,
+                    'sga2017':info17.ins_SGAexpense,
+                    'sga2016':info16.ins_SGAexpense,
+                    'sga2015':info15.ins_SGAexpense,
+                    'osga2017':info17.ins_otherSGAexpense,
+                    'osga2016':info16.ins_otherSGAexpense,
+                    'osga2015':info15.ins_otherSGAexpense,
+                    'ebit2017':info17.ins_EBIT,
+                    'ebit2016':info16.ins_EBIT,
+                    'ebit2015':info15.ins_EBIT,
+                    'incomeTax2017':info17.ins_incomeTax,
+                    'incomeTax2016':info16.ins_incomeTax,
+                    'incomeTax2015':info15.ins_incomeTax
+                },
+                'SREDTaxCredit':{
+                    'salary2017':tax17.cti_salaryWages,
+                    'salary2016':tax16.cti_salaryWages,
+                    'salary2015':tax15.cti_salaryWages,
+                    'cost2017':tax17.cti_costMaterial,
+                    'cost2016':tax16.cti_costMaterial,
+                    'cost2015':tax15.cti_costMaterial,
+                    'con2017':tax17.cti_contractExpense,
+                    'con2016':tax16.cti_contractExpense,
+                    'con2015':tax15.cti_contractExpense,
+                    'lea2017':'',
+                    'lea2016':'',
+                    'lea2015':'',
+                    'over2017':tax17.cti_overhead,
+                    'over2016':tax16.cti_overhead,
+                    'over2015':tax15.cti_overhead,
+                    'cap2017':tax17.cti_capitalExpenditure,
+                    'cap2016':tax16.cti_capitalExpenditure,
+                    'cap2015':tax15.cti_capitalExpenditure
+                },
+                '2018RDExpense':{
+                    'salarywages':tax.cti_salaryWages,
+                    'contractexpense':tax.cti_contractExpense,
+                    'capitalexpendture':tax.cti_capitalExpenditure
+                }
+
+            };
+            res.render("taxexpense",{content:taxexpense});
+
+        });
+    });
+});
+/*
+app.get("/companyinfo", ensureLogin, (req, res) => {
+    var userName = req.session.user.cli_loginName;
+    dataServiceAuth.getPublicFinancialData(userName).then((pubf) => {
+        
+            res.render("companyinfo",{pubf:pubf});
+    
+        
+    })
+});
+*/
+/*
+app.get("/companyinfo", ensureLogin, (req, res) => {
+    var userName = req.session.user.cli_loginName;
+    dataServiceAuth.getclientData(userName).then((client) => {
+        
+            res.render("companyinfo",{client:client});
+    
+        
+    })
+});
+/*
+app.get("/companyinfo", ensureLogin, (req, res) => {
+    // Company info query from database need to be developed
+
+    var userName = req.session.user.cli_loginName;
+
+    dataServiceAuth.getclientData(userName).then((clientData) => {
+
+        var companyTaxInfoData =dataServiceAuth.getPublicFinancialData(userName).then((info) => {
+
+            var info17 = objectToJson(info.puf_3FiscalYears[0].puf_incomeStatment3[0])['0'];
+            var info16 = objectToJson(info.puf_3FiscalYears[1].puf_incomeStatment3[0])['1'];
+            //var info15 = objectToJson(info.puf_3FiscalYears[2].puf_incomeStatment3[0])['0'];
+            var info15 = objectToJson(info.puf_3FiscalYears[2].puf_incomeStatment3[0])['2'];
+
+            var bs17=objectToJson(info.puf_3FiscalYears[0].puf_balanceSheet[0])['0'];
+            var bs16=objectToJson(info.puf_3FiscalYears[1].puf_balanceSheet[0])['1'];
+            var bs15=objectToJson(info.puf_3FiscalYears[2].puf_balanceSheet[0])['2'];
+
+            var caf17 = objectToJson(info.puf_3FiscalYears[0].puf_cashFlow[0])['0'];
+            var caf16 = objectToJson(info.puf_3FiscalYears[1].puf_cashFlow[0])['1'];
+            var caf15 = objectToJson(info.puf_3FiscalYears[2].puf_cashFlow[0])['2'];
+
+            var companyinfo = {
+                'basicInfo': {
+                    'companyName': clientData.cli_companyName,
+                    'companyLocation': clientData.cli_officeLocation.cli_city,
+                    'companyType': clientData.cli_LinkedInProfile.cli_companyType,
+                    'fiscalYear': '2018'
+                },
+                'incomeStatement': {
+                    '2015': {
+                        'ins_sales': info15.ins_sales,
+                        'ins_workingCapital': caf15.caf_changesWorkingCapital,
+                        'ins_grossProfitIncome': info15.ins_grossProfitIncome,
+                        'ins_accumulatedDepreciation': info15.ins_depreciationAmortization,
+                        'ins_incomeTax': info15.ins_incomeTax,
+                        'ins_COGS': info15.ins_COGS,
+                        'ins_netIncome': info15.ins_netIncome
+                    },
+                    '2016': {
+                        'ins_sales': info16.ins_sales,
+                        'ins_workingCapital': caf16.caf_changesWorkingCapital,
+                        'ins_grossProfitIncome': info16.ins_grossProfitIncome,
+                        'ins_accumulatedDepreciation': info16.ins_depreciationAmortization,
+                        'ins_incomeTax': info16.ins_incomeTax,
+                        'ins_COGS': info16.ins_COGS,
+                        'ins_netIncome': info16.ins_netIncome
+                    },
+                    '2017': {
+                        'ins_sales': info17.ins_sales,
+                        'ins_workingCapital': caf17.caf_changesWorkingCapital,
+                        'ins_grossProfitIncome': info17.ins_grossProfitIncome,
+                        'ins_accumulatedDepreciation': info17.ins_depreciationAmortization,
+                        'ins_incomeTax': info17.ins_incomeTax,
+                        'ins_COGS': info17.ins_COGS,
+                        'ins_netIncome': info17.ins_netIncome
+                    },
+                },
+                'balancesheet': {
+                    '2015': {
+                        'bas_propertyPlantEquip': bs15.bas_propertyPlantEquip,
+                        'bas_constructInProgress': bs15.bas_constructInProgress,
+                        'bas_computerSoftwareEquip': bs15.bas_computerSoftwareEquip,
+                        'bas_otherPPE': bs15.bas_otherPPE,
+                        'bas_accummulatedDepreciation': bs15.bas_accummulatedDepreciation,
+                        'bas_intangibleAsset': bs15.bas_intangibleAsset
+                    },
+                    '2016': {
+                        'bas_propertyPlantEquip': bs16.bas_propertyPlantEquip,
+                        'bas_constructInProgress': bs16.bas_constructInProgress,
+                        'bas_computerSoftwareEquip': bs16.bas_computerSoftwareEquip,
+                        'bas_otherPPE': bs16.bas_otherPPE,
+                        'bas_accummulatedDepreciation': bs16.bas_accummulatedDepreciation,
+                        'bas_intangibleAsset': bs16.bas_intangibleAsset
+                    },
+                    '2017': {
+                        'bas_propertyPlantEquip': bs17.bas_propertyPlantEquip,
+                        'bas_constructInProgress': bs17.bas_constructInProgress,
+                        'bas_computerSoftwareEquip': bs17.bas_computerSoftwareEquip,
+                        'bas_otherPPE': bs17.bas_otherPPE,
+                        'bas_accummulatedDepreciation': bs17.bas_accummulatedDepreciation,
+                        'bas_intangibleAsset': bs17.bas_intangibleAsset
+                    }
+                },
+                'cashflowStatement': {
+                    '2015': {
+                        'caf_deferredTax': bs15.bas_deferredTax,
+                        'caf_investmentTaxCredit': caf15.caf_investmentTaxCredit,
+                        'caf_capitalExpenditure': caf15.caf_capitalExpenditure
+                    },
+                    '2016': {
+                        'caf_deferredTax': bs16.bas_deferredTax,
+                        'caf_investmentTaxCredit': caf16.caf_investmentTaxCredit,
+                        'caf_capitalExpenditure': caf16.caf_capitalExpenditure
+                    },
+                    '2017': {
+                        'caf_deferredTax': bs17.bas_deferredTax,
                         'caf_investmentTaxCredit': caf17.caf_investmentTaxCredit,
                         'caf_capitalExpenditure': caf17.caf_capitalExpenditure
                     }
@@ -247,10 +579,12 @@ app.get("/companyinfo", ensureLogin, (req, res) => {
             };
             res.render('companyinfo',{content: companyinfo});
         });
-
+        
     });
+    //res.render('companyinfo');
 });
-
+*/
+/*
 // setup a route to listen on /financialanalysis
 app.get("/financialanalysis", ensureLogin, (req, res) => {
     // financial analysis query from database need to be developed
@@ -302,13 +636,21 @@ app.get("/financialanalysis", ensureLogin, (req, res) => {
         };
         res.render('financialanalysis', {content: financialanlysis});
     });
+    res.render('financialanalysis');
 });
 
 // setup a route to listen on /taxcredit
 app.get("/taxcredit", ensureLogin, (req, res) => {
     // tax credit query from database need to be developed
+    
     var userName = req.session.user.cli_loginName;
+    
     dataServiceAuth.getCompanyTaxInfoData(userName).then((info) => {
+
+        var puf17 = objectToJson(info.cti_3FiscalYears[0].cti_companyTaxInfo3[0])['0'];
+        var puf16 = objectToJson(info.cti_3FiscalYears[1].cti_companyTaxInfo3[0])['1'];
+        var puf15 = objectToJson(info.cti_3FiscalYears[2].cti_companyTaxInfo3[0])['2'];
+
         var taxcredit = {
             'IndustryBenchmark':{
                 'caRD2017':'',
@@ -326,15 +668,15 @@ app.get("/taxcredit", ensureLogin, (req, res) => {
             },
             'HistoryTaxCredit':{
 
-                'GST2017':'',
-                'GST2016':'',
-                'GST2015':'',
-                'investment2017':'',
-                'investment2016':'',
-                'investment2015':'',
-                'SRED2017':'',
-                'SRED2016':'',
-                'SRED2015':''
+                'GST2017':puf17.cti_gstHST,
+                'GST2016':puf16.cti_gstHST,
+                'GST2015':puf15.cti_gstHST,
+                'investment2017':puf17.cti_investmentTaxCredit,
+                'investment2016':puf16.cti_investmentTaxCredit,
+                'investment2015':puf15.cti_investmentTaxCredit,
+                'SRED2017':puf17.cti_SREDtaxCredit,
+                'SRED2016':puf16.cti_SREDtaxCredit,
+                'SRED2015':puf15.cti_SREDtaxCredit
             },
             'HistoryTaxIssue':{
                 'gsthstIssue':info.cti_GSThstTaxIssues,
@@ -345,7 +687,7 @@ app.get("/taxcredit", ensureLogin, (req, res) => {
         };
         res.render("taxcredit",{content:taxcredit});
     });
-
+        res.render("taxcredit");
 });
 
 // setup a route to listen on /taxexpense
@@ -385,24 +727,24 @@ app.get("/taxexpense", ensureLogin, (req, res) => {
                     'incomeTax2015':info15b.ins_incomeTax
                 },
                 'SREDTaxCredit':{
-                    'salary2017':'',
-                    'salary2016':'',
-                    'salary2015':'',
-                    'cost2017':'',
-                    'cost2016':'',
-                    'cost2015':'',
-                    'con2017':'',
-                    'con2016':'',
-                    'con2015':'',
-                    'lea2017':'',
-                    'lea2016':'',
-                    'lea2015':'',
-                    'over2017':'',
-                    'over2016':'',
-                    'over2015':'',
-                    'cap2017':'',
-                    'cap2016':'',
-                    'cap2015':''
+                    'salary2017':info17.cti_salaryWages,
+                    'salary2016':info16.cti_salaryWages,
+                    'salary2015':info15b.cti_salaryWages,
+                    'cost2017':info17.cti_costMaterial,
+                    'cost2016':info16.cti_costMaterial,
+                    'cost2015':info15b.cti_costMaterial,
+                    'con2017':info17.cti_contractExpense,
+                    'con2016':info16.cti_contractExpense,
+                    'con2015':info15b.cti_contractExpense,
+                    'lea2017':info17.cti_leaseExpenditure,
+                    'lea2016':info16.cti_leaseExpenditure,
+                    'lea2015':info15b.cti_leaseExpenditure,
+                    'over2017':info17.cti_overhead,
+                    'over2016':info16.cti_overhead,
+                    'over2015':info15b.cti_overhead,
+                    'cap2017':info17.cti_capitalExpenditure,
+                    'cap2016':info16.cti_capitalExpenditure,
+                    'cap2015':info15b.cti_capitalExpenditure
                 },
                 '2018RDExpense':{
                     'salarywages':'',
@@ -411,12 +753,12 @@ app.get("/taxexpense", ensureLogin, (req, res) => {
                 }
 
             };
-            res.render("taxexpense",{content:taxexpense});
-
         });
+        res.render("taxexpense",{content:taxexpense});
     });
+    res.render("taxexpense");
 });
-
+*/
 // setup a route to listen on /product
 app.get("/product", ensureLogin, (req, res) => {
     // product query from database need to be developed
