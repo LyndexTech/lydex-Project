@@ -298,6 +298,8 @@ app.get("/financialanalysis", ensureLogin, (req, res) => {
     dataServiceAuth.getPublicFinancialData(userName).then((info) => {
         dataServiceAuth.getIndustryBenchmarkData(userName).then((bm) => {
 
+            if(!info || !bm) res.render('financialanalysis');
+
             var puf15 = info.puf_3FiscalYears[0].puf_financialRatio[0];
             var puf16 = info.puf_3FiscalYears[1].puf_financialRatio[0];
             var puf17 = info.puf_3FiscalYears[2].puf_financialRatio[0];
@@ -354,6 +356,9 @@ app.get("/taxcredit", ensureLogin, (req, res) => {
         dataServiceAuth.getIndustryBenchmarkData(userName).then((bm) => {
             dataServiceAuth.getCompanyTaxInfoData(userName).then((tax) => {
 
+                if(!info || !bm || !tax) res.render('financialanalysis');
+
+
                 var bm15 = bm.inb_3FiscalYears[0].inb_industryBenchmark3;
                 var bm16 = bm.inb_3FiscalYears[1].inb_industryBenchmark3;
                 var bm17 = bm.inb_3FiscalYears[2].inb_industryBenchmark3;
@@ -409,6 +414,9 @@ app.get("/taxexpense", ensureLogin, (req, res) => {
     var userName = req.session.user.cli_loginName;
     dataServiceAuth.getPublicFinancialData(userName).then((info) => {
         dataServiceAuth.getCompanyTaxInfoData(userName).then((tax) => {
+
+            if(!info || !tax) res.render('financialanalysis');
+
             var info15 = info.puf_3FiscalYears[0].puf_incomeStatment3[0];
             var info16 = info.puf_3FiscalYears[1].puf_incomeStatment3[0];
             var info17 = info.puf_3FiscalYears[2].puf_incomeStatment3[0];
