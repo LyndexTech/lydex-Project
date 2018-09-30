@@ -76,7 +76,13 @@ app.use(function(req, res, next) {
 
  // user upload functions middleware
 const storage = multer.diskStorage({
-    destination: "./public/files/uploaded/",
+    //destination: "./public/files/uploaded/",
+    destination: (req, file, cb) => {
+        let userName = req.session.user.cli_loginName;
+        let filePath = './public/files/uploaded/'+userName;
+        fs.mkdirsSync(filePath);
+        cb(null, filePath);
+      },
     filename: function (req, file, cb) {
       //cb(null, Date.now() + path.extname(file.originalname));
       cb(null, file.originalname);
@@ -84,11 +90,12 @@ const storage = multer.diskStorage({
 });
 const upload = multer({ storage: storage });
 app.post("/assessment/upload", upload.array("files", 12), (req, res) => {
-    // console.log(req.files[0].destination);
-    const filePath = req.files[0].destination+req.files[0].filename;
+    //console.log(req.files[0].destination);
+    //console.log(req.files[0].filename);
+    const filePath = req.files[0].destination + '/' + req.files[0].filename;
     const userName = req.session.user.cli_loginName;
 
-    // console.log(filePath);
+     //console.log(filePath);
     // console.log(userName);
 
     const pythonProcess = spawn('python',["Insert.py", filePath, userName]);
@@ -143,7 +150,8 @@ app.get("/logout", (req, res) => {
 });
 
 app.get("/assessment", ensureLogin, (req, res) => {
-    fs.readdir("./public/files/uploaded", function(err, items) {
+    let filePath = "./public/files/uploaded/"+req.session.user.cli_loginName;
+    fs.readdir(filePath, function(err, items) {
         res.render("assessment", {files:items});
       });
 });
@@ -205,7 +213,7 @@ app.get("/companyinfo", (req, res) => {
             var companyinfo = {
                 'basicInfo': {
                     'companyName': clientData.cli_companyName,
-                    'companyLocation': clientData.cli_LinkedInProfile.cli_headquarters,
+                    'companyLocation': clientData.cli_officeLocation.cli_city,
                     'companyType': clientData.cli_LinkedInProfile.cli_companyType,
                     'fiscalYear': '2018'
                 },
@@ -298,8 +306,6 @@ app.get("/financialanalysis", ensureLogin, (req, res) => {
     dataServiceAuth.getPublicFinancialData(userName).then((info) => {
         dataServiceAuth.getIndustryBenchmarkData(userName).then((bm) => {
 
-            if(!info || !bm) res.render('financialanalysis');
-
             var puf15 = info.puf_3FiscalYears[0].puf_financialRatio[0];
             var puf16 = info.puf_3FiscalYears[1].puf_financialRatio[0];
             var puf17 = info.puf_3FiscalYears[2].puf_financialRatio[0];
@@ -356,9 +362,6 @@ app.get("/taxcredit", ensureLogin, (req, res) => {
         dataServiceAuth.getIndustryBenchmarkData(userName).then((bm) => {
             dataServiceAuth.getCompanyTaxInfoData(userName).then((tax) => {
 
-                if(!info || !bm || !tax) res.render('financialanalysis');
-
-
                 var bm15 = bm.inb_3FiscalYears[0].inb_industryBenchmark3;
                 var bm16 = bm.inb_3FiscalYears[1].inb_industryBenchmark3;
                 var bm17 = bm.inb_3FiscalYears[2].inb_industryBenchmark3;
@@ -414,9 +417,6 @@ app.get("/taxexpense", ensureLogin, (req, res) => {
     var userName = req.session.user.cli_loginName;
     dataServiceAuth.getPublicFinancialData(userName).then((info) => {
         dataServiceAuth.getCompanyTaxInfoData(userName).then((tax) => {
-
-            if(!info || !tax) res.render('financialanalysis');
-
             var info15 = info.puf_3FiscalYears[0].puf_incomeStatment3[0];
             var info16 = info.puf_3FiscalYears[1].puf_incomeStatment3[0];
             var info17 = info.puf_3FiscalYears[2].puf_incomeStatment3[0];
@@ -802,21 +802,7 @@ app.get("/product", ensureLogin, (req, res) => {
 // register user form
 app.post("/register", (req, res) => {
 
-
-    var registerBody = {
-        cli_loginName: req.body.cli_loginName,
-        cli_loginName2: req.body.cli_loginName2,
-        cli_password: req.body.cli_password,
-        cli_password2: req.body.cli_password2,
-        cli_userLinkedInURL: req.body.cli_userLinkedInURL,
-        cli_companyName: req.body.cli_companyName,
-        cli_LinkedInProfile: {
-            cli_website: req.body.cli_website,
-            cli_headquarters: req.body.cli_headquarters
-        }
-    };
-
-    dataServiceAuth.registerUser(registerBody)
+    dataServiceAuth.registerUser(req.body)
     .then(() => {
       res.render("register", {successMessage: "User created"});
     })
