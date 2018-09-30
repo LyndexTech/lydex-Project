@@ -95,8 +95,8 @@ app.post("/assessment/upload", upload.array("files", 12), (req, res) => {
     const filePath = req.files[0].destination + '/' + req.files[0].filename;
     const userName = req.session.user.cli_loginName;
 
-     //console.log(filePath);
-    // console.log(userName);
+     // console.log(filePath);
+     // console.log(userName);
 
     const pythonProcess = spawn('python',["Insert.py", filePath, userName]);
 
@@ -183,9 +183,6 @@ app.get("/companyinfo", (req, res) => {
 
             if(!info) res.render('companyinfo');
 
-
-            console.log(info);
-
             var info15 = info.puf_3FiscalYears[0].puf_incomeStatment3[0];
             var info16 = info.puf_3FiscalYears[1].puf_incomeStatment3[0];
             var info17 = info.puf_3FiscalYears[2].puf_incomeStatment3[0];
@@ -213,7 +210,7 @@ app.get("/companyinfo", (req, res) => {
             var companyinfo = {
                 'basicInfo': {
                     'companyName': clientData.cli_companyName,
-                    'companyLocation': clientData.cli_officeLocation.cli_city,
+                    'companyLocation': clientData.cli_LinkedInProfile.cli_headquarters,
                     'companyType': clientData.cli_LinkedInProfile.cli_companyType,
                     'fiscalYear': '2018'
                 },
@@ -802,7 +799,21 @@ app.get("/product", ensureLogin, (req, res) => {
 // register user form
 app.post("/register", (req, res) => {
 
-    dataServiceAuth.registerUser(req.body)
+
+    var clientSchema = {
+            cli_loginName: req.body.cli_loginName,
+            cli_loginName2:req.body.cli_loginName2,
+            cli_password :req.body.cli_password ,
+            cli_password2:req.body.cli_password2,
+            cli_userLinkedInURL: req.body.cli_userLinkedInURL,
+            cli_companyName: req.body.cli_companyName,
+            cli_LinkedInProfile: {cli_website:req.body.cli_website,
+                cli_headquarters:req.body.cli_headquarters},
+        };
+
+
+    dataServiceAuth.registerUser(clientSchema)
+
     .then(() => {
       res.render("register", {successMessage: "User created"});
     })
