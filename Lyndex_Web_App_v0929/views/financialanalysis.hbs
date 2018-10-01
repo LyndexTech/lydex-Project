@@ -1,0 +1,195 @@
+{{> navbar }}
+<div id="content">
+    <!-- financial information nav -->
+    <div class="row">
+        <ul class="nav nav-tabs">
+            <li class="nav-item">
+                <a class="nav-link" href="/companyinfo">Company Information Review</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link active" href="/financialanalysis">General Financial Analysis</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/taxcredit">SR&amp;ED Tax Credit Review</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/taxexpense">R&amp;D Tax Expense Analysis</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/product">Product &amp; Tech vs R&amp;D Field</a>
+            </li>
+        </ul>
+    </div>
+
+    <br>
+    <!-- financial analysis content -->
+    <form action="/post_financialanlysis" method="post">
+        <h5>Industry Benchmark</h5>
+        <div class="form-row">
+            <div class="form-group col-sm-3">
+                <label for="industry">Industry</label>
+                <input type="text" class="form-control" name="industry"  id="industry" value="{{content.industryBenchmark.industry}}" readonly>
+            </div>
+            <div class="form-group col-sm-3">
+                <label for="subCategory">Sub-Category</label>
+                <input type="text" class="form-control" name="subCategory" id="subCategory" value="{{content.industryBenchmark.subCategory}}" readonly>
+            </div>
+            <div class="form-group col-sm-3">
+                <label for="marketSize">Market Size (in Billion $)</label>
+                <input type="number" class="form-control" name="marketSize" id="marketSize" value="{{content.industryBenchmark.marketSize}}" readonly>
+            </div>
+            <div class="form-group col-sm-3">
+                <label for="marketRdExpense">R&amp;D Expense (in Billion $)</label>
+                <input type="number" class="form-control" name ="marketRdExpense" id="marketRdExpense" value="{{content.industryBenchmark.marketRdExpense}}" readonly>
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-group col-sm-9">
+                <label for="mainCompany">Main Listed Companies</label>
+                <input type="textarea" class="form-control" name ="mainCompany" id="mainCompany" readonly></input>
+            </div>
+        </div>
+
+        <hr>
+
+        <h5>Financial Ratio</h5>
+        <div class="form-row">
+            <div class="form-group col-sm-3">
+                <p></p>
+            </div>
+            <div class="form-group col-sm-2">
+                <p class="text-center">2017</p>
+            </div>
+            <div class="form-group col-sm-2">
+                <p class="text-center">2016</p>
+            </div>
+            <div class="form-group col-sm-2">
+                <p class="text-center">2015</p>
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-group col-sm-3">
+                <p class="text-center">P/E Ratio</p>
+            </div>
+            <div class="form-group col-sm-2">
+                <input type="number" class="form-control" name="pe2017" id="pe2017" value="{{content.financialratio.2017.peratio}}">
+            </div>
+            <div class="form-group col-sm-2">
+                <input type="number" class="form-control" name="pe2016" id="pe2016" value="{{content.financialratio.2016.peratio}}">
+            </div>
+            <div class="form-group col-sm-2">
+                <input type="number" class="form-control" name="pe2015" id="pe2015" value="{{content.financialratio.2015.peratio}}">
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-group col-sm-3">
+                <p class="text-center">Current Ratio</p>
+            </div>
+            <div class="form-group col-sm-2">
+                <input type="number" class="form-control" name="currentRatio2017" id="currentRatio2017" value="{{content.financialratio.2017.currentratio}}">
+            </div>
+            <div class="form-group col-sm-2">
+                <input type="number" class="form-control" name="currentRatio2016" id="currentRatio2016" value="{{content.financialratio.2016.currentratio}}">
+            </div>
+            <div class="form-group col-sm-2">
+                <input type="number" class="form-control" name="currentRatio2015" id="currentRatio2015" value="{{content.financialratio.2015.currentratio}}">
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-group col-sm-3">
+                <p class="text-center">Quick Ratio</p>
+            </div>
+            <div class="form-group col-sm-2">
+                <input type="number" class="form-control" name ="quickRatio2017" id="quickRatio2017" value="{{content.financialratio.2017.quickratio}}">
+            </div>
+            <div class="form-group col-sm-2">
+                <input type="number" class="form-control" name ="quickRatio2016" id="quickRatio2016" value="{{content.financialratio.2016.quickratio}}">
+            </div>
+            <div class="form-group col-sm-2">
+                <input type="number" class="form-control" name ="quickRatio2015" id="quickRatio2015" value="{{content.financialratio.2015.quickratio}}">
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-group col-sm-3">
+                <p class="text-center">Asset Turnover</p>
+            </div>
+            <div class="form-group col-sm-2">
+                <input type="number" class="form-control"  name="assetTurnover2017" id="assetTurnover2017" value="{{content.financialratio.2017.assetturnover}}">
+            </div>
+            <div class="form-group col-sm-2">
+                <input type="number" class="form-control"  name="assetTurnover2016"id="assetTurnover2016" value="{{content.financialratio.2016.assetturnover}}">
+            </div>
+            <div class="form-group col-sm-2">
+                <input type="number" class="form-control" name="assetTurnover2015" id="assetTurnover2015" value="{{content.financialratio.2015.assetturnover}}">
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-group col-sm-3">
+                <p class="text-center">Gross Margin</p>
+            </div>
+            <div class="form-group col-sm-2">
+                <input type="number" class="form-control"  name="grossMargin2017" id="grossMargin2017" value="{{content.financialratio.2017.grossmargin}}">
+            </div>
+            <div class="form-group col-sm-2">
+                <input type="number" class="form-control"  name="grossMargin2016" id="grossMargin2016" value="{{content.financialratio.2016.grossmargin}}">
+            </div>
+            <div class="form-group col-sm-2">
+                <input type="number" class="form-control" name="grossMargin2015" id="grossMargin2015" value="{{content.financialratio.2015.grossmargin}}">
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-group col-sm-3">
+                <p class="text-center">Operating Margin</p>
+            </div>
+            <div class="form-group col-sm-2">
+                <input type="number" class="form-control" name="operatingMargin2017" id="operatingMargin2017" value="{{content.financialratio.2017.operatingmargin}}">
+            </div>
+            <div class="form-group col-sm-2">
+                <input type="number" class="form-control" name="operatingMargin2016" id="operatingMargin2016" value="{{content.financialratio.2016.operatingmargin}}">
+            </div>
+            <div class="form-group col-sm-2">
+                <input type="number" class="form-control" name="operatingMargin2015" id="operatingMargin2015" value="{{content.financialratio.2015.operatingmargin}}">
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-group col-sm-3">
+                <p class="text-center">Net Margin</p>
+            </div>
+            <div class="form-group col-sm-2">
+                <input type="number" class="form-control" name="netMargin2017" id="netMargin2017" value="{{content.financialratio.2017.netmargin}}">
+            </div>
+            <div class="form-group col-sm-2">
+                <input type="number" class="form-control" name="netMargin2016" id="netMargin2016" value="{{content.financialratio.2016.netmargin}}">
+            </div>
+            <div class="form-group col-sm-2">
+                <input type="number" class="form-control" name="netMargin2015" id="netMargin2015" value="{{content.financialratio.2015.netmargin}}">
+            </div>
+        </div>
+
+        <hr>
+
+        <button type="submit" class="btn btn-primary">Update</button>
+        <a href="/assessment" role="button" class="btn btn-success">Start Over</a>
+    </form>
+    <!-- Pagination -->
+    <div class="row">
+        <div class="col">
+            <nav aria-label="Page navigation">
+                <ul class="pagination justify-content-center">
+                    <li class="page-item">
+                        <a class="page-link" href="/companyinfo">Previous</a>
+                    </li>
+                    <li class="page-item"><a class="page-link" href="/companyinfo">1</a></li>
+                    <li class="page-item active"><a class="page-link" href="/financialanalysis">2</a></li>
+                    <li class="page-item"><a class="page-link" href="/taxcredit">3</a></li>
+                    <li class="page-item"><a class="page-link" href="/taxexpense">4</a></li>
+                    <li class="page-item"><a class="page-link" href="/product">5</a></li>
+                    <li class="page-item">
+                        <a class="page-link" href="/taxcredit">Next</a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+</div>
+

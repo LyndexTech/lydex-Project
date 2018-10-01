@@ -1,0 +1,11 @@
+{{> navbar }}
+<div id="content">
+    <br><br>
+    <h5>Please upload your files here:</h5>
+    <form method="POST" action="/assessment/upload" enctype="multipart/form-data">
+        <input type="file" class="form-control" id="files" name="files" multiple>
+        <br><br>
+        <button type="submit" class="btn btn-success float-right">Upload</button>
+    </form>
+    <a href="/companyinfo" role="button" class="btn btn-light float-right">Skip</a>
+</div>

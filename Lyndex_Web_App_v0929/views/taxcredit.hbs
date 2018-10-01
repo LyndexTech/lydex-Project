@@ -1,0 +1,216 @@
+{{> navbar }}
+<div id="content">
+<!-- financial information nav -->
+
+    <div class="row">
+        <ul class="nav nav-tabs">
+            <li class="nav-item">
+                <a class="nav-link" href="/companyinfo">Company Information Review</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/financialanalysis">Financial Analysis Reports</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link active" href="/taxcredit">SR&amp;ED Tax Credit Review</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/taxexpense">R&amp;D Tax Expense Analysis</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/product">Product &amp; Tech vs R&amp;D Field</a>
+            </li>
+        </ul>
+    </div>
+
+    <br>
+
+    <!-- tax analysis content -->
+    <form action="/post_taxcredit" method="post">
+        <h5>Industry Benchmark</h5>
+        <div class="form-row">
+            <div class="form-group col-sm-3">
+                <p class="text-center"></p>
+            </div>
+            <div class="form-group col-sm-2">
+                <p class="text-center">2017</p>
+            </div>
+            <div class="form-group col-sm-2">
+                <p class="text-center">2016</p>
+            </div>
+            <div class="form-group col-sm-2">
+                <p class="text-center">2015</p>
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-group col-sm-3">
+                <p class="text-center">Canadian R&amp;D Expenditure</p>
+            </div>
+            <div class="form-group col-sm-2">
+                <input type="number" class="form-control" name ="caRD2017" id="caRD2017" value="{{content.IndustryBenchmark.caRD2017}}" readonly>
+            </div>
+            <div class="form-group col-sm-2">
+                <input type="number" class="form-control" name="caRD2016" id="caRD2016" value="{{content.IndustryBenchmark.caRD2016}}" readonly>
+            </div>
+            <div class="form-group col-sm-2">
+                <input type="number" class="form-control" name="caRD2015" id="caRD2015" value="{{content.IndustryBenchmark.caRD2015}}" readonly>
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-group col-sm-3">
+                <p class="text-center">SR&amp;ED Tax Credit</p>
+            </div>
+            <div class="form-group col-sm-2">
+                <input type="number" class="form-control" name="sredTaxCredits2017"  id="sredTaxCredits2017" value="{{content.IndustryBenchmark.sredTaxCredits2017}}" readonly>
+            </div>
+            <div class="form-group col-sm-2">
+                <input type="number" class="form-control" name="sredTaxCredits2016" id="sredTaxCredits2016" value="{{content.IndustryBenchmark.sredTaxCredits2016}}" readonly>
+            </div>
+            <div class="form-group col-sm-2">
+                <input type="number" class="form-control" name="sredTaxCredits2015" id="sredTaxCredits2015" value="{{content.IndustryBenchmark.sredTaxCredits2015}}" readonly>
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-group col-sm-3">
+                <p class="text-center">Industry Size</p>
+            </div>
+            <div class="form-group col-sm-2">
+                <input type="number" class="form-control" name ="idustrySize2017" id="idustrySize2017" value="{{content.IndustryBenchmark.idustrySize2017}}" readonly>
+            </div>
+            <div class="form-group col-sm-2">
+                <input type="number" class="form-control" name ="idustrySize2016" id="industrySize2016" value="{{content.IndustryBenchmark.idustrySize2016}}" readonly>
+            </div>
+            <div class="form-group col-sm-2">
+                <input type="number" class="form-control" name ="idustrySize2015" id="industrySize2015" value="{{content.IndustryBenchmark.idustrySize2015}}" readonly>
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-group col-sm-3">
+                <p class="text-center">Investment Tax Credits</p>
+            </div>
+            <div class="form-group col-sm-2">
+                <input type="number" class="form-control" name ="indRdExpense2017" id="indRdExpense2017" value="{{content.IndustryBenchmark.indRdExpense2017}}" readonly>
+            </div>
+            <div class="form-group col-sm-2">
+                <input type="number" class="form-control" name ="indRdExpense2016" id="indRdExpense2016" value="{{content.IndustryBenchmark.indRdExpense2016}}" readonly>
+            </div>
+            <div class="form-group col-sm-2">
+                <input type="number" class="form-control" name ="indRdExpense2015" id="indRdExpense2015" value="{{content.IndustryBenchmark.indRdExpense2015}}" readonly>
+            </div>
+        </div>
+
+        <hr>
+
+        <h5>History Tax Credit</h5>
+        <div class="form-row">
+            <div class="form-group col-sm-3">
+                <p class="text-center"></p>
+            </div>
+            <div class="form-group col-sm-2">
+                <p class="text-center">2017</p>
+            </div>
+            <div class="form-group col-sm-2">
+                <p class="text-center">2016</p>
+            </div>
+            <div class="form-group col-sm-2">
+                <p class="text-center">2015</p>
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-group col-sm-3">
+                <p class="text-center" >GST/HST</p>
+            </div>
+            <div class="form-group col-sm-2">
+                <input type="text" class="form-control" name ="GST2017" id="GST2017" value="{{content.HistoryTaxCredit.GST2017}}">
+            </div>
+            <div class="form-group col-sm-2">
+                <input type="text" class="form-control" name ="GST2016" id="GST2016" value="{{content.HistoryTaxCredit.GST2016}}">
+            </div>
+            <div class="form-group col-sm-2">
+                <input type="text" class="form-control" name ="GST2015" id="GST2015" value="{{content.HistoryTaxCredit.GST2015}}">
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-group col-sm-3">
+                <p class="text-center" >Investment Tax Credit</p>
+            </div>
+            <div class="form-group col-sm-2">
+                <input type="text" class="form-control" name="investment2017" id="investment2017" value="{{content.HistoryTaxCredit.investment2017}}">
+            </div>
+            <div class="form-group col-sm-2">
+                <input type="text" class="form-control" name="investment2016" id="investment2016" value="{{content.HistoryTaxCredit.investment2016}}">
+            </div>
+            <div class="form-group col-sm-2">
+                <input type="text" class="form-control" name="investment2015" id="investment2015" value="{{content.HistoryTaxCredit.investment2015}}">
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-group col-sm-3">
+                <p class="text-center" >SR&amp;ED Tax Credit</p>
+            </div>
+            <div class="form-group col-sm-2">
+                <input type="text" class="form-control" name ="SRED2017" id="SRED2017" value="{{content.HistoryTaxCredit.SRED2017}}">
+            </div>
+            <div class="form-group col-sm-2">
+                <input type="text" class="form-control" name ="SRED2016" id="SRED2016" value="{{content.HistoryTaxCredit.SRED2016}}">
+            </div>
+            <div class="form-group col-sm-2">
+                <input type="text" class="form-control" name ="SRED2015" id="SRED2015" value="{{content.HistoryTaxCredit.SRED2015}}">
+            </div>
+        </div>
+
+        <hr>
+
+        <h5>History Tax Issue</h5>
+        <div class="form-row">
+            <div class="form-group col-sm-6">
+                <label for="gst/hstIssue">GST/HST Tax Issue:</label>
+                <textarea class="form-control" name="gstHstIssue" id="gstHstIssue" Value="{{content.HistoryTaxIssue.gsthstIssue}}">{{content.HistoryTaxIssue.gsthstIssue}}</textarea>
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-group col-sm-6">
+                <label for="employeeTaxIssue">Employee Tax Issue:</label>
+                <textarea class="form-control" name ="employeeTaxIssue" id="employeeTaxIssue"  Value="{{content.HistoryTaxIssue.employeeTaxIssue}}">{{content.HistoryTaxIssue.employeeTaxIssue}}</textarea>
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-group col-sm-6">
+                <label for="transferPricingTaxIssue">Transfer Pricing Tax Issue:</label>
+                <textarea class="form-control" name="transferPricingTaxIssue" id="transferPricingTaxIssue"  Value="{{content.HistoryTaxIssue.transferPricingTaxIssue}}">{{content.HistoryTaxIssue.transferPricingTaxIssue}}</textarea>
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-group col-sm-6">
+                <label for="transferPricingTaxIssue">Other Tax Issue:</label>
+                <textarea class="form-control" name ="otherTaxIssue" id="otherTaxIssue"  Value="{{content.HistoryTaxIssue.othertransferPricingTaxIssue}}">{{content.HistoryTaxIssue.othertransferPricingTaxIssue}}</textarea>
+            </div>
+        </div>
+
+        <hr>
+
+        <button type="submit" class="btn btn-primary">Update</button>
+        <a href="/assessment" role="button" class="btn btn-success">Start Over</a>
+    </form>
+
+    <!-- Pagination -->
+    <div class="row">
+        <div class="col">
+            <nav aria-label="Page navigation">
+                <ul class="pagination justify-content-center">
+                    <li class="page-item">
+                        <a class="page-link" href="/financialanalysis">Previous</a>
+                    </li>
+                    <li class="page-item"><a class="page-link" href="/companyinfo">1</a></li>
+                    <li class="page-item"><a class="page-link" href="/financialanalysis">2</a></li>
+                    <li class="page-item active"><a class="page-link" href="/taxcredit">3</a></li>
+                    <li class="page-item"><a class="page-link" href="/taxexpense">4</a></li>
+                    <li class="page-item"><a class="page-link" href="/product">5</a></li>
+                    <li class="page-item">
+                        <a class="page-link" href="/taxexpense">Next</a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+
+</div>

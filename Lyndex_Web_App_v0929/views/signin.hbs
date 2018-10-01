@@ -1,0 +1,29 @@
+    
+    <form class="form-signin" method="POST" action="/signin">
+      <div class="text-center"><img class="mb-4" src="images/Lyndex_logo.png" alt="Company Logo" width="72" height="72"></div>
+      <h1 class="h3 mb-3 font-weight-normal text-center">Please sign in</h1>
+      <label for="cli_loginName" class="sr-only">Email address</label>
+      <input type="email" name="cli_loginName" id="cli_logName" class="form-control" placeholder="Email address" required autofocus>
+      <label for="cli_password" class="sr-only">Password</label>
+      <input type="password" name= "cli_password" id="cli_password" class="form-control" placeholder="Password" required>
+      <div class="checkbox mb-3">
+        <label class="text-center">
+          <input type="checkbox" value="remember-me"> Remember me
+        </label>
+      </div>
+      {{#if errorMessage}}
+        <div class="alert alert-danger text-center"> <strong>Error:</strong> {{errorMessage}}</div>
+      {{/if}}
+      <div>
+        <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+        <div class="text-center"><a href="/forgetpassword">Fogot your password?</a></div>
+        
+        <script type="in/Login"></script> 
+      </div>
+      <p class="text-center">Don't have an account?</p>
+      <a class="btn btn-md btn-success btn-block" href="/register" role="button">Register</a>
+      <p class="mt-5 mb-3 text-muted text-center">&copy; Lyndex Technology 2018</p>
+    </form>
+
+        <!-- Custom styles for Sign-in page -->
+    <link rel="stylesheet" type="text/css" href="css/signin.css">
